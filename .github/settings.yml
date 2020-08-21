@@ -1,0 +1,11 @@
+repository:
+  name: tusClasesOnline
+  description: tusClasesOnline front-end
+  homepage: https://tusclasesonline.es
+  topics: angular, typescript
+  private: true
+  has_issues: true
+  has_projects: true
+  has_wiki: true
+  has_downloads: true
+  default_branch: master
