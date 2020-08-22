@@ -4,7 +4,9 @@ import { Component } from '@angular/core';
   selector: 'app-home',
   template: `
     <div class="background-image">
-      <h1 class="title">Encuentra los mejores tutores</h1>
+      <div class="main-info">
+        <h1 class="title">Encuentra los mejores tutores</h1>
+      </div>
     </div>
   `,
   styleUrls: ['./home.component.scss'],
