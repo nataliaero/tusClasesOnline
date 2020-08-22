@@ -1,4 +1,4 @@
-@use '../../variables';
+@use '../../../variables';
 
 :host {
   position: absolute;
@@ -12,6 +12,11 @@
   justify-content: space-between;
   background-color: pink;
   padding: variables.$unit variables.$spacing * 2;
+
+  mat-icon {
+    color: variables.$secondary-color;
+    margin-right: variables.$half-unit;
+  }
 }
 
 .app-bar-left {

@@ -1,3 +1,5 @@
+@use 'variables';
+
 /* You can add global styles to this file, and also import other style files */
 body,
 html {
@@ -16,10 +18,17 @@ h3,
 h4,
 h5,
 p {
-  font-family: 'Roboto', 'Helvetica', 'Arial';
+  font-family: variables.$primary-font;
   margin: 0;
   padding: 0;
+  color: variables.$secondary-color;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
