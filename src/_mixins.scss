@@ -1,0 +1,13 @@
+@use 'variables';
+
+@mixin tablet {
+  @media (variables.$tablet-width) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (variables.$mobile-width) {
+    @content;
+  }
+}

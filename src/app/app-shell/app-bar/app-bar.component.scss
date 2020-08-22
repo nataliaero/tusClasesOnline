@@ -1,0 +1,68 @@
+@use '../../../variables';
+@use '../../../mixins';
+
+$image-height: 30px;
+
+:host {
+  position: absolute;
+  width: 100%;
+}
+
+.app-bar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  background-color: pink;
+  padding: variables.$unit variables.$spacing * 2;
+
+  mat-icon {
+    color: variables.$secondary-color;
+    margin-right: variables.$half-unit;
+    cursor: pointer;
+    color: variables.$white;
+  }
+
+  p {
+    color: variables.$white;
+  }
+
+  @include mixins.mobile {
+    p {
+      display: none;
+    }
+
+    mat-icon {
+      margin-right: 0;
+      margin-left: variables.$spacing;
+    }
+  }
+}
+
+.app-bar-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+
+  img {
+    height: $image-height;
+    width: auto;
+    margin-right: variables.$unit;
+  }
+
+  p {
+    font-family: variables.$secondary-font;
+  }
+}
+
+.app-bar-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  p {
+    margin-right: variables.$spacing * 2;
+    cursor: pointer;
+  }
+}
