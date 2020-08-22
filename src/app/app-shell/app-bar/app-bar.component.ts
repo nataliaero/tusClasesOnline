@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
         <p>Encuentra un tutor</p>
         <mat-icon>school</mat-icon>
         <p>Convi&eacute;rtete en tutor</p>
-        <mat-icon>person_24</mat-icon>
+        <mat-icon>person</mat-icon>
         <p>Entrar</p>
       </div>
     </div>
