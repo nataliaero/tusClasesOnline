@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { RootNavigationService } from 'src/navigation';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-root-component',
   template: ``,
 })
 export class RootComponent implements OnInit {

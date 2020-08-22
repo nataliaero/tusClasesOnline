@@ -1,0 +1,38 @@
+@use '../../variables';
+
+:host {
+  position: absolute;
+  width: 100%;
+}
+
+.app-bar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  background-color: pink;
+  padding: variables.$unit variables.$spacing * 2;
+}
+
+.app-bar-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  img {
+    height: 30px;
+    width: auto;
+    margin-right: variables.$unit;
+  }
+
+  p {
+    align-self: center;
+    font-family: variables.$secondary-font;
+  }
+}
+
+.app-bar-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
