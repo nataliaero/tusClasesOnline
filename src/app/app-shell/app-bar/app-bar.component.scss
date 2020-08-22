@@ -1,4 +1,7 @@
 @use '../../../variables';
+@use '../../../mixins';
+
+$image-height: 30px;
 
 :host {
   position: absolute;
@@ -16,6 +19,23 @@
   mat-icon {
     color: variables.$secondary-color;
     margin-right: variables.$half-unit;
+    cursor: pointer;
+    color: variables.$white;
+  }
+
+  p {
+    color: variables.$white;
+  }
+
+  @include mixins.mobile {
+    p {
+      display: none;
+    }
+
+    mat-icon {
+      margin-right: 0;
+      margin-left: variables.$spacing;
+    }
   }
 }
 
@@ -23,15 +43,15 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 
   img {
-    height: 30px;
+    height: $image-height;
     width: auto;
     margin-right: variables.$unit;
   }
 
   p {
-    align-self: center;
     font-family: variables.$secondary-font;
   }
 }
@@ -40,4 +60,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  p {
+    margin-right: variables.$spacing * 2;
+    cursor: pointer;
+  }
 }
