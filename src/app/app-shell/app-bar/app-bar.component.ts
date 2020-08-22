@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
         <mat-icon>search</mat-icon>
         <p>Encuentra un tutor</p>
         <mat-icon>school</mat-icon>
-        <p>Conviertete en tutor</p>
+        <p>Convi&eacute;rtete en tutor</p>
         <mat-icon>person_24</mat-icon>
         <p>Entrar</p>
       </div>

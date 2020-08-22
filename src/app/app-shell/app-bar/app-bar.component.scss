@@ -2,10 +2,12 @@
 @use '../../../mixins';
 
 $image-height: 30px;
+$font-size-logo: 20px;
 
 :host {
   position: absolute;
   width: 100%;
+  z-index: 10;
 }
 
 .app-bar {
@@ -13,7 +15,6 @@ $image-height: 30px;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-  background-color: pink;
   padding: variables.$unit variables.$spacing * 2;
 
   mat-icon {
@@ -53,6 +54,7 @@ $image-height: 30px;
 
   p {
     font-family: variables.$secondary-font;
+    font-size: $font-size-logo;
   }
 }
 
