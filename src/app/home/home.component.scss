@@ -2,7 +2,7 @@
 @use '../../mixins';
 
 $height-search: 50px;
-$width-search: 300px;
+$width-search: 500px;
 $font-size-search: 16px;
 
 :host {
@@ -57,17 +57,15 @@ $font-size-search: 16px;
   flex-direction: row;
   align-items: center;
   margin-top: variables.$spacing * 4;
-}
 
-.search-form {
-  display: flex;
-  align-items: center;
-  background-color: variables.$white;
-  color: variables.$grey-light;
-  padding: 0 variables.$unit;
-  border-radius: variables.$border-radius 0 0 variables.$border-radius;
-  height: $height-search;
-  width: $width-search;
+  input {
+    border: none;
+    border-radius: variables.$border-radius 0 0 variables.$border-radius;
+    height: $height-search;
+    width: $width-search;
+    font-size: $font-size-search;
+    padding: 0 variables.$unit;
+  }
 }
 
 .search-button {

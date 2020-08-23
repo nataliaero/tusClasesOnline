@@ -11,14 +11,12 @@ import { FormGroup, FormControl } from '@angular/forms';
         <h2 class="subtitle">{{ msg.startToday }}</h2>
         <div class="search-group">
           <form [formGroup]="searchForm">
-            <mat-form-field class="search-form">
-              <input
-                matInput
-                name="search"
-                [formControl]="searchFormControl"
-                [placeholder]="msg.searchQuestion"
-              />
-            </mat-form-field>
+            <input
+              matInput
+              name="search"
+              [formControl]="searchFormControl"
+              [placeholder]="msg.searchQuestion"
+            />
           </form>
           <button mat-button class="search-button" (click)="onSearch()">
             {{ msg.findTutor }}
