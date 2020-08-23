@@ -3,6 +3,7 @@
 
 $height-search: 50px;
 $width-search: 500px;
+$width-search-mobile: 200px;
 $font-size-search: 16px;
 
 :host {
@@ -65,6 +66,10 @@ $font-size-search: 16px;
     width: $width-search;
     font-size: $font-size-search;
     padding: 0 variables.$unit;
+
+    @include mixins.mobile {
+      width: $width-search-mobile;
+    }
   }
 }
 

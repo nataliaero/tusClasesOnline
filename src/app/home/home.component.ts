@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MESSAGES } from '../../messages';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MobileService } from '../../services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +21,10 @@ import { FormGroup, FormControl } from '@angular/forms';
             />
           </form>
           <button mat-button class="search-button" (click)="onSearch()">
-            {{ msg.findTutor }}
+            <mat-icon *ngIf="isMobileOrTablet$ | async; else text">search</mat-icon>
+            <ng-template #text>
+              {{ msg.searchQuestion }}
+            </ng-template>
           </button>
         </div>
       </div>
@@ -28,6 +33,11 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
+  constructor(private mobileService: MobileService) {}
+
+  searchIcon = 'search';
+  isMobileOrTablet$: Observable<boolean> = this.mobileService.isMobileOrTablet$;
+
   msg = {
     findTutor: MESSAGES['basic.findTutor'],
     findBestTutors: MESSAGES['home.findBestTutors'],
