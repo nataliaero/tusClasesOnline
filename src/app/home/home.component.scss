@@ -1,6 +1,10 @@
 @use '../../variables';
 @use '../../mixins';
 
+$height-search: 50px;
+$width-search: 300px;
+$font-size-search: 16px;
+
 :host {
   position: absolute;
   width: 100%;
@@ -46,4 +50,30 @@
   @include mixins.mobile {
     font-size: 16px;
   }
+}
+
+.search-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: variables.$spacing * 4;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  background-color: variables.$white;
+  color: variables.$grey-light;
+  padding: 0 variables.$unit;
+  border-radius: variables.$border-radius 0 0 variables.$border-radius;
+  height: $height-search;
+  width: $width-search;
+}
+
+.search-button {
+  background-color: variables.$primary-color;
+  color: variables.$white;
+  border-radius: 0 variables.$border-radius variables.$border-radius 0;
+  height: $height-search;
+  font-size: $font-size-search;
 }

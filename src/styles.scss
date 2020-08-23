@@ -24,6 +24,10 @@ p {
   color: variables.$secondary-color;
 }
 
+button {
+  font-family: variables.$primary-font;
+}
+
 h1 {
   font-weight: 400;
 }
