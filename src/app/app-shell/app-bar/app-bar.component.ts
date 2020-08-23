@@ -27,7 +27,7 @@ export class AppBarComponent {
   userIcon = 'person';
 
   msg = {
-    findTutor: MESSAGES['appBar.findTutor'],
+    findTutor: MESSAGES['basic.findTutor'],
     becomeTutor: MESSAGES['appBar.becomeTutor'],
     signIn: MESSAGES['appBar.signIn'],
     tusClasesOnline: MESSAGES['appBar.tusClasesOnline'],

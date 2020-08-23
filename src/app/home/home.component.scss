@@ -33,8 +33,17 @@
 
 .title {
   color: variables.$white;
+  margin-bottom: variables.$spacing;
 
   @include mixins.mobile {
     font-size: 20px;
+  }
+}
+
+.subtitle {
+  color: variables.$white;
+
+  @include mixins.mobile {
+    font-size: 16px;
   }
 }
