@@ -24,8 +24,17 @@ p {
   color: variables.$secondary-color;
 }
 
+button,
+input {
+  font-family: variables.$primary-font;
+}
+
 h1 {
   font-weight: 400;
+}
+
+h2 {
+  font-weight: 300;
 }
 
 html,
@@ -35,4 +44,16 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+mat-form-field {
+  ::ng-deep .mat-form-field-wrapper {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
 }
