@@ -10,12 +10,9 @@ import { MESSAGES } from '../../../messages';
         <p>{{ msg.tusClasesOnline }}</p>
       </div>
       <div class="app-bar-right">
-        <mat-icon>{{ searchIcon }}</mat-icon>
-        <p>{{ msg.findTutor }}</p>
-        <mat-icon>{{ schoolIcon }}</mat-icon>
-        <p>{{ msg.becomeTutor }}</p>
-        <mat-icon>{{ userIcon }}</mat-icon>
-        <p>{{ msg.signIn }}</p>
+        <app-button [message]="msg.findTutor" [icon]="searchIcon"></app-button>
+        <app-button [message]="msg.becomeTutor" [icon]="schoolIcon"></app-button>
+        <app-button [message]="msg.signIn" [icon]="userIcon"></app-button>
       </div>
     </div>
   `,
@@ -32,4 +29,8 @@ export class AppBarComponent {
     signIn: MESSAGES['appBar.signIn'],
     tusClasesOnline: MESSAGES['appBar.tusClasesOnline'],
   };
+
+  onClickUser(): void {
+    console.log('click');
+  }
 }
