@@ -5,10 +5,12 @@ import { AppShellRoutingModule } from './app-shell.routing';
 import { RootComponent } from './root.component';
 import { AppBarComponent } from './app-bar/app-bar.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { AppButtonModule } from '../app-button';
 
 @NgModule({
   declarations: [AppShellComponent, RootComponent, AppBarComponent],
-  imports: [AppShellRoutingModule, CommonModule, MatIconModule],
+  imports: [AppButtonModule, AppShellRoutingModule, CommonModule, MatIconModule, MatButtonModule],
   exports: [AppShellComponent],
 })
 export class AppShellModule {
