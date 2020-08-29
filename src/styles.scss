@@ -1,4 +1,5 @@
 @use 'variables';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 /* You can add global styles to this file, and also import other style files */
 body,
@@ -12,12 +13,12 @@ html {
   box-sizing: border-box;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-p {
+.mat-typography h1,
+.mat-typography h2,
+.mat-typography h3,
+.mat-typography h4,
+.mat-typography h5,
+.mat-typography p {
   font-family: variables.$primary-font;
   margin: 0;
   padding: 0;
@@ -29,12 +30,13 @@ input {
   font-family: variables.$primary-font;
 }
 
-h1 {
+.mat-typography h1 {
+  font-size: 32px;
   font-weight: 400;
 }
 
-h2 {
-  font-weight: 300;
+.mat-typography h2 {
+  font-weight: 400;
 }
 
 html,
