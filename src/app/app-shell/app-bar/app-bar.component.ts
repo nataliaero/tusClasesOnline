@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { MESSAGES } from '../../../messages';
+import { AppLoginSignUpService } from '../../app-login-signup';
+import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-bar',
@@ -12,13 +15,14 @@ import { MESSAGES } from '../../../messages';
       <div class="app-bar-right">
         <app-button [message]="msg.findTutor" [icon]="searchIcon"></app-button>
         <app-button [message]="msg.becomeTutor" [icon]="schoolIcon"></app-button>
-        <app-button [message]="msg.signIn" [icon]="userIcon"></app-button>
+        <app-button [message]="msg.signIn" [icon]="userIcon" (click)="onClickUser()"></app-button>
       </div>
     </div>
   `,
   styleUrls: ['./app-bar.component.scss'],
 })
 export class AppBarComponent {
+  constructor(private appLoginSignUpService: AppLoginSignUpService) {}
   searchIcon = 'search';
   schoolIcon = 'school';
   userIcon = 'person';
@@ -30,7 +34,7 @@ export class AppBarComponent {
     tusClasesOnline: MESSAGES['appBar.tusClasesOnline'],
   };
 
-  onClickUser(): void {
-    console.log('click');
+  onClickUser(): Subscription {
+    return this.appLoginSignUpService.openDialog().pipe(take(1)).subscribe();
   }
 }
