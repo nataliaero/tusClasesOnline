@@ -1,12 +1,82 @@
 @use '../../variables';
 @use '../../mixins';
 
-$width-buttons: 300px;
+$width-form-field: 300px;
+$width-form-field-mobile: 250px;
+$height-button: 40px;
 
-.username {
-  width: $width-buttons;
+.form-field {
+  width: $width-form-field;
+
+  @include mixins.mobile {
+    width: $width-form-field-mobile;
+  }
 }
 
-.input-message {
-  width: $width-buttons;
+.username-message {
+  width: $width-form-field;
+  margin: 0 auto;
+  text-align: left;
+
+  @include mixins.mobile {
+    width: $width-form-field-mobile;
+  }
+}
+
+.password-message {
+  display: flex;
+  justify-content: space-between;
+  width: $width-form-field;
+  margin: 0 auto;
+
+  @include mixins.mobile {
+    width: $width-form-field-mobile;
+  }
+
+  .link {
+    color: variables.$primary-color;
+    cursor: pointer;
+  }
+}
+
+.check-box {
+  width: $width-form-field;
+  margin: 0 auto;
+  margin-bottom: variables.$spacing;
+  text-align: left;
+
+  @include mixins.mobile {
+    width: $width-form-field-mobile;
+  }
+}
+
+.password-visibility {
+  cursor: pointer;
+}
+
+.register-question {
+  margin: variables.$spacing 0 variables.$unit 0;
+}
+
+.register-links {
+  span {
+    margin-right: variables.$half-unit;
+  }
+
+  .link {
+    color: variables.$primary-color;
+    cursor: pointer;
+  }
+}
+
+.submit-button {
+  color: variables.$white;
+  background-color: variables.$primary-color;
+  height: $height-button;
+  width: $width-form-field;
+  margin: 0 auto;
+
+  @include mixins.mobile {
+    width: $width-form-field-mobile;
+  }
 }

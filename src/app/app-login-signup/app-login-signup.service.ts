@@ -11,6 +11,7 @@ export class AppLoginSignUpService {
     return this.matDialog
       .open(AppLoginComponent, {
         width: '600px',
+        maxWidth: '90vw',
       })
       .afterClosed();
   }

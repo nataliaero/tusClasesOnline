@@ -1,8 +1,9 @@
 @use '../../variables';
 @use '../../mixins';
 
-$width-buttons: 300px;
 $height-buttons: 40px;
+$width-buttons: 300px;
+$width-buttons-mobile: 250px;
 
 .content {
   display: flex;
@@ -17,6 +18,10 @@ $height-buttons: 40px;
   height: $height-buttons;
   width: $width-buttons;
   margin-bottom: variables.$spacing;
+
+  @include mixins.mobile {
+    width: $width-buttons-mobile;
+  }
 }
 
 .facebook-image {
@@ -29,6 +34,10 @@ $height-buttons: 40px;
   background-color: variables.$google-color;
   height: $height-buttons;
   width: $width-buttons;
+
+  @include mixins.mobile {
+    width: $width-buttons-mobile;
+  }
 }
 
 .google-image {

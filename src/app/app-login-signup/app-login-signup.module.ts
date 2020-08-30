@@ -9,6 +9,7 @@ import { AppLoginSignUpService } from './app-login-signup.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppFormComponent } from './app-login-form.component';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [AppLoginComponent, AppFormComponent],
@@ -17,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
     CommonModule,
     MatIconModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatDialogModule,
     MatInputModule,
     ReactiveFormsModule,
