@@ -3,13 +3,14 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'app-dialog',
   template: `
-    <div mat-dialog-title>
-      <h2>{{ title }}</h2>
-    </div>
-    <button mat-dialog-close mat-icon-button class="close-button">
+    <button mat-dialog-close mat-icon-button class="close-button" tabIndex="-1">
       <mat-icon>{{ cancelIcon }}</mat-icon>
     </button>
-    <mat-dialog-content>
+    <div mat-dialog-title>
+      <h2 class="title">{{ title }}</h2>
+    </div>
+    <div class="divider"></div>
+    <mat-dialog-content class="content">
       <ng-content></ng-content>
     </mat-dialog-content>
   `,
@@ -19,5 +20,5 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 export class AppDialogComponent {
   @Input() title: string;
 
-  cancelIcon = 'cancel';
+  cancelIcon = 'close';
 }

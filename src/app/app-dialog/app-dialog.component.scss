@@ -4,14 +4,34 @@
 :host {
   position: relative;
   display: block;
+
+  .mat-dialog-title {
+    margin: 0;
+  }
 }
 
 h2 {
   margin-top: 0;
+  color: variables.$secondary-color;
 }
 
 .close-button {
   position: absolute;
   top: -(variables.$spacing);
   right: -(variables.$spacing);
+  color: variables.$secondary-color;
+}
+
+.title {
+  padding-top: variables.$unit;
+}
+
+.divider {
+  border-bottom: 1px solid variables.$grey-xlight;
+  margin: variables.$unit 0 variables.$unit * 3 0;
+}
+
+.content {
+  text-align: center;
+  color: variables.$secondary-color;
 }

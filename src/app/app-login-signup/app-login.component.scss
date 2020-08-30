@@ -1,0 +1,52 @@
+@use '../../variables';
+@use '../../mixins';
+
+$width-buttons: 300px;
+$height-buttons: 40px;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+
+.facebook-button {
+  color: variables.$white;
+  background-color: variables.$facebook-color;
+  height: $height-buttons;
+  width: $width-buttons;
+  margin-bottom: variables.$spacing;
+}
+
+.facebook-image {
+  height: 30px;
+  margin-right: variables.$spacing;
+}
+
+.google-button {
+  color: variables.$white;
+  background-color: variables.$google-color;
+  height: $height-buttons;
+  width: $width-buttons;
+}
+
+.google-image {
+  height: 30px;
+  margin-right: variables.$spacing;
+}
+
+.separator {
+  height: 1px;
+  background-color: variables.$grey-xlight;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: variables.$spacing * 2 0;
+
+  span {
+    padding: 0 variables.$spacing;
+    background-color: variables.$white;
+  }
+}

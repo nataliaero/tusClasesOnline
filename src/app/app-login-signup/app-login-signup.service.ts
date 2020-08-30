@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AppLoginSignupComponent } from './app-login-signup.component';
+import { AppLoginComponent } from './app-login.component';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class AppLoginSignUpService {
   constructor(private matDialog: MatDialog) {}
 
-  openDialog(): Observable<void> {
-    return this.matDialog.open(AppLoginSignupComponent).afterClosed();
+  openLoginDialog(): Observable<void> {
+    return this.matDialog
+      .open(AppLoginComponent, {
+        width: '600px',
+      })
+      .afterClosed();
   }
 }

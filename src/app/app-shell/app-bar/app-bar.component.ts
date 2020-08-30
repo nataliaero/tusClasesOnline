@@ -35,6 +35,6 @@ export class AppBarComponent {
   };
 
   onClickUser(): Subscription {
-    return this.appLoginSignUpService.openDialog().pipe(take(1)).subscribe();
+    return this.appLoginSignUpService.openLoginDialog().pipe(take(1)).subscribe();
   }
 }

@@ -1,0 +1,12 @@
+@use '../../variables';
+@use '../../mixins';
+
+$width-buttons: 300px;
+
+.username {
+  width: $width-buttons;
+}
+
+.input-message {
+  width: $width-buttons;
+}
