@@ -22,13 +22,9 @@ h2 {
   color: variables.$secondary-color;
 }
 
-.title {
-  padding-top: variables.$unit;
-}
-
 .divider {
   border-bottom: 1px solid variables.$grey-xlight;
-  margin: variables.$unit 0 variables.$unit * 3 0;
+  margin: variables.$unit 0 variables.$spacing * 3 0;
 }
 
 .content {

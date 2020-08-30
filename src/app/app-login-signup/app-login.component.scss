@@ -4,6 +4,7 @@
 $height-buttons: 40px;
 $width-buttons: 300px;
 $width-buttons-mobile: 250px;
+$height-image: 30px;
 
 .content {
   display: flex;
@@ -12,37 +13,35 @@ $width-buttons-mobile: 250px;
   align-items: center;
 }
 
-.facebook-button {
+.login-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   color: variables.$white;
-  background-color: variables.$facebook-color;
   height: $height-buttons;
   width: $width-buttons;
-  margin-bottom: variables.$spacing;
 
   @include mixins.mobile {
     width: $width-buttons-mobile;
   }
 }
 
-.facebook-image {
-  height: 30px;
+.image-button {
+  height: $height-image;
   margin-right: variables.$spacing;
+  position: absolute;
+  left: variables.$unit;
+}
+
+.facebook-button {
+  background-color: variables.$facebook-color;
+  margin-bottom: variables.$spacing;
 }
 
 .google-button {
-  color: variables.$white;
   background-color: variables.$google-color;
-  height: $height-buttons;
-  width: $width-buttons;
-
-  @include mixins.mobile {
-    width: $width-buttons-mobile;
-  }
-}
-
-.google-image {
-  height: 30px;
-  margin-right: variables.$spacing;
 }
 
 .separator {

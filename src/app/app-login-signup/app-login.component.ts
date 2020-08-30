@@ -6,14 +6,14 @@ import { MESSAGES } from '../../messages';
   template: `
     <app-dialog [title]="msg.title">
       <div class="content">
-        <button mat-raised-button class="facebook-button" tabIndex="-1">
-          <img class="facebook-image" src="/assets/facebookLogo.png" alt="Facebook Logo" />
+        <div class="login-button facebook-button" tabIndex="-1">
+          <img class="image-button" src="/assets/facebookLogo.png" alt="Facebook Logo" />
+          <span>{{ msg.enterWithFacebook }}</span>
+        </div>
+        <div mat-raised-button class="login-button google-button" tabIndex="-1">
+          <img class="image-button" src="/assets/googleLogo.png" alt="Google Logo" />
           {{ msg.enterWithFacebook }}
-        </button>
-        <button mat-raised-button class="google-button" tabIndex="-1">
-          <img class="google-image" src="/assets/googleLogo.jpg" alt="Google Logo" />
-          {{ msg.enterWithFacebook }}
-        </button>
+        </div>
         <div class="separator">
           <span>{{ msg.initializeSession }}</span>
         </div>
