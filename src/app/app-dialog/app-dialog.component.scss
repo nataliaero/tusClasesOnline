@@ -24,7 +24,7 @@ h2 {
 
 .divider {
   border-bottom: 1px solid variables.$grey-xlight;
-  margin: variables.$unit 0 variables.$spacing * 3 0;
+  margin: variables.$unit 0 variables.$unit * 5 0;
 }
 
 .content {

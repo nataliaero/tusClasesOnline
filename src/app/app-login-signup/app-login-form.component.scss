@@ -8,6 +8,10 @@ $height-button: 40px;
 .form-field {
   width: $width-form-field;
 
+  ::ng-deep .mat-form-field-infix {
+    padding: variables.$unit 0;
+  }
+
   @include mixins.mobile {
     width: $width-form-field-mobile;
   }
@@ -52,6 +56,10 @@ $height-button: 40px;
 
 .password-visibility {
   cursor: pointer;
+  color: variables.$grey-xlight;
+}
+
+.password-visibility:hover {
   color: variables.$grey-light;
 }
 

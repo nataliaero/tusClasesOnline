@@ -4,7 +4,7 @@
 $height-buttons: 40px;
 $width-buttons: 300px;
 $width-buttons-mobile: 250px;
-$height-image: 30px;
+$height-image: 28px;
 
 .content {
   display: flex;
@@ -51,7 +51,7 @@ $height-image: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: variables.$spacing * 2 0;
+  margin: variables.$unit * 5 0 variables.$spacing * 2 0;
 
   span {
     padding: 0 variables.$spacing;
