@@ -5,14 +5,6 @@ $image-height: 30px;
 $font-size-logo: 20px;
 $font-size-text: 16px;
 
-.click-user:hover {
-  background-color: variables.$grey-light;
-}
-
-.click-user:active {
-  background-color: variables.$grey;
-}
-
 .click-user {
   display: flex;
   flex-direction: row;
@@ -44,5 +36,12 @@ $font-size-text: 16px;
     .button-icon {
       margin-right: 0;
     }
+  }
+}
+
+.click-user:active {
+  .button-icon,
+  .button-message {
+    color: variables.$grey-xlight;
   }
 }

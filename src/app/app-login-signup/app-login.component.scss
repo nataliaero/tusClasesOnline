@@ -1,0 +1,60 @@
+@use '../../variables';
+@use '../../mixins';
+
+$height-buttons: 40px;
+$width-buttons: 300px;
+$width-buttons-mobile: 250px;
+$height-image: 28px;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+
+.login-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: variables.$white;
+  height: $height-buttons;
+  width: $width-buttons;
+
+  @include mixins.mobile {
+    width: $width-buttons-mobile;
+  }
+}
+
+.image-button {
+  height: $height-image;
+  margin-right: variables.$spacing;
+  position: absolute;
+  left: variables.$unit;
+}
+
+.facebook-button {
+  background-color: variables.$facebook-color;
+  margin-bottom: variables.$spacing;
+}
+
+.google-button {
+  background-color: variables.$google-color;
+}
+
+.separator {
+  height: 1px;
+  background-color: variables.$grey-xlight;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: variables.$unit * 5 0 variables.$spacing * 2 0;
+
+  span {
+    padding: 0 variables.$spacing;
+    background-color: variables.$white;
+  }
+}

@@ -59,13 +59,14 @@ $font-size-search: 16px;
   align-items: center;
   margin-top: variables.$spacing * 4;
 
-  input {
+  .search-input {
     border: none;
     border-radius: variables.$border-radius 0 0 variables.$border-radius;
     height: $height-search;
     width: $width-search;
     font-size: $font-size-search;
     padding: 0 variables.$unit;
+    background-color: variables.$white;
 
     @include mixins.mobile {
       width: $width-search-mobile;

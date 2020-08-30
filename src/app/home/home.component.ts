@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
           <form [formGroup]="searchForm">
             <input
               matInput
+              class="search-input"
               name="search"
               [formControl]="searchFormControl"
               [placeholder]="msg.searchQuestion"

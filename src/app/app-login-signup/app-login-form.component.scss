@@ -1,0 +1,92 @@
+@use '../../variables';
+@use '../../mixins';
+
+$width-form-field: 300px;
+$width-form-field-mobile: 250px;
+$height-button: 40px;
+
+.form-field {
+  width: $width-form-field;
+
+  ::ng-deep .mat-form-field-infix {
+    padding: variables.$unit 0;
+  }
+
+  @include mixins.mobile {
+    width: $width-form-field-mobile;
+  }
+}
+
+.username-message {
+  width: $width-form-field;
+  margin: 0 auto;
+  text-align: left;
+
+  @include mixins.mobile {
+    width: $width-form-field-mobile;
+  }
+}
+
+.password-message {
+  display: flex;
+  justify-content: space-between;
+  width: $width-form-field;
+  margin: 0 auto;
+
+  @include mixins.mobile {
+    width: $width-form-field-mobile;
+  }
+
+  .link {
+    color: variables.$primary-color;
+    cursor: pointer;
+  }
+}
+
+.check-box {
+  width: $width-form-field;
+  margin: 0 auto;
+  margin-bottom: variables.$spacing;
+  text-align: left;
+
+  @include mixins.mobile {
+    width: $width-form-field-mobile;
+  }
+}
+
+.password-visibility {
+  cursor: pointer;
+  color: variables.$grey-xlight;
+}
+
+.password-visibility:hover {
+  color: variables.$grey-light;
+}
+
+.register-question {
+  margin: variables.$spacing 0 variables.$unit 0;
+}
+
+.register-links {
+  span {
+    margin-right: variables.$half-unit;
+  }
+
+  .link {
+    color: variables.$primary-color;
+    cursor: pointer;
+  }
+}
+
+.submit-button {
+  color: variables.$white;
+  background-color: variables.$primary-color;
+  height: $height-button;
+  width: $width-form-field;
+  margin: 0 auto;
+  border-radius: 0;
+
+  @include mixins.mobile {
+    width: $width-form-field-mobile;
+  }
+}
