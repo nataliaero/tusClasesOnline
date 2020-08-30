@@ -28,7 +28,7 @@ import { BehaviorSubject } from 'rxjs';
       </mat-form-field>
       <div class="password-message">
         <div>{{ msg.password }}</div>
-        <div class="forget-passwaord">{{ msg.forgetPassword }}</div>
+        <div class="link">{{ msg.forgetPassword }}</div>
       </div>
       <mat-form-field class="form-field" appearance="outline">
         <input
@@ -66,7 +66,7 @@ import { BehaviorSubject } from 'rxjs';
       <span>{{ msg.register }}</span>
       <span class="link">{{ msg.registerStudent }}</span>
       <span>{{ msg.or }}</span>
-      <span>{{ msg.registerTutor }}</span>
+      <span class="link">{{ msg.registerTutor }}</span>
     </div>
   `,
   styleUrls: ['./app-login-form.component.scss'],
