@@ -5,11 +5,15 @@ $height-search: 50px;
 $width-search: 500px;
 $width-search-mobile: 200px;
 $font-size-search: 16px;
+$max-width-content: 1050px;
+$min-width-subject: 200px;
+$height-subject: 96px;
 
 :host {
   position: absolute;
   width: 100%;
   top: 0;
+  background-color: variables.$grey-xlight;
 }
 
 .background-image {
@@ -24,60 +28,109 @@ $font-size-search: 16px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: -(variables.$spacing * 3);
 }
 
-.main-info {
-  padding: 0 32px;
-  max-width: 1280px;
+.header-info {
+  padding: 0 variables.$spacing;
+  max-width: $max-width-content;
   width: 100%;
 
   @include mixins.mobile {
     max-width: 100%;
   }
-}
 
-.title {
-  color: variables.$white;
-  margin-bottom: variables.$spacing;
-
-  @include mixins.mobile {
-    font-size: 20px;
-  }
-}
-
-.subtitle {
-  color: variables.$white;
-
-  @include mixins.mobile {
-    font-size: 16px;
-  }
-}
-
-.search-group {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top: variables.$spacing * 4;
-
-  .search-input {
-    border: none;
-    border-radius: variables.$border-radius 0 0 variables.$border-radius;
-    height: $height-search;
-    width: $width-search;
-    font-size: $font-size-search;
-    padding: 0 variables.$unit;
-    background-color: variables.$white;
+  .title {
+    color: variables.$white;
+    margin-bottom: variables.$spacing;
 
     @include mixins.mobile {
-      width: $width-search-mobile;
+      font-size: 20px;
     }
+  }
+
+  .subtitle {
+    color: variables.$white;
+
+    @include mixins.mobile {
+      font-size: 16px;
+    }
+  }
+
+  .search-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: variables.$spacing * 4;
+
+    .search-input {
+      border: none;
+      border-radius: variables.$border-radius 0 0 variables.$border-radius;
+      height: $height-search;
+      width: $width-search;
+      font-size: $font-size-search;
+      padding: 0 variables.$unit;
+      background-color: variables.$white;
+
+      @include mixins.mobile {
+        width: $width-search-mobile;
+      }
+    }
+  }
+
+  .search-button {
+    background-color: variables.$primary-color;
+    color: variables.$white;
+    border-radius: 0 variables.$border-radius variables.$border-radius 0;
+    height: $height-search;
+    font-size: $font-size-search;
   }
 }
 
-.search-button {
-  background-color: variables.$primary-color;
-  color: variables.$white;
-  border-radius: 0 variables.$border-radius variables.$border-radius 0;
-  height: $height-search;
-  font-size: $font-size-search;
+.main-body {
+  padding: 0 variables.$spacing;
+  max-width: $max-width-content;
+  width: 100%;
+  background-color: transparent;
+  margin: 0 auto;
+  margin-bottom: variables.$spacing;
+}
+
+.subjects {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: variables.$white;
+  margin: 0 auto;
+  justify-content: space-around;
+  @include mixins.mobile {
+    max-width: 100%;
+  }
+}
+
+.subject {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  width: 33.33333%;
+  min-width: $min-width-subject;
+  height: $height-subject;
+  padding: 0 10%;
+
+  mat-icon {
+    color: variables.$primary-color;
+    margin-right: variables.$spacing;
+    font-size: 28px;
+  }
+
+  @include mixins.tablet {
+    padding: 0 5%;
+  }
+
+  @include mixins.mobile {
+    height: 72px;
+    h2 {
+      font-size: 16px;
+    }
+  }
 }
