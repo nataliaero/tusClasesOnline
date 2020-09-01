@@ -33,8 +33,8 @@ import { Observable } from 'rxjs';
     <div class="main-body">
       <div class="subjects">
         <div class="subject">
-          <div><mat-icon>details</mat-icon></div>
-          <div><h2>Matemáticas</h2></div>
+          <mat-icon>blur_on</mat-icon>
+          <h2>Matemáticas</h2>
         </div>
         <div class="subject">
           <mat-icon>filter_vintage</mat-icon>
@@ -49,7 +49,7 @@ import { Observable } from 'rxjs';
           <h2>Informática</h2>
         </div>
         <div class="subject">
-          <mat-icon>blur_on</mat-icon>
+          <mat-icon>attach_money</mat-icon>
           <h2>Economía</h2>
         </div>
         <div class="subject">
