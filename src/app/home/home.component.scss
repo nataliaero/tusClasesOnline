@@ -6,6 +6,8 @@ $width-search: 500px;
 $width-search-mobile: 200px;
 $font-size-search: 16px;
 $max-width-content: 1050px;
+$min-width-subject: 200px;
+$height-subject: 96px;
 
 :host {
   position: absolute;
@@ -30,7 +32,7 @@ $max-width-content: 1050px;
 }
 
 .header-info {
-  padding: 0 32px;
+  padding: 0 variables.$spacing;
   max-width: $max-width-content;
   width: 100%;
 
@@ -86,7 +88,7 @@ $max-width-content: 1050px;
 }
 
 .main-body {
-  padding: 0 32px;
+  padding: 0 variables.$spacing;
   max-width: $max-width-content;
   width: 100%;
   background-color: transparent;
@@ -106,13 +108,13 @@ $max-width-content: 1050px;
 }
 
 .subject {
-  width: 33.33333%;
-  min-width: 200px;
   display: flex;
   flex-direction: row;
   justify-content: left;
   align-items: center;
-  height: 96px;
+  width: 33.33333%;
+  min-width: $min-width-subject;
+  height: $height-subject;
   padding: 0 10%;
 
   mat-icon {
