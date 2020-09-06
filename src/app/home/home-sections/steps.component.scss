@@ -1,0 +1,91 @@
+@use '../../../variables';
+@use '../../../mixins';
+
+$title-font-size-mobile: 20px;
+$subtitle-font-size-mobile: 16px;
+$image-size: 400px;
+$image-size-mobile: 250px;
+$info-size: 230px;
+
+.map {
+  display: flex;
+  flex-direction: column;
+  background-color: variables.$white;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  margin-top: variables.$spacing * 2;
+
+  .map-avatar {
+    margin-top: -16px;
+  }
+
+  .map-title {
+    font-size: 26px;
+    margin-top: variables.$spacing;
+    color: variables.$secondary-color;
+    text-align: center;
+
+    @include mixins.mobile {
+      font-size: $title-font-size-mobile;
+    }
+  }
+  .map-subtitle {
+    margin: variables.$spacing 0;
+    text-align: center;
+
+    @include mixins.mobile {
+      font-size: $subtitle-font-size-mobile;
+    }
+  }
+
+  .map-image {
+    max-width: $image-size;
+    @include mixins.mobile {
+      max-width: $image-size-mobile;
+    }
+  }
+
+  .map-info {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: variables.$spacing * 3 0 variables.$spacing * 2 0;
+
+    @include mixins.mobile {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    @include mixins.mobile {
+      flex-direction: row;
+      margin-bottom: variables.$spacing * 2;
+      width: $info-size;
+      justify-content: left;
+    }
+
+    .info-avatar {
+      margin-bottom: variables.$half-unit;
+
+      @include mixins.mobile {
+        margin-right: variables.$unit;
+      }
+    }
+  }
+
+  .map-button {
+    background-color: variables.$primary-color;
+    color: variables.$white;
+    padding: variables.$unit;
+    margin: variables.$spacing 0;
+  }
+}

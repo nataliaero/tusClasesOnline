@@ -33,6 +33,7 @@ import { Observable } from 'rxjs';
     <div class="main-body">
       <app-subjects></app-subjects>
       <app-map></app-map>
+      <app-steps></app-steps>
     </div>
   `,
   styleUrls: ['./home.component.scss'],

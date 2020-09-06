@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MESSAGES } from '../../messages';
+import { MESSAGES } from '../../../messages';
 
 interface SubjectConfig {
   icon: string;

@@ -46,4 +46,8 @@ export const MESSAGES = {
   'map.learnAtYourPace': 'Aprende a tu ritmo',
   'map.affordablePrice': 'Precios asequibles',
   'map.bookPrivateClass': 'Pide una clase privada con un tutor',
+  'steps.title': 'Como funciona clasesOnline.es',
+  'steps.step1': 'Encuentra el tutor perfecto',
+  'steps.step2': 'Programa tu clase',
+  'steps.step3': 'Empieza tu primera clase',
 };

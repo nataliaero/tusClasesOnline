@@ -13,17 +13,22 @@ $avatar-icon-size: 32px;
   background-color: variables.$primary-color;
   border-radius: 50%;
   padding: variables.$unit;
+}
 
-  .avatar-icon {
-    color: variables.$white;
-    width: $avatar-icon-size;
-    height: $avatar-icon-size;
-    font-size: $avatar-icon-size;
-  }
+.avatar-icon {
+  color: variables.$white;
+  width: $avatar-icon-size;
+  height: $avatar-icon-size;
+  font-size: $avatar-icon-size;
+}
 
-  .avatar-message {
-    font-family: variables.$primary-font;
-    font-size: $font-size-text;
-    color: variables.$white;
-  }
+.avatar-message {
+  width: $avatar-icon-size;
+  height: $avatar-icon-size;
+}
+
+.avatar-message-body {
+  font-family: variables.$primary-font;
+  font-size: $font-size-text;
+  color: variables.$white;
 }
