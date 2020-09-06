@@ -53,4 +53,6 @@ export const MESSAGES = {
   'steps.step1': 'Encuentra el tutor perfecto',
   'steps.step2': 'Programa tu clase',
   'steps.step3': 'Empieza tu primera clase',
+  'tutorInfo.title': 'Conviértete en tutor',
+  'tutorInfo.subtitle': 'Gana dinero compartiendo tus conocimientos',
 };

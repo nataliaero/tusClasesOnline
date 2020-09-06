@@ -33,12 +33,11 @@ import { Observable } from 'rxjs';
     <div class="main-body">
       <app-subjects></app-subjects>
       <app-map></app-map>
-      <app-steps></app-steps>
-      <div class="first-class">
-        <app-avatar class="first-class-avatar" [icon]="iconFirstClass"></app-avatar>
-        <div class="first-class-title">{{ msg.firstClassTitle }}</div>
+      <app-section [title]="msg.firstClassTitle" [icon]="iconFirstClass">
         <h2 class="first-class-body">{{ msg.firstClassBody }}</h2>
-      </div>
+      </app-section>
+      <app-steps></app-steps>
+      <app-tutor-info></app-tutor-info>
     </div>
   `,
   styleUrls: ['./home.component.scss'],

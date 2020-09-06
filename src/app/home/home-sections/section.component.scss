@@ -1,0 +1,40 @@
+@use '../../../variables';
+@use '../../../mixins';
+
+$title-font-size: 26px;
+$title-font-size-mobile: 20px;
+$subtitle-font-size-mobile: 16px;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  background-color: variables.$white;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  margin-top: variables.$spacing * 2;
+
+  .section-avatar {
+    margin-top: -16px;
+  }
+
+  .section-title {
+    font-size: $title-font-size;
+    margin-top: variables.$spacing * 2;
+    color: variables.$secondary-color;
+    text-align: center;
+
+    @include mixins.mobile {
+      font-size: $title-font-size-mobile;
+    }
+  }
+
+  .section-subtitle {
+    margin: variables.$spacing 0;
+    text-align: center;
+
+    @include mixins.mobile {
+      font-size: $subtitle-font-size-mobile;
+    }
+  }
+}

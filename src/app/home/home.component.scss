@@ -96,40 +96,15 @@ $subtitle-font-size-mobile: 16px;
   margin-bottom: variables.$spacing;
 }
 
-.first-class {
-  display: flex;
-  flex-direction: column;
-  background-color: variables.$white;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: center;
-  margin-top: variables.$spacing * 2;
+.first-class-body {
+  margin-top: variables.$spacing * 3;
+  margin-bottom: variables.$spacing * 4;
+  text-align: center;
+  padding: 0 variables.$spacing * 10;
+  color: variables.$grey;
 
-  .first-class-avatar {
-    margin-top: -16px;
-  }
-
-  .first-class-title {
-    font-size: 26px;
-    margin-top: variables.$spacing * 2;
-    color: variables.$secondary-color;
-    text-align: center;
-
-    @include mixins.mobile {
-      font-size: $title-font-size-mobile;
-    }
-  }
-
-  .first-class-body {
-    margin-top: variables.$spacing * 3;
-    margin-bottom: variables.$spacing * 4;
-    text-align: center;
-    padding: 0 variables.$spacing * 10;
-    color: variables.$grey;
-
-    @include mixins.mobile {
-      font-size: $subtitle-font-size-mobile;
-      padding: 0 variables.$spacing * 2;
-    }
+  @include mixins.mobile {
+    font-size: $subtitle-font-size-mobile;
+    padding: 0 variables.$spacing * 2;
   }
 }
