@@ -93,3 +93,26 @@ $max-width-content: 1050px;
   margin: 0 auto;
   margin-bottom: variables.$spacing;
 }
+
+.map {
+  display: flex;
+  flex-direction: column;
+  background-color: variables.$white;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  margin-top: variables.$spacing * 2;
+
+  .map-title {
+    font-size: 26px;
+    margin-top: variables.$spacing;
+    color: variables.$secondary-color;
+  }
+  .map-subtitle {
+    margin-top: variables.$spacing;
+  }
+
+  .map-image {
+    width: 400px;
+  }
+}

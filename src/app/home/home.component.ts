@@ -32,6 +32,12 @@ import { Observable } from 'rxjs';
     </div>
     <div class="main-body">
       <app-subjects></app-subjects>
+      <div class="map">
+        <app-avatar [icon]="mapIcon"></app-avatar>
+        <div class="map-title">Todas tus clases a un click de distancia</div>
+        <h2 class="map-subtitle">Accede a clases particulares con los mejores tutores</h2>
+        <img class="map-image" src="/assets/mapa.png" alt="Mapa" />
+      </div>
     </div>
   `,
   styleUrls: ['./home.component.scss'],
@@ -40,6 +46,7 @@ export class HomeComponent {
   constructor(private mobileService: MobileService) {}
 
   isMobileOrTablet$: Observable<boolean> = this.mobileService.isMobileOrTablet$;
+  mapIcon = 'publicon';
 
   msg = {
     findTutor: MESSAGES['basic.findTutor'],
