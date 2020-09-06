@@ -4,12 +4,22 @@ import { MESSAGES } from '../../../messages';
 @Component({
   selector: 'app-steps',
   template: `
-    <div class="map">
-      <app-avatar class="map-avatar" [icon]="stepIcon"></app-avatar>
-      <div class="map-title">{{ msg.title }}</div>
-      <div class="map-info">
-        <app-avatar class="info-avatar" [message]="'1'"></app-avatar>
-        <h3>{{ msg.step1 }}</h3>
+    <div class="steps">
+      <app-avatar class="step-avatar" [icon]="stepIcon"></app-avatar>
+      <div class="step-title">{{ msg.title }}</div>
+      <div class="step-info">
+        <div class="step-first">
+          <app-avatar [message]="'1'"></app-avatar>
+          <h3 class="step-message">{{ msg.step1 }}</h3>
+        </div>
+        <div class="step-second">
+          <app-avatar [message]="'2'"></app-avatar>
+          <h3 class="step-message">{{ msg.step2 }}</h3>
+        </div>
+        <div class="step-third">
+          <app-avatar [message]="'3'"></app-avatar>
+          <h3 class="step-message">{{ msg.step3 }}</h3>
+        </div>
       </div>
     </div>
   `,

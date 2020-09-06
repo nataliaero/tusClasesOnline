@@ -16,7 +16,7 @@ interface InfoConfig {
       <img class="map-image" src="/assets/mapa.png" alt="Mapa" />
       <div class="map-info">
         <div *ngFor="let info of infoConfig" class="info">
-          <app-avatar class="info-avatar" [icon]="info.icon"></app-avatar>
+          <app-avatar class="map-avatar" [icon]="info.icon"></app-avatar>
           <h3>{{ info.message }}</h3>
         </div>
       </div>
