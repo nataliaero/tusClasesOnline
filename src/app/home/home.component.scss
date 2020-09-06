@@ -6,6 +6,8 @@ $width-search: 500px;
 $width-search-mobile: 200px;
 $font-size-search: 16px;
 $max-width-content: 1050px;
+$title-font-size-mobile: 20px;
+$subtitle-font-size-mobile: 16px;
 
 :host {
   position: absolute;
@@ -43,7 +45,7 @@ $max-width-content: 1050px;
     margin-bottom: variables.$spacing;
 
     @include mixins.mobile {
-      font-size: 20px;
+      font-size: $title-font-size-mobile;
     }
   }
 
@@ -51,7 +53,7 @@ $max-width-content: 1050px;
     color: variables.$white;
 
     @include mixins.mobile {
-      font-size: 16px;
+      font-size: $subtitle-font-size-mobile;
     }
   }
 
@@ -103,16 +105,64 @@ $max-width-content: 1050px;
   align-items: center;
   margin-top: variables.$spacing * 2;
 
+  .map-avatar {
+    margin-top: -16px;
+  }
+
   .map-title {
     font-size: 26px;
     margin-top: variables.$spacing;
     color: variables.$secondary-color;
+
+    @include mixins.mobile {
+      font-size: $title-font-size-mobile;
+    }
   }
   .map-subtitle {
-    margin-top: variables.$spacing;
+    margin: variables.$spacing 0;
+
+    @include mixins.mobile {
+      font-size: $subtitle-font-size-mobile;
+    }
   }
 
   .map-image {
-    width: 400px;
+    max-width: 400px;
+  }
+
+  .map-info {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: variables.$spacing * 3 0 variables.$spacing * 2 0;
+
+    @include mixins.mobile {
+      flex-direction: column;
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    @include mixins.mobile {
+      flex-direction: row;
+      margin-bottom: variables.$spacing * 2;
+    }
+
+    .info-avatar {
+      width: 48px;
+      margin-bottom: variables.$half-unit;
+    }
+  }
+
+  .map-button {
+    background-color: variables.$primary-color;
+    color: variables.$white;
+    padding: variables.$unit;
+    margin: variables.$spacing 0;
   }
 }

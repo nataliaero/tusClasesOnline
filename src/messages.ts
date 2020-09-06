@@ -40,4 +40,10 @@ export const MESSAGES = {
   'subjects.english': 'Inglés',
   'subjects.algebra': 'Álgebra',
   'subjects.chemistry': 'Química',
+  'map.title': 'Todas tus clases a un click de distancia',
+  'map.subtitle': 'Accede a clases particulares con los mejores tutores',
+  'map.experiencedTutors': 'Tutores experimentados',
+  'map.learnAtYourPace': 'Aprende a tu ritmo',
+  'map.affordablePrice': 'Precios asequibles',
+  'map.bookPrivateClass': 'Pide una clase privada con un tutor',
 };

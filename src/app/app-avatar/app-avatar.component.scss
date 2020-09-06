@@ -3,7 +3,7 @@
 
 $font-size-logo: 20px;
 $font-size-text: 16px;
-$avatar-icon-size: 40px;
+$avatar-icon-size: 32px;
 
 .avatar {
   display: flex;
@@ -12,8 +12,7 @@ $avatar-icon-size: 40px;
   align-items: center;
   background-color: variables.$primary-color;
   border-radius: 50%;
-  padding: variables.$half-unit;
-  margin-top: -16px;
+  padding: variables.$unit;
 
   .avatar-icon {
     color: variables.$white;
