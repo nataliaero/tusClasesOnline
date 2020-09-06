@@ -11,9 +11,18 @@ import { AvatarModule } from '../app-avatar';
 import { MapComponent } from './home-sections/map.component';
 import { StepsComponent } from './home-sections/steps.component';
 import { SubjectsComponent } from './home-sections/subjects.component';
+import { TutorInfoComponent } from './home-sections/tutor-info.component';
+import { SectionComponent } from './home-sections/section.component';
 
 @NgModule({
-  declarations: [HomeComponent, MapComponent, StepsComponent, SubjectsComponent],
+  declarations: [
+    HomeComponent,
+    MapComponent,
+    SectionComponent,
+    StepsComponent,
+    SubjectsComponent,
+    TutorInfoComponent,
+  ],
   imports: [
     AvatarModule,
     CommonModule,

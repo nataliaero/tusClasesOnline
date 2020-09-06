@@ -9,10 +9,7 @@ interface InfoConfig {
 @Component({
   selector: 'app-map',
   template: `
-    <div class="map">
-      <app-avatar class="map-avatar" [icon]="mapIcon"></app-avatar>
-      <div class="map-title">{{ msg.title }}</div>
-      <h2 class="map-subtitle">{{ msg.subtitle }}</h2>
+    <app-section [title]="msg.title" [subtitle]="msg.subtitle" [icon]="mapIcon">
       <img class="map-image" src="/assets/mapa.png" alt="Mapa" />
       <div class="map-info">
         <div *ngFor="let info of infoConfig" class="info">
@@ -23,7 +20,7 @@ interface InfoConfig {
       <button mat-button class="map-button" (click)="onClick()">
         {{ msg.bookPrivateClass }}
       </button>
-    </div>
+    </app-section>
   `,
   styleUrls: ['./map.component.scss'],
 })

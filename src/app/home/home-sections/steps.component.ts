@@ -4,9 +4,7 @@ import { MESSAGES } from '../../../messages';
 @Component({
   selector: 'app-steps',
   template: `
-    <div class="steps">
-      <app-avatar class="step-avatar" [icon]="stepIcon"></app-avatar>
-      <div class="step-title">{{ msg.title }}</div>
+    <app-section [title]="msg.title" [icon]="stepIcon">
       <div class="step-info">
         <div class="step-first">
           <app-avatar [message]="'1'"></app-avatar>
@@ -21,7 +19,7 @@ import { MESSAGES } from '../../../messages';
           <h3 class="step-message">{{ msg.step3 }}</h3>
         </div>
       </div>
-    </div>
+    </app-section>
   `,
   styleUrls: ['./steps.component.scss'],
 })
