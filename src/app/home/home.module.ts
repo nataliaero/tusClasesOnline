@@ -7,12 +7,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { SubjectsComponent } from './subjects.component';
 import { AvatarModule } from '../app-avatar';
-import { MapComponent } from './map.component';
+import { MapComponent } from './home-sections/map.component';
+import { StepsComponent } from './home-sections/steps.component';
+import { SubjectsComponent } from './home-sections/subjects.component';
 
 @NgModule({
-  declarations: [HomeComponent, MapComponent, SubjectsComponent],
+  declarations: [HomeComponent, MapComponent, StepsComponent, SubjectsComponent],
   imports: [
     AvatarModule,
     CommonModule,
