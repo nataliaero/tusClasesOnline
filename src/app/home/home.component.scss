@@ -96,7 +96,7 @@ $subtitle-font-size-mobile: 16px;
   margin-bottom: variables.$spacing;
 }
 
-.map {
+.first-class {
   display: flex;
   flex-direction: column;
   background-color: variables.$white;
@@ -105,64 +105,31 @@ $subtitle-font-size-mobile: 16px;
   align-items: center;
   margin-top: variables.$spacing * 2;
 
-  .map-avatar {
+  .first-class-avatar {
     margin-top: -16px;
   }
 
-  .map-title {
+  .first-class-title {
     font-size: 26px;
-    margin-top: variables.$spacing;
+    margin-top: variables.$spacing * 2;
     color: variables.$secondary-color;
+    text-align: center;
 
     @include mixins.mobile {
       font-size: $title-font-size-mobile;
     }
   }
-  .map-subtitle {
-    margin: variables.$spacing 0;
+
+  .first-class-body {
+    margin-top: variables.$spacing * 3;
+    margin-bottom: variables.$spacing * 4;
+    text-align: center;
+    padding: 0 variables.$spacing * 10;
+    color: variables.$grey;
 
     @include mixins.mobile {
       font-size: $subtitle-font-size-mobile;
+      padding: 0 variables.$spacing * 2;
     }
-  }
-
-  .map-image {
-    max-width: 400px;
-  }
-
-  .map-info {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin: variables.$spacing * 3 0 variables.$spacing * 2 0;
-
-    @include mixins.mobile {
-      flex-direction: column;
-    }
-  }
-
-  .info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-
-    @include mixins.mobile {
-      flex-direction: row;
-      margin-bottom: variables.$spacing * 2;
-    }
-
-    .info-avatar {
-      width: 48px;
-      margin-bottom: variables.$half-unit;
-    }
-  }
-
-  .map-button {
-    background-color: variables.$primary-color;
-    color: variables.$white;
-    padding: variables.$unit;
-    margin: variables.$spacing 0;
   }
 }
