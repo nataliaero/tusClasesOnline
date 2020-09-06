@@ -31,4 +31,13 @@ export const MESSAGES = {
   'signup.enterWithGoogle': 'Regístrate con Google',
   'signup.registerEmail': 'o regístrate con tu email',
   'signup.register': 'Regístrate',
+  'subjects.mathematics': 'Matemáticas',
+  'subjects.physics': 'Física',
+  'subjects.language': 'Lengua',
+  'subjects.informatics': 'Informática',
+  'subjects.economy': 'Economía',
+  'subjects.french': 'Francés',
+  'subjects.english': 'Inglés',
+  'subjects.algebra': 'Álgebra',
+  'subjects.chemistry': 'Química',
 };
