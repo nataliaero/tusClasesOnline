@@ -55,4 +55,9 @@ export const MESSAGES = {
   'steps.step3': 'Empieza tu primera clase',
   'tutorInfo.title': 'Conviértete en tutor',
   'tutorInfo.subtitle': 'Gana dinero compartiendo tus conocimientos',
+  'tutorInfo.findStudents': 'Encuentra alumnos',
+  'tutorInfo.flexibleTime': 'Horarios que se adaptan a ti',
+  'tutorInfo.earnMoney': 'Gana dinero de forma segura',
+  'tutorInfo.start': 'Regístrate y empieza dando clases online en clasesOnline.es',
+  'tutorInfo.register': 'Conviértete en tutor',
 };

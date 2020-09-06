@@ -16,7 +16,7 @@ $info-size: 230px;
   display: flex;
   justify-content: space-around;
   width: 100%;
-  margin: variables.$spacing * 3 0 variables.$spacing * 2 0;
+  margin-top: variables.$spacing * 3;
 
   @include mixins.mobile {
     flex-direction: column;
@@ -51,6 +51,7 @@ $info-size: 230px;
 .map-button {
   background-color: variables.$primary-color;
   color: variables.$white;
-  padding: variables.$unit;
-  margin: variables.$spacing 0;
+  padding: variables.$unit variables.$spacing;
+  margin: variables.$spacing * 2 0;
+  font-size: 16px;
 }
