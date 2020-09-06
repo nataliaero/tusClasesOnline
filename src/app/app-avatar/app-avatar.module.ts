@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { AppButtonComponent } from './app-button.component';
+import { AvatarComponent } from './app-avatar.component';
 
 @NgModule({
-  declarations: [AppButtonComponent],
+  declarations: [AvatarComponent],
   imports: [CommonModule, MatIconModule],
-  exports: [AppButtonComponent],
+  exports: [AvatarComponent],
 })
-export class AppButtonModule {}
+export class AvatarModule {}

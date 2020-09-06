@@ -1,0 +1,29 @@
+@use '../../variables';
+@use '../../mixins';
+
+$font-size-logo: 20px;
+$font-size-text: 16px;
+$avatar-icon-size: 32px;
+
+.avatar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: variables.$primary-color;
+  border-radius: 50%;
+  padding: variables.$unit;
+
+  .avatar-icon {
+    color: variables.$white;
+    width: $avatar-icon-size;
+    height: $avatar-icon-size;
+    font-size: $avatar-icon-size;
+  }
+
+  .avatar-message {
+    font-family: variables.$primary-font;
+    font-size: $font-size-text;
+    color: variables.$white;
+  }
+}

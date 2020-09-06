@@ -8,10 +8,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { SubjectsComponent } from './subjects.component';
+import { AvatarModule } from '../app-avatar';
+import { MapComponent } from './map.component';
 
 @NgModule({
-  declarations: [HomeComponent, SubjectsComponent],
+  declarations: [HomeComponent, MapComponent, SubjectsComponent],
   imports: [
+    AvatarModule,
     CommonModule,
     HomeRoutingModule,
     MatButtonModule,

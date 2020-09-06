@@ -24,7 +24,7 @@ import { Observable } from 'rxjs';
           <button mat-button class="search-button" (click)="onSearch()">
             <mat-icon *ngIf="isMobileOrTablet$ | async; else text">search</mat-icon>
             <ng-template #text>
-              {{ msg.searchQuestion }}
+              {{ msg.findTutor }}
             </ng-template>
           </button>
         </div>
@@ -32,6 +32,7 @@ import { Observable } from 'rxjs';
     </div>
     <div class="main-body">
       <app-subjects></app-subjects>
+      <app-map></app-map>
     </div>
   `,
   styleUrls: ['./home.component.scss'],
