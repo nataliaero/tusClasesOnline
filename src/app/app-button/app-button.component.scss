@@ -5,6 +5,12 @@ $image-height: 30px;
 $font-size-logo: 20px;
 $font-size-text: 16px;
 
+:host {
+  :hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
 .click-user {
   display: flex;
   flex-direction: row;
@@ -12,8 +18,10 @@ $font-size-text: 16px;
   align-items: center;
   background-color: transparent;
   cursor: pointer;
-  padding: 0 variables.$spacing;
-  border-radius: 16px;
+  padding: variables.$spacing;
+  :hover {
+    background-color: transparent;
+  }
 
   .button-icon {
     display: inline;

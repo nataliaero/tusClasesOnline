@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MESSAGES } from '../../../messages';
 import { AppLoginSignUpService } from '../../app-login-signup';
 import { take } from 'rxjs/operators';
@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-bar',
   template: `
-    <div class="app-bar">
+    <div [class]="getAppBarClass()">
       <div class="app-bar-left">
         <img src="/assets/logoWhite.png" alt="Logo" />
         <p>{{ msg.tusClasesOnline }}</p>
@@ -21,7 +21,7 @@ import { Subscription } from 'rxjs';
   `,
   styleUrls: ['./app-bar.component.scss'],
 })
-export class AppBarComponent {
+export class AppBarComponent implements OnInit {
   constructor(private appLoginSignUpService: AppLoginSignUpService) {}
   searchIcon = 'search';
   schoolIcon = 'school';
@@ -33,6 +33,21 @@ export class AppBarComponent {
     signIn: MESSAGES['appBar.signIn'],
     tusClasesOnline: MESSAGES['appBar.tusClasesOnline'],
   };
+
+  scroll = false;
+
+  ngOnInit(): void {
+    window.addEventListener('scroll', this.scrolling, true);
+  }
+
+  scrolling = s => {
+    const sc = s.target.scrollingElement.scrollTop;
+    this.scroll = sc >= 10;
+  };
+
+  getAppBarClass(): string {
+    return this.scroll ? 'app-bar scroll-color' : 'app-bar';
+  }
 
   onClickUser(): Subscription {
     return this.appLoginSignUpService.openLoginDialog().pipe(take(1)).subscribe();
