@@ -34,6 +34,11 @@ import { Observable } from 'rxjs';
       <app-subjects></app-subjects>
       <app-map></app-map>
       <app-steps></app-steps>
+      <div class="first-class">
+        <app-avatar class="first-class-avatar" [icon]="iconFirstClass"></app-avatar>
+        <div class="first-class-title">{{ msg.firstClassTitle }}</div>
+        <h2 class="first-class-body">{{ msg.firstClassBody }}</h2>
+      </div>
     </div>
   `,
   styleUrls: ['./home.component.scss'],
@@ -42,12 +47,15 @@ export class HomeComponent {
   constructor(private mobileService: MobileService) {}
 
   isMobileOrTablet$: Observable<boolean> = this.mobileService.isMobileOrTablet$;
+  iconFirstClass = 'thumb_up';
 
   msg = {
     findTutor: MESSAGES['basic.findTutor'],
     findBestTutors: MESSAGES['home.findBestTutors'],
     startToday: MESSAGES['home.startToday'],
     searchQuestion: MESSAGES['home.searchQuestion'],
+    firstClassTitle: MESSAGES['home.firstClassTitle'],
+    firstClassBody: MESSAGES['home.firstClass'],
   };
 
   searchForm: FormGroup = new FormGroup({
