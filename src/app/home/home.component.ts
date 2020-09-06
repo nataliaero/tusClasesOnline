@@ -31,45 +31,7 @@ import { Observable } from 'rxjs';
       </div>
     </div>
     <div class="main-body">
-      <div class="subjects">
-        <div class="subject">
-          <mat-icon>blur_on</mat-icon>
-          <h2>Matemáticas</h2>
-        </div>
-        <div class="subject">
-          <mat-icon>filter_vintage</mat-icon>
-          <h2>Física</h2>
-        </div>
-        <div class="subject">
-          <mat-icon>create</mat-icon>
-          <h2>Lengua</h2>
-        </div>
-        <div class="subject">
-          <mat-icon>laptop</mat-icon>
-          <h2>Informática</h2>
-        </div>
-        <div class="subject">
-          <mat-icon>attach_money</mat-icon>
-          <h2>Economía</h2>
-        </div>
-        <div class="subject">
-          <mat-icon>spa</mat-icon>
-          <h2>Francés</h2>
-        </div>
-        <div class="subject">
-          <mat-icon>publicon</mat-icon>
-          <h2>Inglés</h2>
-        </div>
-        <div class="subject">
-          <mat-icon>school</mat-icon>
-          <h2>Álgebra</h2>
-        </div>
-        <div class="subject">
-          <mat-icon>exposure</mat-icon>
-          <h2>Química</h2>
-        </div>
-      </div>
-      <div></div>
+      <app-subjects></app-subjects>
     </div>
   `,
   styleUrls: ['./home.component.scss'],
@@ -77,7 +39,6 @@ import { Observable } from 'rxjs';
 export class HomeComponent {
   constructor(private mobileService: MobileService) {}
 
-  searchIcon = 'search';
   isMobileOrTablet$: Observable<boolean> = this.mobileService.isMobileOrTablet$;
 
   msg = {

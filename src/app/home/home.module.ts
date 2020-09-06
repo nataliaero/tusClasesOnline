@@ -7,9 +7,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { SubjectsComponent } from './subjects.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, SubjectsComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

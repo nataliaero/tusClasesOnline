@@ -6,8 +6,6 @@ $width-search: 500px;
 $width-search-mobile: 200px;
 $font-size-search: 16px;
 $max-width-content: 1050px;
-$min-width-subject: 200px;
-$height-subject: 96px;
 
 :host {
   position: absolute;
@@ -94,43 +92,4 @@ $height-subject: 96px;
   background-color: transparent;
   margin: 0 auto;
   margin-bottom: variables.$spacing;
-}
-
-.subjects {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: variables.$white;
-  margin: 0 auto;
-  justify-content: space-around;
-  @include mixins.mobile {
-    max-width: 100%;
-  }
-}
-
-.subject {
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
-  align-items: center;
-  width: 33.33333%;
-  min-width: $min-width-subject;
-  height: $height-subject;
-  padding: 0 10%;
-
-  mat-icon {
-    color: variables.$primary-color;
-    margin-right: variables.$spacing;
-    font-size: 28px;
-  }
-
-  @include mixins.tablet {
-    padding: 0 5%;
-  }
-
-  @include mixins.mobile {
-    height: 72px;
-    h2 {
-      font-size: 16px;
-    }
-  }
 }

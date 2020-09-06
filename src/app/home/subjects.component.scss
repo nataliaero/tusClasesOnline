@@ -1,0 +1,46 @@
+@use '../../variables';
+@use '../../mixins';
+
+$height-subject: 96px;
+$height-subject-mobile: 72px;
+$min-width-subject: 200px;
+$icon-size: 28px;
+
+.subjects {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: variables.$white;
+  margin: 0 auto;
+  justify-content: space-around;
+  @include mixins.mobile {
+    max-width: 100%;
+  }
+}
+
+.subject {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  width: 33.33333%;
+  min-width: $min-width-subject;
+  height: $height-subject;
+  padding: 0 10%;
+
+  mat-icon {
+    color: variables.$primary-color;
+    margin-right: variables.$spacing;
+    font-size: $icon-size;
+  }
+
+  @include mixins.tablet {
+    padding: 0 5%;
+  }
+
+  @include mixins.mobile {
+    height: $height-subject-mobile;
+    h2 {
+      font-size: 16px;
+    }
+  }
+}
