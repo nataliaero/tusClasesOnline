@@ -9,13 +9,6 @@ $max-width-content: 1050px;
 $title-font-size-mobile: 20px;
 $subtitle-font-size-mobile: 16px;
 
-:host {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  background-color: variables.$grey-xxlight;
-}
-
 .background-image {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     /* the gradient on top, adjust color and opacity to your taste */
@@ -32,12 +25,12 @@ $subtitle-font-size-mobile: 16px;
 }
 
 .header-info {
-  padding: 0 variables.$spacing;
   max-width: $max-width-content;
   width: 100%;
 
   @include mixins.mobile {
     max-width: 100%;
+    padding: 0 variables.$spacing;
   }
 
   .title {
@@ -88,12 +81,14 @@ $subtitle-font-size-mobile: 16px;
 }
 
 .main-body {
-  padding: 0 variables.$spacing;
   max-width: $max-width-content;
   width: 100%;
   background-color: transparent;
   margin: 0 auto;
   margin-bottom: variables.$spacing;
+  @include mixins.mobile {
+    padding: 0 variables.$spacing;
+  }
 }
 
 .first-class-body {

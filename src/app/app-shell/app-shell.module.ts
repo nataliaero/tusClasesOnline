@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AppButtonModule } from '../app-button';
 import { AppLoginSignupModule, AppLoginSignUpService } from '../app-login-signup';
+import { FooterModule } from '../app-footer';
 
 @NgModule({
   declarations: [AppShellComponent, RootComponent, AppBarComponent],
@@ -18,6 +19,7 @@ import { AppLoginSignupModule, AppLoginSignUpService } from '../app-login-signup
     CommonModule,
     MatIconModule,
     MatButtonModule,
+    FooterModule,
   ],
   exports: [AppShellComponent],
 })
