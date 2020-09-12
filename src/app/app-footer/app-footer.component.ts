@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-footer',
   template: `
     <div class="footer">
-      <div>© TusClasesOnline</div>
+      <div class="copyright">© TusClasesOnline</div>
       <div class="footer-items">
         <p>Términos de servicio</p>
         <p>Poliítica de privicidad</p>

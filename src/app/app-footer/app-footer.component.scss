@@ -11,8 +11,16 @@
   color: variables.$white;
 }
 
+.copyright {
+  align-self: center;
+}
+
 .footer-items {
   display: flex;
+
+  @include mixins.mobile {
+    flex-direction: column;
+  }
 
   p {
     color: variables.$white;
