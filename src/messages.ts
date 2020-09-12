@@ -60,4 +60,8 @@ export const MESSAGES = {
   'tutorInfo.earnMoney': 'Gana dinero de forma segura',
   'tutorInfo.start': 'Regístrate y empieza dando clases online en clasesOnline.es',
   'tutorInfo.register': 'Conviértete en tutor',
+  'footer.copyright': '© TusClasesOnline',
+  'footer.termsOfService': 'Términos de servicio',
+  'footer.privacyPolicy': 'Política de privicidad',
+  'footer.contact': 'Contacta',
 };

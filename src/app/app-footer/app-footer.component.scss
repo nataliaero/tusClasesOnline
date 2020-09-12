@@ -1,0 +1,35 @@
+@use '../../variables';
+@use '../../mixins';
+
+.footer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: variables.$spacing * 2;
+  background-color: variables.$secondary-color;
+  color: variables.$white;
+}
+
+.copyright {
+  align-self: center;
+}
+
+.footer-items {
+  display: flex;
+
+  @include mixins.mobile {
+    flex-direction: column;
+  }
+
+  p {
+    color: variables.$white;
+    padding: 0 variables.$spacing;
+
+    cursor: pointer;
+  }
+
+  :hover {
+    color: variables.$primary-color;
+  }
+}

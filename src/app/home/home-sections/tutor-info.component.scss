@@ -2,6 +2,8 @@
 @use '../../../mixins';
 
 $max-width: 700px;
+$height-body: 200px;
+$height-body-mobile: 150px;
 
 .tutor-info {
   display: flex;
@@ -19,7 +21,7 @@ $max-width: 700px;
 }
 
 .tutor-image {
-  width: 250px;
+  height: $height-body;
 
   @include mixins.mobile {
     display: none;
@@ -29,14 +31,19 @@ $max-width: 700px;
 .tutor-info-body {
   display: flex;
   flex-direction: column;
-  margin-bottom: variables.$spacing;
+  margin-left: variables.$spacing;
+  justify-content: space-between;
+  height: $height-body;
+
+  @include mixins.mobile {
+    height: $height-body-mobile;
+  }
 
   div {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    margin: variables.$spacing;
   }
 }
 
