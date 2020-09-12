@@ -3,6 +3,7 @@ import { MESSAGES } from '../../messages';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { passwordValidators } from './validators';
 
 @Component({
   selector: 'app-signup-form',
@@ -101,7 +102,7 @@ export class AppSignUpFormComponent {
 
   loginForm: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required], passwordValidators),
     repeatPassword: new FormControl('', [Validators.required]),
     rememberMe: new FormControl(''),
     acceptLegalTerms: new FormControl('', [Validators.requiredTrue]),
