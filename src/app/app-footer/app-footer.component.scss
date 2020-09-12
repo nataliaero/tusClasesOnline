@@ -17,5 +17,11 @@
   p {
     color: variables.$white;
     padding: 0 variables.$spacing;
+
+    cursor: pointer;
+  }
+
+  :hover {
+    color: variables.$primary-color;
   }
 }
