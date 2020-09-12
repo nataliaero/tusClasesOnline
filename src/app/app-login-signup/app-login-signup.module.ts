@@ -8,12 +8,18 @@ import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AppDialogModule } from '../app-dialog';
 import { AppLoginSignUpService } from './app-login-signup.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AppFormComponent } from './app-login-form.component';
+import { AppLoginFormComponent } from './app-login-form.component';
+import { AppSignUpFormComponent } from './app-signup-form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
-  declarations: [AppLoginComponent, AppFormComponent, AppSignupComponent],
+  declarations: [
+    AppLoginComponent,
+    AppLoginFormComponent,
+    AppSignupComponent,
+    AppSignUpFormComponent,
+  ],
   imports: [
     AppDialogModule,
     CommonModule,
@@ -24,7 +30,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatInputModule,
     ReactiveFormsModule,
   ],
-  exports: [AppLoginComponent, AppFormComponent, AppSignupComponent],
+  exports: [AppLoginComponent, AppLoginFormComponent, AppSignupComponent, AppSignUpFormComponent],
   providers: [AppLoginSignUpService, { provide: MAT_DIALOG_DATA, useValue: {} }],
 })
 export class AppLoginSignupModule {}

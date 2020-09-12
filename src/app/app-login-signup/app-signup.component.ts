@@ -23,6 +23,7 @@ export interface SignupDialogData {
           <span>{{ msg.registerEmail }}</span>
         </div>
       </div>
+      <app-signup-form></app-signup-form>
     </app-dialog>
   `,
   styleUrls: ['./app-login.component.scss'],

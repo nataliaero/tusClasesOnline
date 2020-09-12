@@ -26,7 +26,7 @@ export const MESSAGES = {
   'login.registerStudent': 'como alumno',
   'login.registerTutor': 'como tutor',
   'login.register': 'Regístrate',
-  'login.enter': 'Accede',
+  'login.enter': 'Acceder',
   'login.notRegisterYet': '¿Aún no te has registrado?',
   'signup.registerStudent': 'Regístrate como alumno',
   'signup.registerTutor': 'Regístrate como tutor',
