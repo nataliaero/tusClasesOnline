@@ -14,7 +14,11 @@ import { Subscription } from 'rxjs';
       </div>
       <div class="app-bar-right">
         <app-button [message]="msg.findTutor" [icon]="searchIcon"></app-button>
-        <app-button [message]="msg.becomeTutor" [icon]="schoolIcon"></app-button>
+        <app-button
+          [message]="msg.becomeTutor"
+          [icon]="schoolIcon"
+          (click)="onClickTutor()"
+        ></app-button>
         <app-button [message]="msg.signIn" [icon]="userIcon" (click)="onClickUser()"></app-button>
       </div>
     </div>
@@ -51,5 +55,12 @@ export class AppBarComponent implements OnInit {
 
   onClickUser(): Subscription {
     return this.appLoginSignUpService.openLoginDialog().pipe(take(1)).subscribe();
+  }
+
+  onClickTutor(): Subscription {
+    return this.appLoginSignUpService
+      .openSignupDialog('Regístrate como tutor')
+      .pipe(take(1))
+      .subscribe();
   }
 }
