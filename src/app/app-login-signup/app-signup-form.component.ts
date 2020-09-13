@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MESSAGES } from '../../messages';
-import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl, ValidationErrors } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
-import { passwordValidators } from './validators';
+import { passwordValidators, repeatPasswordValidators } from './validators';
 
 @Component({
   selector: 'app-signup-form',
@@ -43,6 +43,9 @@ import { passwordValidators } from './validators';
         <mat-error *ngIf="passwordFormControl.hasError('required')">
           {{ msg.mandatoryField }}
         </mat-error>
+        <mat-error *ngIf="passwordFormControl.hasError('passwordPattern')">
+          {{ msg.passwordError }}
+        </mat-error>
       </mat-form-field>
       <div class="password-message">{{ msg.repeatPassword }}</div>
       <mat-form-field class="form-field" appearance="outline">
@@ -59,6 +62,12 @@ import { passwordValidators } from './validators';
         </mat-icon>
         <mat-error *ngIf="repeatPasswordFormControl.hasError('required')">
           {{ msg.mandatoryField }}
+        </mat-error>
+        <mat-error *ngIf="repeatPasswordFormControl.hasError('passwordPattern')">
+          {{ msg.passwordError }}
+        </mat-error>
+        <mat-error *ngIf="repeatPasswordFormControl.hasError('passwordMatch')">
+          {{ msg.repeatPasswordError }}
         </mat-error>
       </mat-form-field>
       <div class="check-box">
@@ -91,6 +100,8 @@ export class AppSignUpFormComponent {
     email: MESSAGES['basic.email'],
     password: MESSAGES['basic.password'],
     repeatPassword: MESSAGES['basic.repeatPassword'],
+    repeatPasswordError: MESSAGES['basic.repeatPasswordError'],
+    passwordError: MESSAGES['basic.passwordError'],
     rememberMe: MESSAGES['basic.rememberMe'],
     forgetPassword: MESSAGES['basic.forgetPassword'],
     notRobot: MESSAGES['basic.notRobot'],
@@ -103,7 +114,7 @@ export class AppSignUpFormComponent {
   loginForm: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required], passwordValidators),
-    repeatPassword: new FormControl('', [Validators.required]),
+    repeatPassword: new FormControl('', [Validators.required], repeatPasswordValidators),
     rememberMe: new FormControl(''),
     acceptLegalTerms: new FormControl('', [Validators.requiredTrue]),
   });
@@ -147,8 +158,16 @@ export class AppSignUpFormComponent {
 
   submit(): void {
     console.log('submit');
+    this.repeatPasswordFormControl.setErrors(this.isRepeatPasswordCorrect());
+
     if (this.loginForm.invalid) {
       return;
     }
+  }
+
+  private isRepeatPasswordCorrect(): ValidationErrors {
+    return this.repeatPasswordFormControl.value === this.passwordFormControl.value
+      ? null
+      : { passwordMatch: true };
   }
 }
