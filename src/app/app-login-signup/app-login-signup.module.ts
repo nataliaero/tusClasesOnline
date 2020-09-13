@@ -6,7 +6,8 @@ import { AppLoginComponent } from './app-login.component';
 import { AppSignupComponent } from './app-signup.component';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AppDialogModule } from '../app-dialog';
-import { AppLoginSignUpService } from './app-login-signup.service';
+import { AppLoginService } from './app-login.service';
+import { AppSignupService } from './app-signup.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppLoginFormComponent } from './app-login-form.component';
 import { AppSignUpFormComponent } from './app-signup-form.component';
@@ -31,6 +32,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ReactiveFormsModule,
   ],
   exports: [AppLoginComponent, AppLoginFormComponent, AppSignupComponent, AppSignUpFormComponent],
-  providers: [AppLoginSignUpService, { provide: MAT_DIALOG_DATA, useValue: {} }],
+  providers: [AppLoginService, AppSignupService, { provide: MAT_DIALOG_DATA, useValue: {} }],
 })
 export class AppLoginSignupModule {}

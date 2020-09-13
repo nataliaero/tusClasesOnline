@@ -28,9 +28,9 @@ $subtitle-font-size-mobile: 16px;
   max-width: $max-width-content;
   width: 100%;
 
-  @include mixins.mobile {
+  @include mixins.tablet {
     max-width: 100%;
-    padding: 0 variables.$spacing;
+    padding: 0 variables.$spacing * 2;
   }
 
   .title {

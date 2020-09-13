@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MESSAGES } from '../../../messages';
-import { AppLoginSignUpService } from '../../app-login-signup';
+import { AppLoginService, AppSignupService } from '../../app-login-signup';
 import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
@@ -26,7 +26,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app-bar.component.scss'],
 })
 export class AppBarComponent implements OnInit {
-  constructor(private appLoginSignUpService: AppLoginSignUpService) {}
+  constructor(
+    private appLoginService: AppLoginService,
+    private appSignupService: AppSignupService,
+  ) {}
   searchIcon = 'search';
   schoolIcon = 'school';
   userIcon = 'person';
@@ -36,6 +39,7 @@ export class AppBarComponent implements OnInit {
     becomeTutor: MESSAGES['appBar.becomeTutor'],
     signIn: MESSAGES['appBar.signIn'],
     tusClasesOnline: MESSAGES['appBar.tusClasesOnline'],
+    registerTutor: MESSAGES['signup.registerTutor'],
   };
 
   scroll = false;
@@ -54,13 +58,10 @@ export class AppBarComponent implements OnInit {
   }
 
   onClickUser(): Subscription {
-    return this.appLoginSignUpService.openLoginDialog().pipe(take(1)).subscribe();
+    return this.appLoginService.openLoginDialog().pipe(take(1)).subscribe();
   }
 
   onClickTutor(): Subscription {
-    return this.appLoginSignUpService
-      .openSignupDialog('Regístrate como tutor')
-      .pipe(take(1))
-      .subscribe();
+    return this.appSignupService.openSignupDialog(this.msg.registerTutor).pipe(take(1)).subscribe();
   }
 }
