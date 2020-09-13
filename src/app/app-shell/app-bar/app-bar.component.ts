@@ -3,6 +3,7 @@ import { MESSAGES } from '../../../messages';
 import { AppLoginService, AppSignupService } from '../../app-login-signup';
 import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { NavigationService } from '../../../services';
 
 @Component({
   selector: 'app-bar',
@@ -13,7 +14,11 @@ import { Subscription } from 'rxjs';
         <p>{{ msg.tusClasesOnline }}</p>
       </div>
       <div class="app-bar-right">
-        <app-button [message]="msg.findTutor" [icon]="searchIcon"></app-button>
+        <app-button
+          (click)="onClickFindTutor()"
+          [message]="msg.findTutor"
+          [icon]="searchIcon"
+        ></app-button>
         <app-button
           [message]="msg.becomeTutor"
           [icon]="schoolIcon"
@@ -29,6 +34,7 @@ export class AppBarComponent implements OnInit {
   constructor(
     private appLoginService: AppLoginService,
     private appSignupService: AppSignupService,
+    private navigationService: NavigationService,
   ) {}
   searchIcon = 'search';
   schoolIcon = 'school';
@@ -63,5 +69,10 @@ export class AppBarComponent implements OnInit {
 
   onClickTutor(): Subscription {
     return this.appSignupService.openSignupDialog(this.msg.registerTutor).pipe(take(1)).subscribe();
+  }
+
+  onClickFindTutor(): void {
+    console.log('onClickFindTutor');
+    this.navigationService.goToSearchTutor();
   }
 }

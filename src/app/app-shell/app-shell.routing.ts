@@ -12,6 +12,10 @@ export const routes: Routes = [
         path: 'home',
         loadChildren: () => import('../home/home.module').then(mod => mod.HomeModule),
       },
+      {
+        path: 'tutor',
+        loadChildren: () => import('../app-tutor/tutor.module').then(mod => mod.TutorModule),
+      },
     ],
   },
 ];
