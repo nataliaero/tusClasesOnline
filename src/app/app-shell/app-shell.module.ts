@@ -7,7 +7,7 @@ import { AppBarComponent } from './app-bar/app-bar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AppButtonModule } from '../app-button';
-import { AppLoginSignupModule, AppLoginSignUpService } from '../app-login-signup';
+import { AppLoginSignupModule } from '../app-login-signup';
 import { FooterModule } from '../app-footer';
 
 @NgModule({

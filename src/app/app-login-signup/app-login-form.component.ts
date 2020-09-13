@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { MESSAGES } from '../../messages';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
@@ -65,15 +65,17 @@ import { passwordValidators } from './validators';
     <div class="register-question">{{ msg.notRegisterYet }}</div>
     <div class="register-links">
       <span>{{ msg.register }}</span>
-      <span class="link">{{ msg.registerStudent }}</span>
+      <span class="link" (click)="onClickRegister('Student')">{{ msg.registerStudent }}</span>
       <span>{{ msg.or }}</span>
-      <span class="link">{{ msg.registerTutor }}</span>
+      <span class="link" (click)="onClickRegister('Tutor')">{{ msg.registerTutor }}</span>
     </div>
   `,
   styleUrls: ['./app-login-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppLoginFormComponent {
+  @Output() register = new EventEmitter<string>();
+
   msg = {
     enter: MESSAGES['login.enter'],
     email: MESSAGES['basic.email'],
@@ -123,6 +125,10 @@ export class AppLoginFormComponent {
       this.passwordType$.next('password');
       this.passwordIcon$.next('visibility');
     }
+  }
+
+  onClickRegister(registerType: string): void {
+    this.register.emit(registerType);
   }
 
   submit(): void {

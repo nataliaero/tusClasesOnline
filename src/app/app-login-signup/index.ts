@@ -1,2 +1,3 @@
 export { AppLoginSignupModule } from './app-login-signup.module';
-export { AppLoginSignUpService } from './app-login-signup.service';
+export { AppLoginService } from './app-login.service';
+export { AppSignupService } from './app-signup.service';
