@@ -1,10 +1,15 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { MESSAGES } from '../../messages';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+export interface SignupDialogData {
+  title: string;
+}
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-signup',
   template: `
-    <app-dialog [title]="msg.title">
+    <app-dialog [title]="data.title">
       <div class="content">
         <div class="login-button facebook-button" tabIndex="-1">
           <img class="image-button" src="/assets/facebookLogo.png" alt="Facebook Logo" />
@@ -15,20 +20,22 @@ import { MESSAGES } from '../../messages';
           {{ msg.enterWithFacebook }}
         </div>
         <div class="separator">
-          <span>{{ msg.initializeSession }}</span>
+          <span>{{ msg.registerEmail }}</span>
         </div>
       </div>
-      <app-login-form></app-login-form>
+      <app-signup-form></app-signup-form>
     </app-dialog>
   `,
   styleUrls: ['./app-login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppLoginComponent {
+export class AppSignupComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: SignupDialogData) {}
+
   msg = {
-    title: MESSAGES['login.enterCursosOnline'],
-    enterWithFacebook: MESSAGES['login.enterWithFacebook'],
-    enterWithGoogle: MESSAGES['login.enterWithGoogle'],
-    initializeSession: MESSAGES['login.initializeSession'],
+    enterWithFacebook: MESSAGES['signup.enterWithFacebook'],
+    enterWithGoogle: MESSAGES['signup.enterWithGoogle'],
+    registerEmail: MESSAGES['signup.registerEmail'],
+    enter: MESSAGES['login.enter'],
   };
 }

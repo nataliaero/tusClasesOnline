@@ -6,6 +6,9 @@ export const MESSAGES = {
   'basic.password': 'Contraseña',
   'basic.repeatPassword': 'Repite la contraseña',
   'basic.forgetPassword': '¿Olvidaste la contraseña?',
+  'basic.passwordError':
+    'La contraseña debe tener entre 8 y 15 caracteres y al menos un número, una letra y un caracter especial.',
+  'basic.repeatPasswordError': 'Las contraseñas no coinciden.',
   'basic.rememberMe': 'Recuérdame',
   'basic.notRobot': 'No soy un robot',
   'basic.acceptLegalTerms': 'Acepto el aviso legal y de privacidad',
@@ -26,7 +29,7 @@ export const MESSAGES = {
   'login.registerStudent': 'como alumno',
   'login.registerTutor': 'como tutor',
   'login.register': 'Regístrate',
-  'login.enter': 'Accede',
+  'login.enter': 'Acceder',
   'login.notRegisterYet': '¿Aún no te has registrado?',
   'signup.registerStudent': 'Regístrate como alumno',
   'signup.registerTutor': 'Regístrate como tutor',
