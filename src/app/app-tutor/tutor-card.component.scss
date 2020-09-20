@@ -11,27 +11,77 @@ $button-width: 160px;
   height: $card-height;
   background-color: variables.$white;
   margin: variables.$spacing 0;
+  @include mixins.tablet {
+    height: auto;
+    flex-direction: column;
+  }
+}
+
+.tutor-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: $card-height;
+  background-color: variables.$white;
+  margin: variables.$spacing 0;
+  width: 100%;
+  @include mixins.tablet {
+    height: auto;
+    margin: variables.$unit 0;
+  }
 }
 
 .tutor-card-left {
   width: 25%;
   padding: 0 variables.$spacing;
+  @include mixins.mobile {
+    width: 50%;
+    padding-right: variables.$unit;
+  }
+}
+
+.tutor-card-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 75%;
+  height: 100%;
+
+  @include mixins.tablet {
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+  }
 }
 
 .tutor-card-middle {
-  width: 45%;
+  width: 55%;
   padding: variables.$spacing 0;
   height: 100%;
+
+  @include mixins.tablet {
+    width: 100%;
+    padding: 0;
+    height: auto;
+  }
 }
 
 .tutor-card-right {
-  width: 30%;
+  width: 45%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
   padding: variables.$spacing;
   height: 100%;
+
+  @include mixins.tablet {
+    width: 100%;
+    padding: 0;
+    height: auto;
+    align-items: flex-start;
+    margin-top: variables.$unit;
+  }
 }
 
 .tutor-card-right-info {
@@ -39,13 +89,11 @@ $button-width: 160px;
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-}
-
-.tutor-card-right-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin-bottom: variables.$spacing;
+  width: 100%;
+  @include mixins.tablet {
+    align-items: flex-start;
+    margin-bottom: variables.$unit;
+  }
 }
 
 .tutor-card-image {
@@ -57,6 +105,9 @@ $button-width: 160px;
   flex-direction: row;
   align-items: center;
   margin-bottom: variables.$unit;
+  @include mixins.tablet {
+    margin-bottom: 0;
+  }
 }
 
 .tutor-card-country {
@@ -67,11 +118,17 @@ $button-width: 160px;
 .tutor-card-long {
   margin-top: variables.$unit;
   margin-bottom: variables.$spacing;
+  @include mixins.tablet {
+    display: none;
+  }
 }
 
 .tutor-card-read-more {
   color: variables.$primary-color;
   cursor: pointer;
+  @include mixins.tablet {
+    display: none;
+  }
 }
 
 .tutor-card-read-more:hover {
@@ -81,25 +138,32 @@ $button-width: 160px;
 .tutor-card-fee-rate-info {
   display: flex;
   flex-direction: row;
+  @include mixins.tablet {
+    justify-content: flex-start;
+    width: 100%;
+    padding-right: variables.$unit;
+  }
 }
 
 .tutor-card-fee {
   margin-right: variables.$spacing;
 }
 
+.tutor-card-rate {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .tutor-card-rate-icon {
   color: variables.$yellow;
 }
 
-.tutor-card-book-class-button {
-  width: $button-width;
-  background-color: variables.$primary-color;
-  padding: variables.$unit;
+.tutor-card-actions {
+  align-self: flex-end;
   margin-bottom: variables.$spacing;
-}
-
-.tutor-card-send-msg-button {
-  width: $button-width;
-  border: 1px solid variables.$primary-color;
-  padding: variables.$unit;
+  margin-right: variables.$unit;
+  @include mixins.mobile {
+    align-self: center;
+  }
 }

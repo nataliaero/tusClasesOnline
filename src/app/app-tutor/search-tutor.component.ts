@@ -8,7 +8,8 @@ import { TUTORS } from './tutors';
   template: `
     <div class="search-tutor">
       <div class="search-tutor-title">
-        <h2>{{ msg.findIdealTutor }} -</h2>
+        <h2>{{ msg.findIdealTutor }}</h2>
+        <h2 class="search-tutor-title-middle">-</h2>
         <h2 class="search-tutor-title-right">{{ msg.filtersTip }}</h2>
       </div>
       <div class="search-tutor-body">

@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { MESSAGES } from '../../messages';
 import { Tutor } from './types';
+import { MobileService } from '../../services';
+import { map } from 'rxjs/operators';
 
 const MAX_LENGTH_DESCRIPTION = 150;
 
@@ -8,68 +11,58 @@ const MAX_LENGTH_DESCRIPTION = 150;
   selector: 'app-tutor-card',
   template: `
     <div class="tutor-card">
-      <div class="tutor-card-left">
-        <img class="tutor-card-image" [src]="tutor.img" alt="Tutor" />
-      </div>
-
-      <div class="tutor-card-middle">
-        <div class="tutor-card-name">
-          <h2>{{ getTutorName(tutor.name, tutor.firstSurname) }}</h2>
-          <p class="tutor-card-country">({{ tutor.country }})</p>
+      <div class="tutor-main">
+        <div class="tutor-card-left">
+          <img class="tutor-card-image" [src]="tutor.img" alt="Tutor" />
         </div>
-        <h4>{{ tutor.descriptionShort }}</h4>
-        <p class="tutor-card-long">{{ getTutorLongDescription(tutor.descriptionLong) }}</p>
-        <p class="tutor-card-read-more">{{ msg.readMore }}</p>
-      </div>
 
-      <div class="tutor-card-right">
-        <div class="tutor-card-right-info">
-          <div class="tutor-card-fee-rate-info">
-            <h3 class="tutor-card-fee">{{ tutor.fee }} {{ RATE_HOUR }}</h3>
-            <mat-icon class="tutor-card-rate-icon">{{ rateIcon }}</mat-icon>
-            <h3>{{ tutor.rate }}</h3>
+        <div class="tutor-card-info">
+          <div class="tutor-card-middle">
+            <div class="tutor-card-name">
+              <h2>{{ getTutorName(tutor.name, tutor.firstSurname) }}</h2>
+              <p class="tutor-card-country">({{ tutor.country }})</p>
+            </div>
+            <h4>{{ tutor.descriptionShort }}</h4>
+            <p class="tutor-card-long">{{ getTutorLongDescription(tutor.descriptionLong) }}</p>
+            <p class="tutor-card-read-more">{{ msg.readMore }}</p>
           </div>
-          <p>{{ tutor.comments.length }} {{ msg.ratings }}</p>
-        </div>
 
-        <div class="tutor-card-right-actions">
-          <app-button
-            class="tutor-card-book-class-button"
-            [icon]="bookClassIcon"
-            [fontSize]="buttonFontSize"
-            [iconSize]="buttonIconSize"
-            [message]="msg.bookAClass"
-          ></app-button>
-          <app-button
-            class="tutor-card-send-msg-button"
-            [color]="sendMsgColor"
-            [icon]="sendMsgIcon"
-            [fontSize]="buttonFontSize"
-            [iconSize]="buttonIconSize"
-            [message]="msg.sendMessage"
-          ></app-button>
+          <div class="tutor-card-right">
+            <div class="tutor-card-right-info">
+              <div class="tutor-card-fee-rate-info">
+                <h3 class="tutor-card-fee">{{ tutor.fee }} {{ RATE_HOUR }}</h3>
+                <div class="tutor-card-rate">
+                  <mat-icon class="tutor-card-rate-icon">{{ rateIcon }}</mat-icon>
+                  <h3>{{ tutor.rate }}</h3>
+                </div>
+              </div>
+              <p>{{ tutor.comments.length }} {{ msg.ratings }}</p>
+            </div>
+
+            <app-tutor-card-actions
+              *ngIf="(isMobileOrTablet$ | async) === false"
+            ></app-tutor-card-actions>
+          </div>
         </div>
       </div>
+      <app-tutor-card-actions
+        class="tutor-card-actions"
+        *ngIf="isMobileOrTablet$ | async"
+      ></app-tutor-card-actions>
     </div>
   `,
   styleUrls: ['./tutor-card.component.scss'],
 })
 export class TutorCardComponent {
+  constructor(private mobileService: MobileService) {}
   @Input() tutor: Tutor;
 
   RATE_HOUR = 'EUR/h';
   rateIcon = 'star';
-  bookClassIcon = 'event_available';
-  sendMsgIcon = 'mail';
-  buttonFontSize = '14px';
-  buttonIconSize = '16px';
-  sendMsgColor = '#3bb3bd';
 
   msg = {
     findIdealTutor: MESSAGES['searchTutor.findIdealTutor'],
     filtersTip: MESSAGES['searchTutor.filtersTip'],
-    bookAClass: MESSAGES['searchTutor.bookAClass'],
-    sendMessage: MESSAGES['searchTutor.sendMessage'],
     readMore: MESSAGES['searchTutor.readMore'],
     fee: MESSAGES['searchTutor.fee'],
     ratings: MESSAGES['searchTutor.ratings'],
@@ -82,6 +75,9 @@ export class TutorCardComponent {
     speaks: MESSAGES['searchTutor.speaks'],
     sortBy: MESSAGES['searchTutor.sortBy'],
   };
+
+  isMobileOrTablet$: Observable<boolean> = this.mobileService.isMobileOrTablet$;
+  // private isNotMobileOrTablet$: Observable<boolean> = this.mobileService.isMobileOrTablet$.pipe(map=>);
 
   getTutorName(name: string, firstSurname: string): string {
     return `${name} ${firstSurname[0]}.`;

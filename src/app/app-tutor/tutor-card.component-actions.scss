@@ -1,0 +1,38 @@
+@use '../../variables';
+@use '../../mixins';
+
+$card-height: 224px;
+$button-width: 160px;
+
+.tutor-card-right-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  @include mixins.tablet {
+    flex-direction: row;
+    align-self: center;
+  }
+}
+
+.tutor-card-book-class-button {
+  width: $button-width;
+  background-color: variables.$primary-color;
+  padding: variables.$unit;
+  margin-bottom: variables.$unit;
+
+  @include mixins.tablet {
+    width: auto;
+    margin-bottom: 0;
+    margin-right: variables.$spacing;
+  }
+}
+
+.tutor-card-send-msg-button {
+  width: $button-width;
+  border: 1px solid variables.$primary-color;
+  padding: variables.$unit;
+  @include mixins.tablet {
+    width: auto;
+  }
+}

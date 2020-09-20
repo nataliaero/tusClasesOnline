@@ -2,6 +2,7 @@
 @use '../../mixins';
 
 $max-width-content: 1050px;
+$font-size-title-mobile: 16px;
 
 .search-tutor {
   display: flex;
@@ -15,6 +16,7 @@ $max-width-content: 1050px;
   @include mixins.tablet {
     padding: 0 variables.$spacing;
     padding-top: variables.$spacing * 4;
+    margin-bottom: 0;
   }
 }
 
@@ -22,11 +24,25 @@ $max-width-content: 1050px;
   padding: variables.$spacing 0;
   display: flex;
   flex-direction: row;
+  @include mixins.tablet {
+    justify-content: center;
+    font-size: $font-size-title-mobile;
+    padding-bottom: 0;
+  }
+}
+
+.search-tutor-title-middle {
+  margin: 0 variables.$unit;
+  @include mixins.tablet {
+    display: none;
+  }
 }
 
 .search-tutor-title-right {
   color: variables.$grey-dark;
-  margin-left: variables.$unit;
+  @include mixins.tablet {
+    display: none;
+  }
 }
 
 .search-tutor-body {
@@ -36,6 +52,9 @@ $max-width-content: 1050px;
 
 .search-tutor-cards {
   width: 70%;
+  @include mixins.tablet {
+    width: 100%;
+  }
 }
 
 .search-tutor-filters {
@@ -43,4 +62,8 @@ $max-width-content: 1050px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @include mixins.mobile {
+    display: none;
+  }
 }
