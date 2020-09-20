@@ -1,0 +1,49 @@
+@use '../../variables';
+@use '../../mixins';
+
+$input-width: 300px;
+
+.search-tutor-filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: variables.$spacing 0 variables.$spacing variables.$spacing;
+  background-color: variables.$white;
+  height: 100%;
+
+  @include mixins.mobile {
+    display: none;
+  }
+}
+
+.search-tutor-separator {
+  height: 1px;
+  background-color: #dadada;
+  width: $input-width;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: variables.$unit variables.$spacing;
+}
+
+.filter-title {
+  margin: variables.$spacing 0 variables.$unit 0;
+}
+
+.keyword-field {
+  width: $input-width;
+}
+
+.search-tutor-price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: $input-width;
+}
+
+.search-tutor-slider {
+  margin-left: variables.$spacing;
+  width: 70%;
+}

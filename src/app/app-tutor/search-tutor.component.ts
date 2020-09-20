@@ -16,10 +16,7 @@ import { TUTORS } from './tutors';
         <div class="search-tutor-cards">
           <app-tutor-card *ngFor="let tutor of tutors" [tutor]="tutor"></app-tutor-card>
         </div>
-        <div class="search-tutor-filters">
-          <h4>{{ msg.whatToLearn }}</h4>
-          <h4>{{ msg.lookKeyWord }}</h4>
-        </div>
+        <app-search-tutor-filters></app-search-tutor-filters>
       </div>
     </div>
   `,
