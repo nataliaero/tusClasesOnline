@@ -18,6 +18,17 @@ $max-width-content: 1050px;
   }
 }
 
+.search-tutor-title {
+  padding: variables.$spacing 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.search-tutor-title-right {
+  color: variables.$grey-dark;
+  margin-left: variables.$unit;
+}
+
 .search-tutor-body {
   display: flex;
   flex-direction: row;

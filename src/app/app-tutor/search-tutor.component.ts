@@ -7,8 +7,10 @@ import { TUTORS } from './tutors';
   selector: 'app-search-tutor',
   template: `
     <div class="search-tutor">
-      <div class="app-bar"></div>
-      <h2>{{ msg.findIdealTutor }} - {{ msg.filtersTip }}</h2>
+      <div class="search-tutor-title">
+        <h2>{{ msg.findIdealTutor }} -</h2>
+        <h2 class="search-tutor-title-right">{{ msg.filtersTip }}</h2>
+      </div>
       <div class="search-tutor-body">
         <div class="search-tutor-cards">
           <app-tutor-card *ngFor="let tutor of tutors" [tutor]="tutor"></app-tutor-card>

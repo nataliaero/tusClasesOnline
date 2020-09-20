@@ -1,7 +1,6 @@
 @use '../../variables';
 @use '../../mixins';
 
-$image-height: 30px;
 $font-size-logo: 20px;
 $font-size-text: 16px;
 
@@ -25,7 +24,6 @@ $font-size-text: 16px;
 
   .button-icon {
     display: inline;
-    color: variables.$white;
     margin-right: variables.$half-unit;
   }
 
@@ -33,7 +31,6 @@ $font-size-text: 16px;
     display: inline;
     font-family: variables.$primary-font;
     font-size: $font-size-text;
-    color: variables.$white;
   }
 
   @include mixins.tablet {
@@ -50,6 +47,6 @@ $font-size-text: 16px;
 .click-user:active {
   .button-icon,
   .button-message {
-    color: variables.$grey-xlight;
+    color: darken(variables.$white, 20);
   }
 }
