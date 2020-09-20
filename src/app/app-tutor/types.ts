@@ -31,6 +31,13 @@ export interface Comment {
   comment: string;
 }
 
+export const enum AvailabilityId {
+  Morning = 'morning',
+  Afternoon = 'afternoon',
+  Evening = 'evening',
+  Weekends = 'weekends',
+}
+
 export interface Tutor {
   name: string;
   firstSurname: string;
@@ -45,4 +52,5 @@ export interface Tutor {
   speaks: Language[];
   subjects: Subject[];
   comments: Comment[];
+  availability: AvailabilityId[];
 }

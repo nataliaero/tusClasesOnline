@@ -2,6 +2,7 @@
 @use '../../mixins';
 
 $input-width: 300px;
+$max-width-availability: 60px;
 
 .search-tutor-filters {
   display: flex;
@@ -46,4 +47,38 @@ $input-width: 300px;
 .search-tutor-slider {
   margin-left: variables.$spacing;
   width: 70%;
+}
+
+.search-tutor-price-range {
+  margin-bottom: variables.$spacing;
+}
+
+.search-tutor-availabilities {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: $input-width;
+  margin: variables.$unit 0 variables.$spacing 0;
+  cursor: pointer;
+}
+
+.search-tutor-availability {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: $max-width-availability;
+  color: variables.$primary-color;
+}
+
+.search-tutor-availability-disabled {
+  color: variables.$grey;
+}
+
+.search-tutor-availability-msg {
+  color: variables.$primary-color;
+  text-align: center;
+}
+
+.search-tutor-availability-msg-disabled {
+  color: variables.$grey;
 }
