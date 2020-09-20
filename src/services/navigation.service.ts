@@ -15,6 +15,11 @@ export class NavigationService {
     this.router.navigate(['/home']);
   }
 
+  goToSearchTutor(): void {
+    console.log('navigate');
+    this.router.navigate(['/tutor/search-tutor']);
+  }
+
   goToRoot(): void {
     this.router.navigate(['/']);
   }

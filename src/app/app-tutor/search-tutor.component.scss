@@ -1,0 +1,69 @@
+@use '../../variables';
+@use '../../mixins';
+
+$max-width-content: 1050px;
+$font-size-title-mobile: 16px;
+
+.search-tutor {
+  display: flex;
+  flex-direction: column;
+  padding-top: variables.$spacing * 4;
+  max-width: $max-width-content;
+  width: 100%;
+  background-color: transparent;
+  margin: 0 auto;
+  margin-bottom: variables.$spacing;
+  @include mixins.tablet {
+    padding: 0 variables.$spacing;
+    padding-top: variables.$spacing * 4;
+    margin-bottom: 0;
+  }
+}
+
+.search-tutor-title {
+  padding: variables.$spacing 0;
+  display: flex;
+  flex-direction: row;
+  @include mixins.tablet {
+    justify-content: center;
+    font-size: $font-size-title-mobile;
+    padding-bottom: 0;
+  }
+}
+
+.search-tutor-title-middle {
+  margin: 0 variables.$unit;
+  @include mixins.tablet {
+    display: none;
+  }
+}
+
+.search-tutor-title-right {
+  color: variables.$grey-dark;
+  @include mixins.tablet {
+    display: none;
+  }
+}
+
+.search-tutor-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.search-tutor-cards {
+  width: 70%;
+  @include mixins.tablet {
+    width: 100%;
+  }
+}
+
+.search-tutor-filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @include mixins.mobile {
+    display: none;
+  }
+}

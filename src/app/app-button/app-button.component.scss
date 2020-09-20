@@ -1,10 +1,6 @@
 @use '../../variables';
 @use '../../mixins';
 
-$image-height: 30px;
-$font-size-logo: 20px;
-$font-size-text: 16px;
-
 :host {
   :hover {
     background-color: rgba(0, 0, 0, 0.5);
@@ -18,29 +14,23 @@ $font-size-text: 16px;
   align-items: center;
   background-color: transparent;
   cursor: pointer;
-  padding: variables.$spacing;
   :hover {
     background-color: transparent;
   }
 
   .button-icon {
-    display: inline;
-    color: variables.$white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-right: variables.$half-unit;
   }
 
   .button-message {
     display: inline;
     font-family: variables.$primary-font;
-    font-size: $font-size-text;
-    color: variables.$white;
   }
 
   @include mixins.tablet {
-    .button-message {
-      display: none;
-    }
-
     .button-icon {
       margin-right: 0;
     }
@@ -50,6 +40,6 @@ $font-size-text: 16px;
 .click-user:active {
   .button-icon,
   .button-message {
-    color: variables.$grey-xlight;
+    color: darken(variables.$white, 20);
   }
 }

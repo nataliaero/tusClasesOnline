@@ -1,25 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { MESSAGES } from '../../../messages';
 import { AppLoginService, AppSignupService } from '../../app-login-signup';
-import { take } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { AppBarService, MobileService, NavigationService } from '../../../services';
 
 @Component({
   selector: 'app-bar',
   template: `
     <div [class]="getAppBarClass()">
-      <div class="app-bar-left">
+      <div class="app-bar-left" (click)="onClickHome()">
         <img src="/assets/logoWhite.png" alt="Logo" />
         <p>{{ msg.tusClasesOnline }}</p>
       </div>
       <div class="app-bar-right">
-        <app-button [message]="msg.findTutor" [icon]="searchIcon"></app-button>
         <app-button
-          [message]="msg.becomeTutor"
+          (click)="onClickFindTutor()"
+          [message]="findMessage$ | async"
+          [icon]="searchIcon"
+        ></app-button>
+        <app-button
+          [message]="tutorMessage$ | async"
           [icon]="schoolIcon"
           (click)="onClickTutor()"
         ></app-button>
-        <app-button [message]="msg.signIn" [icon]="userIcon" (click)="onClickUser()"></app-button>
+        <app-button
+          [message]="userMessage$ | async"
+          [icon]="userIcon"
+          (click)="onClickUser()"
+        ></app-button>
       </div>
     </div>
   `,
@@ -27,12 +36,12 @@ import { Subscription } from 'rxjs';
 })
 export class AppBarComponent implements OnInit {
   constructor(
+    private appBarService: AppBarService,
     private appLoginService: AppLoginService,
     private appSignupService: AppSignupService,
+    private mobileService: MobileService,
+    private navigationService: NavigationService,
   ) {}
-  searchIcon = 'search';
-  schoolIcon = 'school';
-  userIcon = 'person';
 
   msg = {
     findTutor: MESSAGES['basic.findTutor'],
@@ -42,7 +51,16 @@ export class AppBarComponent implements OnInit {
     registerTutor: MESSAGES['signup.registerTutor'],
   };
 
-  scroll = false;
+  private scroll = false;
+  private isMobileOrTablet$: Observable<boolean> = this.mobileService.isMobileOrTablet$;
+
+  searchIcon = 'search';
+  schoolIcon = 'school';
+  userIcon = 'person';
+
+  findMessage$ = this.isMobileOrTablet$.pipe(map(el => (el ? null : this.msg.findTutor)));
+  tutorMessage$ = this.isMobileOrTablet$.pipe(map(el => (el ? null : this.msg.becomeTutor)));
+  userMessage$ = this.isMobileOrTablet$.pipe(map(el => (el ? null : this.msg.signIn)));
 
   ngOnInit(): void {
     window.addEventListener('scroll', this.scrolling, true);
@@ -54,7 +72,11 @@ export class AppBarComponent implements OnInit {
   };
 
   getAppBarClass(): string {
-    return this.scroll ? 'app-bar scroll-color' : 'app-bar';
+    return this.scroll || this.appBarService.getStyle() ? 'app-bar scroll-color' : 'app-bar';
+  }
+
+  onClickHome(): void {
+    this.navigationService.goToHome();
   }
 
   onClickUser(): Subscription {
@@ -63,5 +85,9 @@ export class AppBarComponent implements OnInit {
 
   onClickTutor(): Subscription {
     return this.appSignupService.openSignupDialog(this.msg.registerTutor).pipe(take(1)).subscribe();
+  }
+
+  onClickFindTutor(): void {
+    this.navigationService.goToSearchTutor();
   }
 }

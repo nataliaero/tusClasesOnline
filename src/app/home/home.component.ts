@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MESSAGES } from '../../messages';
 import { FormGroup, FormControl } from '@angular/forms';
-import { MobileService } from '../../services';
+import { AppBarService, MobileService } from '../../services';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -42,8 +42,8 @@ import { Observable } from 'rxjs';
   `,
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
-  constructor(private mobileService: MobileService) {}
+export class HomeComponent implements OnInit {
+  constructor(private appBarService: AppBarService, private mobileService: MobileService) {}
 
   isMobileOrTablet$: Observable<boolean> = this.mobileService.isMobileOrTablet$;
   iconFirstClass = 'thumb_up';
@@ -60,6 +60,10 @@ export class HomeComponent {
   searchForm: FormGroup = new FormGroup({
     search: new FormControl('', []),
   });
+
+  ngOnInit(): void {
+    this.appBarService.updateStyle(false);
+  }
 
   get searchFormControl(): FormControl {
     return this.searchForm.get('search') as FormControl;
