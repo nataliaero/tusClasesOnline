@@ -1,0 +1,74 @@
+@use '../../variables';
+@use '../../mixins';
+
+.tutor-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 224px;
+  background-color: variables.$white;
+  margin: variables.$spacing 0;
+}
+
+.tutor-card-left {
+  width: 25%;
+  padding: 0 variables.$spacing;
+}
+
+.tutor-card-middle {
+  width: 45%;
+  padding: variables.$spacing 0;
+}
+
+.tutor-card-right {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding: variables.$unit;
+  padding: 0 variables.$spacing;
+}
+
+.tutor-card-image {
+  width: 100%;
+}
+
+.tutor-card-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: variables.$unit;
+}
+
+.tutor-card-country {
+  color: variables.$grey;
+  margin-left: variables.$unit;
+}
+
+.tutor-card-long {
+  margin-top: variables.$unit;
+  margin-bottom: variables.$spacing;
+}
+
+.tutor-card-read-more {
+  color: variables.$primary-color;
+  cursor: pointer;
+}
+
+.tutor-card-read-more:hover {
+  color: variables.$primary-color-dark;
+}
+
+.tutor-card-fee-rate-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.tutor-card-fee {
+  margin-right: variables.$spacing;
+}
+
+.tutor-card-rate-icon {
+  color: variables.$yellow;
+}

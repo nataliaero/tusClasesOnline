@@ -1,6 +1,35 @@
 @use '../../variables';
 @use '../../mixins';
 
+$max-width-content: 1050px;
+
 .search-tutor {
   display: flex;
+  flex-direction: column;
+  padding-top: variables.$spacing * 4;
+  max-width: $max-width-content;
+  width: 100%;
+  background-color: transparent;
+  margin: 0 auto;
+  margin-bottom: variables.$spacing;
+  @include mixins.tablet {
+    padding: 0 variables.$spacing;
+    padding-top: variables.$spacing * 4;
+  }
+}
+
+.search-tutor-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.search-tutor-cards {
+  width: 70%;
+}
+
+.search-tutor-filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
