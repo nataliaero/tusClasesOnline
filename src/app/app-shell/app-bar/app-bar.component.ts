@@ -3,13 +3,13 @@ import { MESSAGES } from '../../../messages';
 import { AppLoginService, AppSignupService } from '../../app-login-signup';
 import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { NavigationService } from '../../../services';
+import { AppBarService, NavigationService } from '../../../services';
 
 @Component({
   selector: 'app-bar',
   template: `
     <div [class]="getAppBarClass()">
-      <div class="app-bar-left">
+      <div class="app-bar-left" (click)="onClickHome()">
         <img src="/assets/logoWhite.png" alt="Logo" />
         <p>{{ msg.tusClasesOnline }}</p>
       </div>
@@ -32,6 +32,7 @@ import { NavigationService } from '../../../services';
 })
 export class AppBarComponent implements OnInit {
   constructor(
+    private appBarService: AppBarService,
     private appLoginService: AppLoginService,
     private appSignupService: AppSignupService,
     private navigationService: NavigationService,
@@ -48,7 +49,7 @@ export class AppBarComponent implements OnInit {
     registerTutor: MESSAGES['signup.registerTutor'],
   };
 
-  scroll = false;
+  private scroll = false;
 
   ngOnInit(): void {
     window.addEventListener('scroll', this.scrolling, true);
@@ -60,7 +61,11 @@ export class AppBarComponent implements OnInit {
   };
 
   getAppBarClass(): string {
-    return this.scroll ? 'app-bar scroll-color' : 'app-bar';
+    return this.scroll || this.appBarService.getStyle() ? 'app-bar scroll-color' : 'app-bar';
+  }
+
+  onClickHome(): void {
+    this.navigationService.goToHome();
   }
 
   onClickUser(): Subscription {
@@ -72,7 +77,6 @@ export class AppBarComponent implements OnInit {
   }
 
   onClickFindTutor(): void {
-    console.log('onClickFindTutor');
     this.navigationService.goToSearchTutor();
   }
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AppBarService } from 'src/services';
 import { MESSAGES } from '../../messages';
 import { TUTORS } from './tutors';
 
@@ -21,8 +22,8 @@ import { TUTORS } from './tutors';
   `,
   styleUrls: ['./search-tutor.component.scss'],
 })
-export class SearchTutorComponent {
-  constructor() {}
+export class SearchTutorComponent implements OnInit {
+  constructor(private appBarService: AppBarService) {}
 
   tutors = TUTORS;
 
@@ -43,4 +44,8 @@ export class SearchTutorComponent {
     speaks: MESSAGES['searchTutor.speaks'],
     sortBy: MESSAGES['searchTutor.sortBy'],
   };
+
+  ngOnInit(): void {
+    this.appBarService.updateStyle(true);
+  }
 }

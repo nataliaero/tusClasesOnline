@@ -143,4 +143,46 @@ export const TUTORS = [
       },
     ],
   },
+  {
+    name: 'Katrina',
+    firstSurname: 'Reina del',
+    secondSurname: 'Mar',
+    img: '/assets/tutor.jpeg',
+    country: 'Rusia',
+    descriptionShort: 'Profesora de ruso',
+    descriptionLong:
+      'Tengo más de 10 años de experiencia como profesora de ruso e inglés a niños y adulto. He trabajado en varios colegios públicos y privados y hablo perfecto inglés además de español.',
+    rate: 2.5,
+    fee: 15,
+    numberRatings: 4,
+    speaks: [
+      { language: 'Ruso', level: 'Nativo' },
+      { language: 'Español', level: 'C2' },
+      { language: 'Inglés', level: 'C2' },
+    ],
+    subjects: [
+      {
+        subject: 'Ruso',
+        levels: ['Primaria', 'Secundaria', 'Superior/bachillerato', 'Universidad'],
+      },
+      {
+        subject: 'Inglés',
+        levels: ['Primaria', 'Secundaria', 'Superior/bachillerato', 'Universidad'],
+      },
+    ],
+    comments: [
+      {
+        name: 'Alex',
+        date: 1111196900000,
+        comment:
+          'Katrina es una excelente profesora, muy profesional y lo recomiendo enormemente. He aprendido muchísimo de ella y he mejorado mis notas en la universidad.',
+      },
+      {
+        name: 'Elena',
+        date: 1211196900000,
+        comment:
+          'Katrina es una excelente profesora, muy profesional y lo recomiendo enormemente. He aprendido muchísimo de ella y he mejorado mis notas en la universidad.',
+      },
+    ],
+  },
 ];
