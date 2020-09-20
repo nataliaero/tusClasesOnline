@@ -23,12 +23,32 @@ const MAX_LENGTH_DESCRIPTION = 150;
       </div>
 
       <div class="tutor-card-right">
-        <div class="tutor-card-fee-rate-info">
-          <h3 class="tutor-card-fee">{{ tutor.fee }} {{ RATE_HOUR }}</h3>
-          <mat-icon class="tutor-card-rate-icon">{{ rateIcon }}</mat-icon>
-          <h3>{{ tutor.rate }}</h3>
+        <div class="tutor-card-right-info">
+          <div class="tutor-card-fee-rate-info">
+            <h3 class="tutor-card-fee">{{ tutor.fee }} {{ RATE_HOUR }}</h3>
+            <mat-icon class="tutor-card-rate-icon">{{ rateIcon }}</mat-icon>
+            <h3>{{ tutor.rate }}</h3>
+          </div>
+          <p>{{ tutor.comments.length }} {{ msg.ratings }}</p>
         </div>
-        <p>{{ tutor.comments.length }} {{ msg.ratings }}</p>
+
+        <div class="tutor-card-right-actions">
+          <app-button
+            class="tutor-card-book-class-button"
+            [icon]="bookClassIcon"
+            [fontSize]="buttonFontSize"
+            [iconSize]="buttonIconSize"
+            [message]="msg.bookAClass"
+          ></app-button>
+          <app-button
+            class="tutor-card-send-msg-button"
+            [color]="sendMsgColor"
+            [icon]="sendMsgIcon"
+            [fontSize]="buttonFontSize"
+            [iconSize]="buttonIconSize"
+            [message]="msg.sendMessage"
+          ></app-button>
+        </div>
       </div>
     </div>
   `,
@@ -39,6 +59,11 @@ export class TutorCardComponent {
 
   RATE_HOUR = 'EUR/h';
   rateIcon = 'star';
+  bookClassIcon = 'event_available';
+  sendMsgIcon = 'mail';
+  buttonFontSize = '14px';
+  buttonIconSize = '16px';
+  sendMsgColor = '#3bb3bd';
 
   msg = {
     findIdealTutor: MESSAGES['searchTutor.findIdealTutor'],

@@ -1,9 +1,6 @@
 @use '../../variables';
 @use '../../mixins';
 
-$font-size-logo: 20px;
-$font-size-text: 16px;
-
 :host {
   :hover {
     background-color: rgba(0, 0, 0, 0.5);
@@ -17,27 +14,22 @@ $font-size-text: 16px;
   align-items: center;
   background-color: transparent;
   cursor: pointer;
-  padding: variables.$spacing;
   :hover {
     background-color: transparent;
   }
 
   .button-icon {
-    display: inline;
+    display: flex;
+    align-items: center;
     margin-right: variables.$half-unit;
   }
 
   .button-message {
     display: inline;
     font-family: variables.$primary-font;
-    font-size: $font-size-text;
   }
 
   @include mixins.tablet {
-    .button-message {
-      display: none;
-    }
-
     .button-icon {
       margin-right: 0;
     }

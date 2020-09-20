@@ -69,6 +69,10 @@ $font-size-text: 16px;
   flex-direction: row;
   align-items: center;
 
+  app-button {
+    padding: variables.$spacing;
+  }
+
   p {
     margin-right: variables.$spacing * 2;
     cursor: pointer;
