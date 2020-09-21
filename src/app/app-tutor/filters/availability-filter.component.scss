@@ -1,0 +1,39 @@
+@use '../../../variables';
+
+$max-width-availability: 60px;
+
+:host {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.search-tutor-availabilities {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: variables.$unit 0 variables.$spacing 0;
+  cursor: pointer;
+}
+
+.search-tutor-availability {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: $max-width-availability;
+  color: variables.$primary-color;
+  cursor: pointer;
+}
+
+.search-tutor-availability-disabled {
+  color: variables.$grey;
+}
+
+.search-tutor-availability-msg {
+  color: variables.$primary-color;
+  text-align: center;
+}
+
+.search-tutor-availability-msg-disabled {
+  color: variables.$grey;
+}

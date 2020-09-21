@@ -54,33 +54,8 @@ $max-width-availability: 60px;
 }
 
 .search-tutor-availabilities {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: $input-width;
   margin: variables.$unit 0 variables.$spacing 0;
-  cursor: pointer;
-}
-
-.search-tutor-availability {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: $max-width-availability;
-  color: variables.$primary-color;
-}
-
-.search-tutor-availability-disabled {
-  color: variables.$grey;
-}
-
-.search-tutor-availability-msg {
-  color: variables.$primary-color;
-  text-align: center;
-}
-
-.search-tutor-availability-msg-disabled {
-  color: variables.$grey;
+  width: $input-width;
 }
 
 .search-tutor-level {
@@ -91,26 +66,7 @@ $max-width-availability: 60px;
 
 .search-tutor-sort-menu {
   width: $input-width;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: $input-width;
-  cursor: pointer;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: variables.$border-radius;
-  padding: variables.$unit;
   margin: variables.$spacing 0;
-  color: variables.$secondary-color;
-
-  .search-tutor-sort-menu-left {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    mat-icon {
-      margin-right: variables.$half-unit;
-    }
-  }
 }
 
 .search-tutor-reset {

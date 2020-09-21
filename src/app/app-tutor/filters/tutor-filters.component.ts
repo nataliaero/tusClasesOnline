@@ -5,18 +5,13 @@ import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { debounceTime, map, startWith, takeUntil, tap } from 'rxjs/operators';
 import { AppBarService } from '../../../services';
 import { TUTOR_MESSAGES } from '../tutor-messages';
-import { AvailabilityId, SortByType, SubjectLevels, TutorFilter } from '../types';
-
-interface Availability {
-  disabled: boolean;
-  icon: string;
-  message: string;
-}
+import { AvailabilityId, SortByType, SubjectLevels } from '../types';
+import { Availability } from './availability-filter.component';
 
 const DEBOUNCE_MS = 200;
 
 @Component({
-  selector: 'app-search-tutor-filters',
+  selector: 'app-tutor-filters',
   template: `
     <form novalidate class="search-tutor-filters" [formGroup]="tutorFilterForm">
       <h4>{{ msg.whatToLearn }}</h4>
@@ -62,22 +57,10 @@ const DEBOUNCE_MS = 200;
       <h4 class="search-tutor-price-range">{{ priceRange$ | async }}</h4>
       <div class="search-tutor-separator"></div>
       <h4 class="filter-title">{{ msg.availability }}</h4>
-      <div class="search-tutor-availabilities">
-        <div
-          *ngFor="let availability of availabilities$ | async | keyvalue"
-          [class.search-tutor-availability]="true"
-          [class.search-tutor-availability-disabled]="availability.value.disabled"
-          (click)="onClickAvailability(availability.key)"
-        >
-          <mat-icon>{{ availability.value.icon }}</mat-icon>
-          <h5
-            [class.search-tutor-availability-msg]="true"
-            [class.search-tutor-availability-msg-disabled]="availability.value.disabled"
-          >
-            {{ availability.value.message }}
-          </h5>
-        </div>
-      </div>
+      <app-availability-filter
+        class="search-tutor-availabilities"
+        (selectAvailabilities)="onClickAvailability($event)"
+      ></app-availability-filter>
       <div class="search-tutor-separator"></div>
       <h4 class="filter-title">{{ msg.level }}</h4>
       <div class="search-tutor-level">
@@ -101,27 +84,11 @@ const DEBOUNCE_MS = 200;
         </mat-checkbox>
       </div>
       <div class="search-tutor-separator"></div>
-      <div class="search-tutor-sort-menu" [matMenuTriggerFor]="menu">
-        <div class="search-tutor-sort-menu-left">
-          <mat-icon>sort</mat-icon>
-          <span>{{ msg.sortBy }}</span>
-        </div>
-        <mat-icon>arrow_drop_down</mat-icon>
-      </div>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="onClickMenu('popularity')">
-          <span>{{ msg.popularity }}</span>
-        </button>
-        <button mat-menu-item (click)="onClickMenu('priceMin')">
-          <span>{{ msg.priceMin }}</span>
-        </button>
-        <button mat-menu-item (click)="onClickMenu('priceMax')">
-          <span>{{ msg.priceMax }}</span>
-        </button>
-        <button mat-menu-item (click)="onClickMenu('rating')">
-          <span>{{ msg.rating }}</span>
-        </button>
-      </mat-menu>
+      <app-sort-by-filter
+        class="search-tutor-sort-menu"
+        (selectSortBy)="onClickMenu($event)"
+      ></app-sort-by-filter>
+
       <div class="search-tutor-separator"></div>
       <h4 class="search-tutor-reset" (click)="onResetFilters()">{{ msg.resetFilter }}</h4>
     </form>
@@ -288,30 +255,12 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
     this.maxPriceFormControl.setValue(this.maxPrice - price.value);
   }
 
-  private getAvailabilityData(id: AvailabilityId): Availability {
-    return this.availabilities$.value[id];
-  }
-
-  onClickAvailability(id: AvailabilityId): void {
-    const availability = this.getAvailabilityData(id);
-    availability.disabled = !availability.disabled;
-
-    const availabilities = this.availabilities$.value;
-    availabilities[id] = availability;
-
-    this.availabilities$.next(availabilities);
-
-    const selectedAvailabilities = [];
-    for (const key in availabilities) {
-      if (!availabilities[key].disabled) {
-        selectedAvailabilities.push(key);
-      }
-    }
-
+  onClickAvailability(selectedAvailabilities: AvailabilityId[]): void {
     this.availabilityFormControl.setValue(selectedAvailabilities);
   }
 
   onClickMenu(selectedSortBy: SortByType): void {
+    console.log('selectedSortBy ', selectedSortBy);
     this.sortByFormControl.setValue(selectedSortBy);
   }
 

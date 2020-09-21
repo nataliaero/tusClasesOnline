@@ -16,7 +16,7 @@ import { TUTORS } from './tutors';
         <div class="search-tutor-cards">
           <app-tutor-card *ngFor="let tutor of tutors" [tutor]="tutor"></app-tutor-card>
         </div>
-        <app-search-tutor-filters></app-search-tutor-filters>
+        <app-tutor-filters></app-tutor-filters>
       </div>
     </div>
   `,

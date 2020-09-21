@@ -7,9 +7,11 @@ import { MatSliderModule } from '@angular/material/slider';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
+import { AvailabilityFilterComponent } from './availability-filter.component';
+import { SortByFilterComponent } from './sort-by-filter.component';
 
 @NgModule({
-  declarations: [TutorFiltersComponent],
+  declarations: [AvailabilityFilterComponent, SortByFilterComponent, TutorFiltersComponent],
   imports: [
     CommonModule,
     MatCheckboxModule,

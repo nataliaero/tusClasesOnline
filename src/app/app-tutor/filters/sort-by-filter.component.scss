@@ -1,0 +1,22 @@
+@use '../../../variables';
+
+.sort-by-filter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: variables.$border-radius;
+  padding: variables.$unit;
+  color: variables.$secondary-color;
+
+  .sort-by-filter-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    mat-icon {
+      margin-right: variables.$half-unit;
+    }
+  }
+}
