@@ -1,12 +1,16 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
 import { AvailabilityId } from '../types';
+import { TutorFiltersService } from './tutor-filters.service';
 
 export interface Availability {
   disabled: boolean;
   icon: string;
   message: string;
 }
+
+type Nil = undefined | null;
 
 @Component({
   selector: 'app-availability-filter',
@@ -28,7 +32,8 @@ export interface Availability {
   `,
   styleUrls: ['./availability-filter.component.scss'],
 })
-export class AvailabilityFilterComponent {
+export class AvailabilityFilterComponent implements OnInit, OnDestroy {
+  constructor(private tutorFiltersService: TutorFiltersService) {}
   @Output() selectAvailabilities = new EventEmitter<AvailabilityId[]>();
 
   availabilities$ = new BehaviorSubject<Record<AvailabilityId, Availability>>({
@@ -38,8 +43,26 @@ export class AvailabilityFilterComponent {
     weekends: { icon: 'event_note', message: 'Fines de semana', disabled: false },
   });
 
+  private destroy$ = new Subject<void>();
+
   private getAvailabilityData(id: AvailabilityId): Availability {
     return this.availabilities$.value[id];
+  }
+
+  ngOnInit(): void {
+    this.tutorFiltersService.reset$
+      .pipe(
+        tap(() => {
+          this.availabilities$.next({
+            morning: { icon: 'brightness_5_24', message: '7-14h', disabled: false },
+            afternoon: { icon: 'brightness_6_24', message: '14-20h', disabled: false },
+            evening: { icon: 'brightness_2_24', message: '20-7h', disabled: false },
+            weekends: { icon: 'event_note', message: 'Fines de semana', disabled: false },
+          });
+        }),
+        takeUntil(this.destroy$),
+      )
+      .subscribe();
   }
 
   onClickAvailability(id: AvailabilityId): void {
@@ -59,5 +82,10 @@ export class AvailabilityFilterComponent {
     }
 
     this.selectAvailabilities.emit(selectedAvailabilities);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

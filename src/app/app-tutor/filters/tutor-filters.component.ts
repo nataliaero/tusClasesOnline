@@ -6,6 +6,7 @@ import { AppBarService } from '../../../services';
 import { TUTOR_MESSAGES } from '../tutor-messages';
 import { AvailabilityId, SortByType, SubjectLevels } from '../types';
 import { Availability } from './availability-filter.component';
+import { TutorFiltersService } from './tutor-filters.service';
 
 const DEBOUNCE_MS = 200;
 
@@ -74,7 +75,10 @@ const DEBOUNCE_MS = 200;
   styleUrls: ['./tutor-filters.component.scss'],
 })
 export class TutorFiltersComponent implements OnInit, OnDestroy {
-  constructor(private appBarService: AppBarService) {}
+  constructor(
+    private appBarService: AppBarService,
+    private tutorFiltersService: TutorFiltersService,
+  ) {}
 
   tutorFilterForm: FormGroup = new FormGroup({
     keyword: new FormControl('', [Validators.maxLength(20)]),
@@ -220,6 +224,7 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
   }
 
   onResetFilters(): void {
+    this.tutorFiltersService.resetFilters();
     this.tutorFilterForm.setValue({
       keyword: '',
       minPrice: 0,

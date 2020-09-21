@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { MESSAGES } from '../../../messages';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { map, startWith, takeUntil, tap } from 'rxjs/operators';
 import { MatSliderChange } from '@angular/material/slider';
+import { TutorFiltersService } from './tutor-filters.service';
 
 @Component({
   selector: 'app-price-filter',
@@ -36,7 +37,8 @@ import { MatSliderChange } from '@angular/material/slider';
   `,
   styleUrls: ['./price-filter.component.scss'],
 })
-export class PriceFilterComponent {
+export class PriceFilterComponent implements OnInit, OnDestroy {
+  constructor(private tutorFiltersService: TutorFiltersService) {}
   @Output() changePriceMin = new EventEmitter<number>();
   @Output() changePriceMax = new EventEmitter<number>();
 
@@ -61,6 +63,20 @@ export class PriceFilterComponent {
     minPrice: MESSAGES['searchTutor.minPrice'],
   };
 
+  private destroy$ = new Subject<void>();
+
+  ngOnInit(): void {
+    this.tutorFiltersService.reset$
+      .pipe(
+        tap(() => {
+          this.selectedMinPrice$.next(0);
+          this.selectedMaxPrice$.next(100);
+        }),
+        takeUntil(this.destroy$),
+      )
+      .subscribe();
+  }
+
   onMoveSliderMinPrice(price: MatSliderChange): void {
     this.selectedMinPrice$.next(price.value);
   }
@@ -75,5 +91,10 @@ export class PriceFilterComponent {
 
   onChangeMaxPrice(price: MatSliderChange): void {
     this.changePriceMax.emit(this.maxPrice - price.value);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

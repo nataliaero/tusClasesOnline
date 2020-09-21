@@ -10,6 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AvailabilityFilterComponent } from './availability-filter.component';
 import { SortByFilterComponent } from './sort-by-filter.component';
 import { PriceFilterComponent } from './price-filter.component';
+import { TutorFiltersService } from './tutor-filters.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { PriceFilterComponent } from './price-filter.component';
     MatSliderModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [TutorFiltersService],
   exports: [TutorFiltersComponent],
 })
 export class TutorFiltersModule {}
