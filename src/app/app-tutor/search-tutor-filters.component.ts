@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSliderChange } from '@angular/material/slider';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, startWith, tap } from 'rxjs/operators';
-import { AppBarService } from 'src/services';
-import { MESSAGES } from '../../messages';
-import { AvailabilityId } from './types';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { debounceTime, map, startWith, takeUntil, tap } from 'rxjs/operators';
+import { AppBarService } from '../../services';
+import { TUTOR_MESSAGES } from './tutor-messages';
+import { AvailabilityId, SortByType, SubjectLevels, TutorFilter } from './types';
 
 interface Availability {
   disabled: boolean;
   icon: string;
   message: string;
 }
+
+const DEBOUNCE_MS = 200;
 
 @Component({
   selector: 'app-search-tutor-filters',
@@ -33,7 +35,7 @@ interface Availability {
       <div class="search-tutor-separator"></div>
       <h4 class="filter-title">{{ msg.priceRange }}</h4>
       <div class="search-tutor-price">
-        <h4>Min price</h4>
+        <h4>{{ msg.minPrice }}</h4>
         <mat-slider
           class="search-tutor-slider"
           [min]="minPrice"
@@ -41,10 +43,11 @@ interface Availability {
           step="1"
           value="minPrice"
           (input)="onSelectMinPrice($event)"
+          (change)="onChangeMinPrice($event)"
         ></mat-slider>
       </div>
       <div class="search-tutor-price">
-        <h4>Max price</h4>
+        <h4>{{ msg.maxPrice }}</h4>
         <mat-slider
           class="search-tutor-slider"
           [min]="minPrice"
@@ -53,6 +56,7 @@ interface Availability {
           value="minPrice"
           invert="true"
           (input)="onSelectMaxPrice($event)"
+          (change)="onChangeMaxPrice($event)"
         ></mat-slider>
       </div>
       <h4 class="search-tutor-price-range">{{ priceRange$ | async }}</h4>
@@ -74,54 +78,102 @@ interface Availability {
           </h5>
         </div>
       </div>
+      <div class="search-tutor-separator"></div>
+      <h4 class="filter-title">{{ msg.level }}</h4>
+      <div class="search-tutor-level">
+        <mat-checkbox [formControl]="preschoolFormControl">
+          {{ msg.preschool }}
+        </mat-checkbox>
+        <mat-checkbox [formControl]="primaryFormControl">
+          {{ msg.primary }}
+        </mat-checkbox>
+        <mat-checkbox [formControl]="secondaryFormControl">
+          {{ msg.secondary }}
+        </mat-checkbox>
+        <mat-checkbox [formControl]="superiorFormControl">
+          {{ msg.superior }}
+        </mat-checkbox>
+        <mat-checkbox [formControl]="universityFormControl">
+          {{ msg.university }}
+        </mat-checkbox>
+        <mat-checkbox [formControl]="adultsFormControl">
+          {{ msg.adults }}
+        </mat-checkbox>
+      </div>
+      <div class="search-tutor-separator"></div>
+      <div class="search-tutor-sort-menu" [matMenuTriggerFor]="menu">
+        <div class="search-tutor-sort-menu-left">
+          <mat-icon>sort</mat-icon>
+          <span>{{ msg.sortBy }}</span>
+        </div>
+        <mat-icon>arrow_drop_down</mat-icon>
+      </div>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onClickMenu('popularity')">
+          <span>{{ msg.popularity }}</span>
+        </button>
+        <button mat-menu-item (click)="onClickMenu('priceMin')">
+          <span>{{ msg.priceMin }}</span>
+        </button>
+        <button mat-menu-item (click)="onClickMenu('priceMax')">
+          <span>{{ msg.priceMax }}</span>
+        </button>
+        <button mat-menu-item (click)="onClickMenu('rating')">
+          <span>{{ msg.rating }}</span>
+        </button>
+      </mat-menu>
+      <div class="search-tutor-separator"></div>
+      <h4 class="search-tutor-reset">{{ msg.resetFilter }}</h4>
     </form>
   `,
   styleUrls: ['./search-tutor-filters.component.scss'],
 })
-export class SearchTutorFiltersComponent implements OnInit {
+export class SearchTutorFiltersComponent implements OnInit, OnDestroy {
   constructor(private appBarService: AppBarService) {}
+
+  tutorFilterForm: FormGroup = new FormGroup({
+    keyword: new FormControl('', [Validators.maxLength(20)]),
+    minPrice: new FormControl(0),
+    maxPrice: new FormControl(100),
+    availability: new FormControl([
+      AvailabilityId.Afternoon,
+      AvailabilityId.Evening,
+      AvailabilityId.Morning,
+      AvailabilityId.Weekends,
+    ]),
+    preschool: new FormControl(true),
+    primary: new FormControl(true),
+    secondary: new FormControl(true),
+    superior: new FormControl(true),
+    university: new FormControl(true),
+    adults: new FormControl(true),
+    sortBy: new FormControl(null),
+  });
 
   minPrice = 0;
   maxPrice = 100;
+  msg = TUTOR_MESSAGES;
 
   selectedMinPrice$ = new BehaviorSubject<number>(this.minPrice);
-  selectedMaxPrice$ = new BehaviorSubject<number>(this.minPrice);
+  selectedMaxPrice$ = new BehaviorSubject<number>(this.maxPrice);
+  selectedLevels$ = new BehaviorSubject<SubjectLevels[]>([
+    SubjectLevels.Preschool,
+    SubjectLevels.Primary,
+    SubjectLevels.Secondary,
+    SubjectLevels.Superior,
+    SubjectLevels.University,
+    SubjectLevels.Adults,
+  ]);
 
   priceRange$: Observable<string> = combineLatest([
     this.selectedMinPrice$,
     this.selectedMaxPrice$,
   ]).pipe(
     map(
-      ([selectedMinPrice, selectedMaxPrice]) =>
-        `${selectedMinPrice}€/h - ${100 - selectedMaxPrice}€/h`,
+      ([selectedMinPrice, selectedMaxPrice]) => `${selectedMinPrice}€/h - ${selectedMaxPrice}€/h`,
     ),
     startWith(`${this.minPrice}€/h - ${this.maxPrice}€/h`),
   );
-
-  msg = {
-    findIdealTutor: MESSAGES['searchTutor.findIdealTutor'],
-    filtersTip: MESSAGES['searchTutor.filtersTip'],
-    bookAClass: MESSAGES['searchTutor.bookAClass'],
-    sendMessage: MESSAGES['searchTutor.sendMessage'],
-    readMore: MESSAGES['searchTutor.readMore'],
-    fee: MESSAGES['searchTutor.fee'],
-    ratings: MESSAGES['searchTutor.ratings'],
-    whatToLearn: MESSAGES['searchTutor.whatToLearn'],
-    lookKeyWord: MESSAGES['searchTutor.lookKeyWord'],
-    lookKeyWordPlaceholder: MESSAGES['searchTutor.lookKeyWordPlaceholder'],
-    priceRange: MESSAGES['searchTutor.priceRange'],
-    availability: MESSAGES['searchTutor.availability'],
-    weekends: MESSAGES['searchTutor.weekends'],
-    speaks: MESSAGES['searchTutor.speaks'],
-    sortBy: MESSAGES['searchTutor.sortBy'],
-  };
-
-  tutorFilterForm: FormGroup = new FormGroup({
-    keyword: new FormControl('', [Validators.maxLength(30)]),
-    minPrice: new FormControl(''),
-    maxPrice: new FormControl(''),
-    availability: new FormControl(''),
-  });
 
   availabilities$ = new BehaviorSubject<Record<AvailabilityId, Availability>>({
     morning: { icon: 'brightness_5_24', message: '7-14h', disabled: false },
@@ -130,8 +182,49 @@ export class SearchTutorFiltersComponent implements OnInit {
     weekends: { icon: 'event_note', message: 'Fines de semana', disabled: false },
   });
 
+  private destroy$ = new Subject<void>();
+
   ngOnInit(): void {
     this.appBarService.updateStyle(true);
+
+    this.tutorFilterForm.valueChanges
+      .pipe(
+        map(value => ({
+          keyword: value.keyword,
+          levels: this.getLevels(value),
+          availability: value.availability,
+          minPrice: value.minPrice,
+          maxPrice: value.maxPrice,
+          sortBy: value.sortBy,
+        })),
+        debounceTime(DEBOUNCE_MS),
+        tap(res => console.log(res)),
+        takeUntil(this.destroy$),
+      )
+      .subscribe();
+  }
+
+  getLevels(value: any): SubjectLevels[] {
+    const levels = [];
+    if (value.preschool) {
+      levels.push(SubjectLevels.Preschool);
+    }
+    if (value.primary) {
+      levels.push(SubjectLevels.Primary);
+    }
+    if (value.secondary) {
+      levels.push(SubjectLevels.Secondary);
+    }
+    if (value.superior) {
+      levels.push(SubjectLevels.Superior);
+    }
+    if (value.university) {
+      levels.push(SubjectLevels.University);
+    }
+    if (value.adults) {
+      levels.push(SubjectLevels.Adults);
+    }
+    return levels;
   }
 
   get keywordFormControl(): FormControl {
@@ -150,14 +243,49 @@ export class SearchTutorFiltersComponent implements OnInit {
     return this.tutorFilterForm.get('maxPrice') as FormControl;
   }
 
+  get preschoolFormControl(): FormControl {
+    return this.tutorFilterForm.get('preschool') as FormControl;
+  }
+
+  get primaryFormControl(): FormControl {
+    return this.tutorFilterForm.get('primary') as FormControl;
+  }
+
+  get secondaryFormControl(): FormControl {
+    return this.tutorFilterForm.get('secondary') as FormControl;
+  }
+
+  get superiorFormControl(): FormControl {
+    return this.tutorFilterForm.get('superior') as FormControl;
+  }
+
+  get universityFormControl(): FormControl {
+    return this.tutorFilterForm.get('university') as FormControl;
+  }
+
+  get adultsFormControl(): FormControl {
+    return this.tutorFilterForm.get('adults') as FormControl;
+  }
+
+  get sortByFormControl(): FormControl {
+    return this.tutorFilterForm.get('sortBy') as FormControl;
+  }
+
   onSelectMinPrice(price: MatSliderChange): void {
     this.selectedMinPrice$.next(price.value);
-    this.minPriceFormControl.setValue({ minPrice: price.value });
+    this.minPriceFormControl.setValue(price.value);
+  }
+
+  onChangeMinPrice(price: MatSliderChange): void {
+    this.minPriceFormControl.setValue(price.value);
   }
 
   onSelectMaxPrice(price: MatSliderChange): void {
-    this.selectedMaxPrice$.next(price.value);
-    this.maxPriceFormControl.setValue({ maxPrice: price.value });
+    this.selectedMaxPrice$.next(this.maxPrice - price.value);
+  }
+
+  onChangeMaxPrice(price: MatSliderChange): void {
+    this.maxPriceFormControl.setValue(this.maxPrice - price.value);
   }
 
   private getAvailabilityData(id: AvailabilityId): Availability {
@@ -180,6 +308,15 @@ export class SearchTutorFiltersComponent implements OnInit {
       }
     }
 
-    this.availabilityFormControl.setValue({ availability: selectedAvailabilities });
+    this.availabilityFormControl.setValue(selectedAvailabilities);
+  }
+
+  onClickMenu(selectedSortBy: SortByType): void {
+    this.sortByFormControl.setValue(selectedSortBy);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

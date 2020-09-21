@@ -10,6 +10,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -21,8 +24,11 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     AppButtonModule,
     CommonModule,
+    MatButtonModule,
+    MatCheckboxModule,
     MatIconModule,
     MatInputModule,
+    MatMenuModule,
     MatSliderModule,
     ReactiveFormsModule,
     TutorRoutingModule,

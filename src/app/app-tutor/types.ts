@@ -1,3 +1,14 @@
+export interface TutorFilter {
+  levels: SubjectLevels[];
+  availability: AvailabilityId[];
+  minPrice: number;
+  maxPrice: number;
+  keyword: string;
+  sortBy: SortByType;
+}
+
+export type SortByType = 'popularity' | 'priceMax' | 'priceMin' | 'rating' | null;
+
 export enum LanguageLevel {
   Native = 'Nativo',
   C2 = 'C2',
@@ -14,10 +25,12 @@ export interface Language {
 }
 
 export enum SubjectLevels {
+  Preschool = 'Preescolar',
   Primary = 'Primaria',
   Secondary = 'Secundaria',
   Superior = 'Superior/bachillerato',
-  University = 'Universidad',
+  University = 'Universitarios',
+  Adults = 'Adultos',
 }
 
 export interface Subject {
