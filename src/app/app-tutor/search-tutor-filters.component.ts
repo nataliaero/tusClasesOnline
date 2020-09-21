@@ -41,7 +41,7 @@ const DEBOUNCE_MS = 200;
           [min]="minPrice"
           [max]="maxPrice"
           step="1"
-          value="minPrice"
+          [value]="selectedMinPrice$ | async"
           (input)="onSelectMinPrice($event)"
           (change)="onChangeMinPrice($event)"
         ></mat-slider>
@@ -53,7 +53,7 @@ const DEBOUNCE_MS = 200;
           [min]="minPrice"
           [max]="maxPrice"
           step="1"
-          value="minPrice"
+          [value]="this.maxPrice - (selectedMaxPrice$ | async)"
           invert="true"
           (input)="onSelectMaxPrice($event)"
           (change)="onChangeMaxPrice($event)"
@@ -123,7 +123,7 @@ const DEBOUNCE_MS = 200;
         </button>
       </mat-menu>
       <div class="search-tutor-separator"></div>
-      <h4 class="search-tutor-reset">{{ msg.resetFilter }}</h4>
+      <h4 class="search-tutor-reset" (click)="onResetFilters()">{{ msg.resetFilter }}</h4>
     </form>
   `,
   styleUrls: ['./search-tutor-filters.component.scss'],
@@ -313,6 +313,30 @@ export class SearchTutorFiltersComponent implements OnInit, OnDestroy {
 
   onClickMenu(selectedSortBy: SortByType): void {
     this.sortByFormControl.setValue(selectedSortBy);
+  }
+
+  onResetFilters(): void {
+    this.selectedMinPrice$.next(this.minPrice);
+    this.selectedMaxPrice$.next(this.maxPrice);
+
+    this.tutorFilterForm.setValue({
+      keyword: '',
+      minPrice: 0,
+      maxPrice: 100,
+      availability: [
+        AvailabilityId.Afternoon,
+        AvailabilityId.Evening,
+        AvailabilityId.Morning,
+        AvailabilityId.Weekends,
+      ],
+      preschool: true,
+      primary: true,
+      secondary: true,
+      superior: true,
+      university: true,
+      adults: true,
+      sortBy: null,
+    });
   }
 
   ngOnDestroy(): void {
