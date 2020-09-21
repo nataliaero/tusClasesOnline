@@ -36,25 +36,13 @@ $max-width-availability: 60px;
   width: $input-width;
 }
 
-.search-tutor-price {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+.search-tutor-availabilities {
+  margin: variables.$unit 0 variables.$spacing 0;
   width: $input-width;
 }
 
-.search-tutor-slider {
-  margin-left: variables.$spacing;
-  width: 70%;
-}
-
-.search-tutor-price-range {
+.search-tutor-price {
   margin-bottom: variables.$spacing;
-}
-
-.search-tutor-availabilities {
-  margin: variables.$unit 0 variables.$spacing 0;
   width: $input-width;
 }
 

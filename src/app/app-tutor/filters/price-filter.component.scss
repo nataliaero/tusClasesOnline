@@ -1,0 +1,21 @@
+@use '../../../variables';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.price-filter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.price-filter-slider {
+  margin-left: variables.$spacing;
+  width: 70%;
+}

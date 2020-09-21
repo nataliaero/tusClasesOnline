@@ -9,9 +9,15 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
 import { AvailabilityFilterComponent } from './availability-filter.component';
 import { SortByFilterComponent } from './sort-by-filter.component';
+import { PriceFilterComponent } from './price-filter.component';
 
 @NgModule({
-  declarations: [AvailabilityFilterComponent, SortByFilterComponent, TutorFiltersComponent],
+  declarations: [
+    AvailabilityFilterComponent,
+    PriceFilterComponent,
+    SortByFilterComponent,
+    TutorFiltersComponent,
+  ],
   imports: [
     CommonModule,
     MatCheckboxModule,

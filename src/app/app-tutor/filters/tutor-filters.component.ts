@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSliderChange } from '@angular/material/slider';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { debounceTime, map, startWith, takeUntil, tap } from 'rxjs/operators';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
 import { AppBarService } from '../../../services';
 import { TUTOR_MESSAGES } from '../tutor-messages';
 import { AvailabilityId, SortByType, SubjectLevels } from '../types';
@@ -29,32 +28,11 @@ const DEBOUNCE_MS = 200;
       </mat-form-field>
       <div class="search-tutor-separator"></div>
       <h4 class="filter-title">{{ msg.priceRange }}</h4>
-      <div class="search-tutor-price">
-        <h4>{{ msg.minPrice }}</h4>
-        <mat-slider
-          class="search-tutor-slider"
-          [min]="minPrice"
-          [max]="maxPrice"
-          step="1"
-          [value]="selectedMinPrice$ | async"
-          (input)="onSelectMinPrice($event)"
-          (change)="onChangeMinPrice($event)"
-        ></mat-slider>
-      </div>
-      <div class="search-tutor-price">
-        <h4>{{ msg.maxPrice }}</h4>
-        <mat-slider
-          class="search-tutor-slider"
-          [min]="minPrice"
-          [max]="maxPrice"
-          step="1"
-          [value]="this.maxPrice - (selectedMaxPrice$ | async)"
-          invert="true"
-          (input)="onSelectMaxPrice($event)"
-          (change)="onChangeMaxPrice($event)"
-        ></mat-slider>
-      </div>
-      <h4 class="search-tutor-price-range">{{ priceRange$ | async }}</h4>
+      <app-price-filter
+        class="search-tutor-price"
+        (changePriceMin)="onChangeMinPrice($event)"
+        (changePriceMax)="onChangeMaxPrice($event)"
+      ></app-price-filter>
       <div class="search-tutor-separator"></div>
       <h4 class="filter-title">{{ msg.availability }}</h4>
       <app-availability-filter
@@ -86,7 +64,7 @@ const DEBOUNCE_MS = 200;
       <div class="search-tutor-separator"></div>
       <app-sort-by-filter
         class="search-tutor-sort-menu"
-        (selectSortBy)="onClickMenu($event)"
+        (selectSortBy)="onClickSortByMenu($event)"
       ></app-sort-by-filter>
 
       <div class="search-tutor-separator"></div>
@@ -117,12 +95,8 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
     sortBy: new FormControl(null),
   });
 
-  minPrice = 0;
-  maxPrice = 100;
   msg = TUTOR_MESSAGES;
 
-  selectedMinPrice$ = new BehaviorSubject<number>(this.minPrice);
-  selectedMaxPrice$ = new BehaviorSubject<number>(this.maxPrice);
   selectedLevels$ = new BehaviorSubject<SubjectLevels[]>([
     SubjectLevels.Preschool,
     SubjectLevels.Primary,
@@ -131,16 +105,6 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
     SubjectLevels.University,
     SubjectLevels.Adults,
   ]);
-
-  priceRange$: Observable<string> = combineLatest([
-    this.selectedMinPrice$,
-    this.selectedMaxPrice$,
-  ]).pipe(
-    map(
-      ([selectedMinPrice, selectedMaxPrice]) => `${selectedMinPrice}€/h - ${selectedMaxPrice}€/h`,
-    ),
-    startWith(`${this.minPrice}€/h - ${this.maxPrice}€/h`),
-  );
 
   availabilities$ = new BehaviorSubject<Record<AvailabilityId, Availability>>({
     morning: { icon: 'brightness_5_24', message: '7-14h', disabled: false },
@@ -238,36 +202,24 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
     return this.tutorFilterForm.get('sortBy') as FormControl;
   }
 
-  onSelectMinPrice(price: MatSliderChange): void {
-    this.selectedMinPrice$.next(price.value);
-    this.minPriceFormControl.setValue(price.value);
+  onChangeMinPrice(price: number): void {
+    this.minPriceFormControl.setValue(price);
   }
 
-  onChangeMinPrice(price: MatSliderChange): void {
-    this.minPriceFormControl.setValue(price.value);
-  }
-
-  onSelectMaxPrice(price: MatSliderChange): void {
-    this.selectedMaxPrice$.next(this.maxPrice - price.value);
-  }
-
-  onChangeMaxPrice(price: MatSliderChange): void {
-    this.maxPriceFormControl.setValue(this.maxPrice - price.value);
+  onChangeMaxPrice(price: number): void {
+    this.maxPriceFormControl.setValue(price);
   }
 
   onClickAvailability(selectedAvailabilities: AvailabilityId[]): void {
     this.availabilityFormControl.setValue(selectedAvailabilities);
   }
 
-  onClickMenu(selectedSortBy: SortByType): void {
+  onClickSortByMenu(selectedSortBy: SortByType): void {
     console.log('selectedSortBy ', selectedSortBy);
     this.sortByFormControl.setValue(selectedSortBy);
   }
 
   onResetFilters(): void {
-    this.selectedMinPrice$.next(this.minPrice);
-    this.selectedMaxPrice$.next(this.maxPrice);
-
     this.tutorFilterForm.setValue({
       keyword: '',
       minPrice: 0,
