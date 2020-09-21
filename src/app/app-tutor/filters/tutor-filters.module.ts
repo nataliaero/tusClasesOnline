@@ -1,0 +1,25 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TutorFiltersComponent } from './tutor-filters.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSliderModule } from '@angular/material/slider';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatMenuModule } from '@angular/material/menu';
+
+@NgModule({
+  declarations: [TutorFiltersComponent],
+  imports: [
+    CommonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatInputModule,
+    MatMenuModule,
+    MatSliderModule,
+    ReactiveFormsModule,
+  ],
+  providers: [],
+  exports: [TutorFiltersComponent],
+})
+export class TutorFiltersModule {}

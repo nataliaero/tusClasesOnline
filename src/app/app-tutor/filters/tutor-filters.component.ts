@@ -3,9 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSliderChange } from '@angular/material/slider';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { debounceTime, map, startWith, takeUntil, tap } from 'rxjs/operators';
-import { AppBarService } from '../../services';
-import { TUTOR_MESSAGES } from './tutor-messages';
-import { AvailabilityId, SortByType, SubjectLevels, TutorFilter } from './types';
+import { AppBarService } from '../../../services';
+import { TUTOR_MESSAGES } from '../tutor-messages';
+import { AvailabilityId, SortByType, SubjectLevels, TutorFilter } from '../types';
 
 interface Availability {
   disabled: boolean;
@@ -126,9 +126,9 @@ const DEBOUNCE_MS = 200;
       <h4 class="search-tutor-reset" (click)="onResetFilters()">{{ msg.resetFilter }}</h4>
     </form>
   `,
-  styleUrls: ['./search-tutor-filters.component.scss'],
+  styleUrls: ['./tutor-filters.component.scss'],
 })
-export class SearchTutorFiltersComponent implements OnInit, OnDestroy {
+export class TutorFiltersComponent implements OnInit, OnDestroy {
   constructor(private appBarService: AppBarService) {}
 
   tutorFilterForm: FormGroup = new FormGroup({
