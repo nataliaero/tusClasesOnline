@@ -59,3 +59,8 @@ textarea:focus,
 input:focus {
   outline: none;
 }
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: variables.$primary-color;
+}

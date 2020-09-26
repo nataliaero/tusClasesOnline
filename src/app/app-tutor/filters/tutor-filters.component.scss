@@ -57,7 +57,7 @@ $max-width-availability: 60px;
 .keyword-field {
   width: $input-width;
   ::ng-deep .mat-form-field-infix {
-    padding: variables.$unit 0 variables.$unit 0;
+    padding: variables.$unit 0;
   }
 }
 
