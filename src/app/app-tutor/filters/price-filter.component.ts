@@ -1,4 +1,11 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { MESSAGES } from '../../../messages';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { map, startWith, takeUntil, tap } from 'rxjs/operators';
@@ -36,6 +43,7 @@ import { TutorFiltersService } from './tutor-filters.service';
     <h4 class="price-filter-range">{{ priceRange$ | async }}</h4>
   `,
   styleUrls: ['./price-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PriceFilterComponent implements OnInit, OnDestroy {
   constructor(private tutorFiltersService: TutorFiltersService) {}

@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { AvailabilityId } from '../types';
@@ -11,6 +19,13 @@ export interface Availability {
 }
 
 type Nil = undefined | null;
+
+const INITIAL_AVAILABILITY: Record<AvailabilityId, Availability> = {
+  morning: { icon: 'brightness_5_24', message: '7-14h', disabled: false },
+  afternoon: { icon: 'brightness_6_24', message: '14-20h', disabled: false },
+  evening: { icon: 'brightness_2_24', message: '20-7h', disabled: false },
+  weekends: { icon: 'event_note', message: 'Fines de semana', disabled: false },
+};
 
 @Component({
   selector: 'app-availability-filter',
@@ -31,35 +46,24 @@ type Nil = undefined | null;
     </div>
   `,
   styleUrls: ['./availability-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvailabilityFilterComponent implements OnInit, OnDestroy {
   constructor(private tutorFiltersService: TutorFiltersService) {}
   @Output() selectAvailabilities = new EventEmitter<AvailabilityId[]>();
 
-  availabilities$ = new BehaviorSubject<Record<AvailabilityId, Availability>>({
-    morning: { icon: 'brightness_5_24', message: '7-14h', disabled: false },
-    afternoon: { icon: 'brightness_6_24', message: '14-20h', disabled: false },
-    evening: { icon: 'brightness_2_24', message: '20-7h', disabled: false },
-    weekends: { icon: 'event_note', message: 'Fines de semana', disabled: false },
-  });
+  availabilities$ = new BehaviorSubject<Record<AvailabilityId, Availability>>(INITIAL_AVAILABILITY);
 
   private destroy$ = new Subject<void>();
 
   private getAvailabilityData(id: AvailabilityId): Availability {
-    return this.availabilities$.value[id];
+    return { ...this.availabilities$.value[id] };
   }
 
   ngOnInit(): void {
     this.tutorFiltersService.reset$
       .pipe(
-        tap(() => {
-          this.availabilities$.next({
-            morning: { icon: 'brightness_5_24', message: '7-14h', disabled: false },
-            afternoon: { icon: 'brightness_6_24', message: '14-20h', disabled: false },
-            evening: { icon: 'brightness_2_24', message: '20-7h', disabled: false },
-            weekends: { icon: 'event_note', message: 'Fines de semana', disabled: false },
-          });
-        }),
+        tap(() => this.availabilities$.next(INITIAL_AVAILABILITY)),
         takeUntil(this.destroy$),
       )
       .subscribe();
@@ -69,9 +73,7 @@ export class AvailabilityFilterComponent implements OnInit, OnDestroy {
     const availability = this.getAvailabilityData(id);
     availability.disabled = !availability.disabled;
 
-    const availabilities = this.availabilities$.value;
-    availabilities[id] = availability;
-
+    const availabilities = { ...this.availabilities$.value, [id]: availability };
     this.availabilities$.next(availabilities);
 
     const selectedAvailabilities = [];

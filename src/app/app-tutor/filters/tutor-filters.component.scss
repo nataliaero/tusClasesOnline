@@ -4,14 +4,20 @@
 $input-width: 300px;
 $max-width-availability: 60px;
 
+.search-tutor-title {
+  margin-top: variables.$spacing;
+}
+
 .search-tutor-filters {
+  position: fixed;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin: variables.$spacing 0 variables.$spacing variables.$spacing;
+  margin: variables.$spacing;
   background-color: variables.$white;
-  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 73.5%;
 
   @include mixins.mobile {
     display: none;
@@ -19,13 +25,13 @@ $max-width-availability: 60px;
 }
 
 .search-tutor-separator {
-  height: 1px;
-  background-color: #dadada;
+  height: 0.1px;
   width: $input-width;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: variables.$unit variables.$spacing;
+  margin: 0 variables.$spacing;
+  border: 0.1px solid #e2e2e2;
 }
 
 .filter-title {

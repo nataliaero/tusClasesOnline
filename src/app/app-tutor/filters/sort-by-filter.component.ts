@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { SortByType } from '../types';
 import { MESSAGES } from '../../../messages';
 
@@ -28,6 +28,7 @@ import { MESSAGES } from '../../../messages';
     </mat-menu>
   `,
   styleUrls: ['./sort-by-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SortByFilterComponent {
   @Output() selectSortBy = new EventEmitter<SortByType>();

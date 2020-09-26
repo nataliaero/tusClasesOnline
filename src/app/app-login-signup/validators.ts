@@ -9,8 +9,6 @@ const PASSWORD_PATTERN = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,1
 
 function PasswordPatternValidator(): AsyncValidatorFn {
   return (control: AbstractControl) => {
-    console.log(control.value);
-    console.log(control.value.match(PASSWORD_PATTERN));
     const message = PASSWORD_PATTERN.test(control.value) ? null : { passwordPattern: true };
     return of(message);
   };

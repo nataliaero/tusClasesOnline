@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
@@ -14,8 +14,6 @@ const DEBOUNCE_MS = 200;
   selector: 'app-tutor-filters',
   template: `
     <form novalidate class="search-tutor-filters" [formGroup]="tutorFilterForm">
-      <h4>{{ msg.whatToLearn }}</h4>
-      <div class="search-tutor-separator"></div>
       <h4 class="filter-title">{{ msg.lookKeyWord }}</h4>
       <mat-form-field class="keyword-field" appearance="outline">
         <input
@@ -73,6 +71,7 @@ const DEBOUNCE_MS = 200;
     </form>
   `,
   styleUrls: ['./tutor-filters.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TutorFiltersComponent implements OnInit, OnDestroy {
   constructor(
@@ -219,7 +218,6 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
   }
 
   onClickSortByMenu(selectedSortBy: SortByType): void {
-    console.log('selectedSortBy ', selectedSortBy);
     this.sortByFormControl.setValue(selectedSortBy);
   }
 
