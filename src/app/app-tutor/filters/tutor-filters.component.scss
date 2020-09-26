@@ -1,0 +1,93 @@
+@use '../../../variables';
+@use '../../../mixins';
+
+$input-width: 300px;
+$max-width-availability: 60px;
+
+.search-tutor-title {
+  margin-top: variables.$spacing;
+}
+
+.search-tutor-filters {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: variables.$spacing;
+  background-color: variables.$white;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 80%;
+
+  @include mixins.mobile {
+    display: none;
+  }
+}
+
+@keyframes filter-positioning {
+  0% {
+    top: 120px;
+  }
+  100% {
+    top: 50px;
+  }
+}
+
+.search-tutor-filters-top {
+  top: 120px;
+  animation-name: filter-positioning;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.search-tutor-separator {
+  height: 0.1px;
+  width: $input-width;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 variables.$spacing;
+  border: 0.1px solid #e2e2e2;
+}
+
+.filter-title {
+  margin: variables.$spacing 0 variables.$unit 0;
+}
+
+.keyword-field {
+  width: $input-width;
+  ::ng-deep .mat-form-field-infix {
+    padding: variables.$unit 0;
+  }
+}
+
+.search-tutor-availabilities {
+  margin: variables.$unit 0 variables.$spacing 0;
+  width: $input-width;
+}
+
+.search-tutor-price {
+  margin-bottom: variables.$spacing;
+  width: $input-width;
+}
+
+.search-tutor-level {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: variables.$spacing;
+}
+
+.search-tutor-sort-menu {
+  width: $input-width;
+  margin: variables.$spacing 0;
+}
+
+.search-tutor-reset {
+  color: variables.$red;
+  margin: variables.$spacing 0;
+  cursor: pointer;
+}
+
+.search-tutor-reset:active {
+  color: variables.$red-dark;
+}

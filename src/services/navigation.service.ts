@@ -16,7 +16,6 @@ export class NavigationService {
   }
 
   goToSearchTutor(): void {
-    console.log('navigate');
     this.router.navigate(['/tutor/search-tutor']);
   }
 

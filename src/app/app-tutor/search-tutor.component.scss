@@ -51,7 +51,7 @@ $font-size-title-mobile: 16px;
 }
 
 .search-tutor-cards {
-  width: 70%;
+  width: 65%;
   @include mixins.tablet {
     width: 100%;
   }
@@ -62,6 +62,7 @@ $font-size-title-mobile: 16px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 35%;
 
   @include mixins.mobile {
     display: none;
