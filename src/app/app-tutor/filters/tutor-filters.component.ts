@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, map, takeUntil } from 'rxjs/operators';
 import { AppBarService } from '../../../services';
 import { TUTOR_MESSAGES } from '../tutor-messages';
 import { AvailabilityId, SortByType, SubjectLevels } from '../types';
@@ -144,7 +144,6 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
           sortBy: value.sortBy,
         })),
         debounceTime(DEBOUNCE_MS),
-        tap(res => console.log(res)),
         takeUntil(this.destroy$),
       )
       .subscribe();
