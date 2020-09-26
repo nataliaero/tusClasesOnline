@@ -71,12 +71,6 @@ $max-width-availability: 60px;
   width: $input-width;
 }
 
-.search-tutor-level {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: variables.$spacing;
-}
-
 .search-tutor-sort-menu {
   width: $input-width;
   margin: variables.$spacing 0;

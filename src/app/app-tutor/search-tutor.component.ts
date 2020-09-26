@@ -30,19 +30,6 @@ export class SearchTutorComponent implements OnInit {
   msg = {
     findIdealTutor: MESSAGES['searchTutor.findIdealTutor'],
     filtersTip: MESSAGES['searchTutor.filtersTip'],
-    bookAClass: MESSAGES['searchTutor.bookAClass'],
-    sendMessage: MESSAGES['searchTutor.sendMessage'],
-    readMore: MESSAGES['searchTutor.readMore'],
-    fee: MESSAGES['searchTutor.fee'],
-    ratings: MESSAGES['searchTutor.ratings'],
-    whatToLearn: MESSAGES['searchTutor.whatToLearn'],
-    lookKeyWord: MESSAGES['searchTutor.lookKeyWord'],
-    lookKeyWordPlaceholder: MESSAGES['searchTutor.lookKeyWordPlaceholder'],
-    priceRange: MESSAGES['searchTutor.priceRange'],
-    availability: MESSAGES['searchTutor.availability'],
-    weekends: MESSAGES['searchTutor.weekends'],
-    speaks: MESSAGES['searchTutor.speaks'],
-    sortBy: MESSAGES['searchTutor.sortBy'],
   };
 
   ngOnInit(): void {

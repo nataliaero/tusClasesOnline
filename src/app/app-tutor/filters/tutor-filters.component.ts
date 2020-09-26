@@ -1,14 +1,31 @@
 import { ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { debounceTime, map, takeUntil } from 'rxjs/operators';
+import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
 import { AppBarService } from '../../../services';
-import { TUTOR_MESSAGES } from '../tutor-messages';
 import { AvailabilityId, SortByType, SubjectLevels } from '../types';
 import { Availability } from './availability-filter.component';
 import { TutorFiltersService } from './tutor-filters.service';
+import { MESSAGES } from '../../../messages';
 
 const DEBOUNCE_MS = 200;
+const MIN_PRICE = 0;
+const MAX_PRICE = 100;
+const INITIAL_AVAILABILITY: AvailabilityId[] = [
+  AvailabilityId.Afternoon,
+  AvailabilityId.Evening,
+  AvailabilityId.Morning,
+  AvailabilityId.Weekends,
+];
+
+const INITIAL_LEVELS: SubjectLevels[] = [
+  SubjectLevels.Preschool,
+  SubjectLevels.Primary,
+  SubjectLevels.Secondary,
+  SubjectLevels.Superior,
+  SubjectLevels.University,
+  SubjectLevels.Adults,
+];
 
 @Component({
   selector: 'app-tutor-filters',
@@ -45,32 +62,12 @@ const DEBOUNCE_MS = 200;
       ></app-availability-filter>
       <div class="search-tutor-separator"></div>
       <h4 class="filter-title">{{ msg.level }}</h4>
-      <div class="search-tutor-level">
-        <mat-checkbox [formControl]="preschoolFormControl">
-          {{ msg.preschool }}
-        </mat-checkbox>
-        <mat-checkbox [formControl]="primaryFormControl">
-          {{ msg.primary }}
-        </mat-checkbox>
-        <mat-checkbox [formControl]="secondaryFormControl">
-          {{ msg.secondary }}
-        </mat-checkbox>
-        <mat-checkbox [formControl]="superiorFormControl">
-          {{ msg.superior }}
-        </mat-checkbox>
-        <mat-checkbox [formControl]="universityFormControl">
-          {{ msg.university }}
-        </mat-checkbox>
-        <mat-checkbox [formControl]="adultsFormControl">
-          {{ msg.adults }}
-        </mat-checkbox>
-      </div>
+      <app-level-filter (changeLevels)="onChangeLevels($event)"></app-level-filter>
       <div class="search-tutor-separator"></div>
       <app-sort-by-filter
         class="search-tutor-sort-menu"
         (selectSortBy)="onClickSortByMenu($event)"
       ></app-sort-by-filter>
-
       <div class="search-tutor-separator"></div>
       <h4 class="search-tutor-reset" (click)="onResetFilters()">{{ msg.resetFilter }}</h4>
     </form>
@@ -84,35 +81,30 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
     private tutorFiltersService: TutorFiltersService,
   ) {}
 
+  msg = {
+    lookKeyWord: MESSAGES['searchTutor.lookKeyWord'],
+    lookKeyWordPlaceholder: MESSAGES['searchTutor.lookKeyWordPlaceholder'],
+    priceRange: MESSAGES['searchTutor.priceRange'],
+    availability: MESSAGES['searchTutor.availability'],
+    weekends: MESSAGES['searchTutor.weekends'],
+    level: MESSAGES['searchTutor.level'],
+    preschool: MESSAGES['searchTutor.preschool'],
+    primary: MESSAGES['searchTutor.primary'],
+    secondary: MESSAGES['searchTutor.secondary'],
+    superior: MESSAGES['searchTutor.superior'],
+    university: MESSAGES['searchTutor.university'],
+    adults: MESSAGES['searchTutor.adults'],
+    resetFilter: MESSAGES['searchTutor.resetFilter'],
+  };
+
   tutorFilterForm: FormGroup = new FormGroup({
     keyword: new FormControl('', [Validators.maxLength(20)]),
-    minPrice: new FormControl(0),
-    maxPrice: new FormControl(100),
-    availability: new FormControl([
-      AvailabilityId.Afternoon,
-      AvailabilityId.Evening,
-      AvailabilityId.Morning,
-      AvailabilityId.Weekends,
-    ]),
-    preschool: new FormControl(true),
-    primary: new FormControl(true),
-    secondary: new FormControl(true),
-    superior: new FormControl(true),
-    university: new FormControl(true),
-    adults: new FormControl(true),
+    minPrice: new FormControl(MIN_PRICE),
+    maxPrice: new FormControl(MAX_PRICE),
+    availability: new FormControl(INITIAL_AVAILABILITY),
     sortBy: new FormControl(null),
+    levels: new FormControl(INITIAL_LEVELS),
   });
-
-  msg = TUTOR_MESSAGES;
-
-  selectedLevels$ = new BehaviorSubject<SubjectLevels[]>([
-    SubjectLevels.Preschool,
-    SubjectLevels.Primary,
-    SubjectLevels.Secondary,
-    SubjectLevels.Superior,
-    SubjectLevels.University,
-    SubjectLevels.Adults,
-  ]);
 
   availabilities$ = new BehaviorSubject<Record<AvailabilityId, Availability>>({
     morning: { icon: 'brightness_5_24', message: '7-14h', disabled: false },
@@ -137,39 +129,17 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
       .pipe(
         map(value => ({
           keyword: value.keyword,
-          levels: this.getLevels(value),
+          levels: value.levels,
           availability: value.availability,
           minPrice: value.minPrice,
           maxPrice: value.maxPrice,
           sortBy: value.sortBy,
         })),
+        tap(console.log),
         debounceTime(DEBOUNCE_MS),
         takeUntil(this.destroy$),
       )
       .subscribe();
-  }
-
-  getLevels(value: any): SubjectLevels[] {
-    const levels = [];
-    if (value.preschool) {
-      levels.push(SubjectLevels.Preschool);
-    }
-    if (value.primary) {
-      levels.push(SubjectLevels.Primary);
-    }
-    if (value.secondary) {
-      levels.push(SubjectLevels.Secondary);
-    }
-    if (value.superior) {
-      levels.push(SubjectLevels.Superior);
-    }
-    if (value.university) {
-      levels.push(SubjectLevels.University);
-    }
-    if (value.adults) {
-      levels.push(SubjectLevels.Adults);
-    }
-    return levels;
   }
 
   get keywordFormControl(): FormControl {
@@ -188,32 +158,12 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
     return this.tutorFilterForm.get('maxPrice') as FormControl;
   }
 
-  get preschoolFormControl(): FormControl {
-    return this.tutorFilterForm.get('preschool') as FormControl;
-  }
-
-  get primaryFormControl(): FormControl {
-    return this.tutorFilterForm.get('primary') as FormControl;
-  }
-
-  get secondaryFormControl(): FormControl {
-    return this.tutorFilterForm.get('secondary') as FormControl;
-  }
-
-  get superiorFormControl(): FormControl {
-    return this.tutorFilterForm.get('superior') as FormControl;
-  }
-
-  get universityFormControl(): FormControl {
-    return this.tutorFilterForm.get('university') as FormControl;
-  }
-
-  get adultsFormControl(): FormControl {
-    return this.tutorFilterForm.get('adults') as FormControl;
-  }
-
   get sortByFormControl(): FormControl {
     return this.tutorFilterForm.get('sortBy') as FormControl;
+  }
+
+  get levelsFormControl(): FormControl {
+    return this.tutorFilterForm.get('levels') as FormControl;
   }
 
   onChangeMinPrice(price: number): void {
@@ -232,24 +182,18 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
     this.sortByFormControl.setValue(selectedSortBy);
   }
 
+  onChangeLevels(selectedLevels: SubjectLevels[]): void {
+    this.levelsFormControl.setValue(selectedLevels);
+  }
+
   onResetFilters(): void {
     this.tutorFiltersService.resetFilters();
     this.tutorFilterForm.setValue({
       keyword: '',
-      minPrice: 0,
-      maxPrice: 100,
-      availability: [
-        AvailabilityId.Afternoon,
-        AvailabilityId.Evening,
-        AvailabilityId.Morning,
-        AvailabilityId.Weekends,
-      ],
-      preschool: true,
-      primary: true,
-      secondary: true,
-      superior: true,
-      university: true,
-      adults: true,
+      minPrice: MIN_PRICE,
+      maxPrice: MAX_PRICE,
+      availability: INITIAL_AVAILABILITY,
+      levels: INITIAL_LEVELS,
       sortBy: null,
     });
   }

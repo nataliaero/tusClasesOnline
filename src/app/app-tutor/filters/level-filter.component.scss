@@ -1,0 +1,7 @@
+@use '../../../variables';
+
+.level-filter {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: variables.$spacing;
+}

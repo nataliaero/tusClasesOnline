@@ -77,4 +77,12 @@ $font-size-text: 16px;
     margin-right: variables.$spacing * 2;
     cursor: pointer;
   }
+
+  app-button:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  app-button:active {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
 }
