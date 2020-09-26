@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
@@ -13,7 +13,12 @@ const DEBOUNCE_MS = 200;
 @Component({
   selector: 'app-tutor-filters',
   template: `
-    <form novalidate class="search-tutor-filters" [formGroup]="tutorFilterForm">
+    <form
+      novalidate
+      [class.search-tutor-filters]="true"
+      [class.search-tutor-filters-top]="scroll"
+      [formGroup]="tutorFilterForm"
+    >
       <h4 class="filter-title">{{ msg.lookKeyWord }}</h4>
       <mat-form-field class="keyword-field" appearance="outline">
         <input
@@ -117,6 +122,13 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
   });
 
   private destroy$ = new Subject<void>();
+  scroll = false;
+
+  @HostListener('window:scroll', ['$event'])
+  onScrollEvent($event): void {
+    const sc = $event.target.scrollingElement.scrollTop;
+    this.scroll = sc >= 50;
+  }
 
   ngOnInit(): void {
     this.appBarService.updateStyle(true);

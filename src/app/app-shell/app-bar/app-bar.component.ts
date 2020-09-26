@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { MESSAGES } from '../../../messages';
 import { AppLoginService, AppSignupService } from '../../app-login-signup';
 import { map, take } from 'rxjs/operators';
@@ -34,7 +34,7 @@ import { AppBarService, MobileService, NavigationService } from '../../../servic
   `,
   styleUrls: ['./app-bar.component.scss'],
 })
-export class AppBarComponent implements OnInit {
+export class AppBarComponent {
   constructor(
     private appBarService: AppBarService,
     private appLoginService: AppLoginService,
@@ -62,14 +62,11 @@ export class AppBarComponent implements OnInit {
   tutorMessage$ = this.isMobileOrTablet$.pipe(map(el => (el ? null : this.msg.becomeTutor)));
   userMessage$ = this.isMobileOrTablet$.pipe(map(el => (el ? null : this.msg.signIn)));
 
-  ngOnInit(): void {
-    window.addEventListener('scroll', this.scrolling, true);
-  }
-
-  scrolling = s => {
-    const sc = s.target.scrollingElement.scrollTop;
+  @HostListener('window:scroll', ['$event'])
+  onScrollEvent($event): void {
+    const sc = $event.target.scrollingElement.scrollTop;
     this.scroll = sc >= 10;
-  };
+  }
 
   getAppBarClass(): string {
     return this.scroll || this.appBarService.getStyle() ? 'app-bar scroll-color' : 'app-bar';

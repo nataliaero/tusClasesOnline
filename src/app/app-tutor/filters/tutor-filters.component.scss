@@ -17,11 +17,27 @@ $max-width-availability: 60px;
   background-color: variables.$white;
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 73.5%;
+  max-height: 80%;
 
   @include mixins.mobile {
     display: none;
   }
+}
+
+@keyframes filter-positioning {
+  0% {
+    top: 120px;
+  }
+  100% {
+    top: 50px;
+  }
+}
+
+.search-tutor-filters-top {
+  top: 120px;
+  animation-name: filter-positioning;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
 
 .search-tutor-separator {
@@ -40,6 +56,9 @@ $max-width-availability: 60px;
 
 .keyword-field {
   width: $input-width;
+  ::ng-deep .mat-form-field-infix {
+    padding: variables.$unit 0 variables.$unit 0;
+  }
 }
 
 .search-tutor-availabilities {
