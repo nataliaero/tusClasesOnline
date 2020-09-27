@@ -4,13 +4,11 @@ import { MESSAGES } from '../../messages';
 @Component({
   selector: 'app-footer',
   template: `
-    <div class="footer">
-      <div class="copyright">{{ msg.copyright }}</div>
-      <div class="footer-items">
-        <p>{{ msg.termsOfService }}</p>
-        <p>{{ msg.privacyPolicy }}</p>
-        <p>{{ msg.contact }}</p>
-      </div>
+    <div class="copyright">{{ msg.copyright }}</div>
+    <div class="footer-items">
+      <p>{{ msg.termsOfService }}</p>
+      <p>{{ msg.privacyPolicy }}</p>
+      <p>{{ msg.contact }}</p>
     </div>
   `,
   styleUrls: ['./app-footer.component.scss'],

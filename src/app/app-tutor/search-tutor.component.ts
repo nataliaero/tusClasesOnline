@@ -45,33 +45,31 @@ export class FilterDialogComponent implements OnInit {
 @Component({
   selector: 'app-search-tutor',
   template: `
-    <div class="search-tutor">
-      <div class="search-tutor-title">
-        <h2>{{ msg.findIdealTutor }}</h2>
-        <h2 class="search-tutor-title-middle">-</h2>
-        <h2 class="search-tutor-title-right">{{ msg.filtersTip }}</h2>
-        <div *ngIf="isMobileOrTablet$ | async" (click)="onOpenFiltersDialog()">
-          <mat-icon>menu</mat-icon>
-        </div>
+    <div class="search-tutor-title">
+      <h2>{{ msg.findIdealTutor }}</h2>
+      <h2 class="search-tutor-title-middle">-</h2>
+      <h2 class="search-tutor-title-right">{{ msg.filtersTip }}</h2>
+      <div *ngIf="isMobileOrTablet$ | async" (click)="onOpenFiltersDialog()">
+        <mat-icon>menu</mat-icon>
       </div>
+    </div>
 
-      <div class="search-tutor-body">
-        <div class="search-tutor-cards">
-          <app-tutor-card *ngFor="let tutor of tutors$ | async" [tutor]="tutor"></app-tutor-card>
-        </div>
-        <app-tutor-filters
-          class="search-tutor-filters"
-          (changeFilter)="onFilterChange($event)"
-        ></app-tutor-filters>
+    <div class="search-tutor-body">
+      <div class="search-tutor-cards">
+        <app-tutor-card *ngFor="let tutor of tutors$ | async" [tutor]="tutor"></app-tutor-card>
       </div>
-      <div class="search-tutor-paginator">
-        <mat-paginator
-          [length]="tutorsLength$ | async"
-          [pageSize]="pageSize$ | async"
-          [pageSizeOptions]="[1, 3, 5, 10, 50, 100]"
-          (page)="onPageSelect($event)"
-        ></mat-paginator>
-      </div>
+      <app-tutor-filters
+        class="search-tutor-filters"
+        (changeFilter)="onFilterChange($event)"
+      ></app-tutor-filters>
+    </div>
+    <div class="search-tutor-paginator">
+      <mat-paginator
+        [length]="tutorsLength$ | async"
+        [pageSize]="pageSize$ | async"
+        [pageSizeOptions]="[1, 3, 5, 10, 50, 100]"
+        (page)="onPageSelect($event)"
+      ></mat-paginator>
     </div>
   `,
   styleUrls: ['./search-tutor.component.scss'],
