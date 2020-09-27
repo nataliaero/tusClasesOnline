@@ -25,12 +25,12 @@ export interface Language {
 }
 
 export enum SubjectLevels {
-  Preschool = 'Preescolar',
-  Primary = 'Primaria',
-  Secondary = 'Secundaria',
-  Superior = 'Superior/bachillerato',
-  University = 'Universitarios',
-  Adults = 'Adultos',
+  Preschool = 'preschool',
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Superior = 'superior',
+  University = 'university',
+  Adults = 'adults',
 }
 
 export interface Subject {

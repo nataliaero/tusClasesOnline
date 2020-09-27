@@ -1,12 +1,6 @@
 @use '../../variables';
 @use '../../mixins';
 
-:host {
-  :hover {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-}
-
 .click-user {
   display: flex;
   flex-direction: row;
@@ -34,12 +28,5 @@
     .button-icon {
       margin-right: 0;
     }
-  }
-}
-
-.click-user:active {
-  .button-icon,
-  .button-message {
-    color: darken(variables.$white, 20);
   }
 }

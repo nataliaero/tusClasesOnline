@@ -20,6 +20,13 @@ export interface Availability {
 
 type Nil = undefined | null;
 
+const INITIAL_IDS = [
+  AvailabilityId.Morning,
+  AvailabilityId.Afternoon,
+  AvailabilityId.Evening,
+  AvailabilityId.Weekends,
+];
+
 const INITIAL_AVAILABILITY: Record<AvailabilityId, Availability> = {
   morning: { icon: 'brightness_5_24', message: '7-14h', disabled: false },
   afternoon: { icon: 'brightness_6_24', message: '14-20h', disabled: false },
@@ -50,6 +57,7 @@ const INITIAL_AVAILABILITY: Record<AvailabilityId, Availability> = {
 })
 export class AvailabilityFilterComponent implements OnInit, OnDestroy {
   constructor(private tutorFiltersService: TutorFiltersService) {}
+  @Input() previousAvailabilityIds: AvailabilityId[] = INITIAL_IDS;
   @Output() selectAvailabilities = new EventEmitter<AvailabilityId[]>();
 
   availabilities$ = new BehaviorSubject<Record<AvailabilityId, Availability>>(INITIAL_AVAILABILITY);
@@ -61,6 +69,18 @@ export class AvailabilityFilterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    const selectedAvailabilities: Record<AvailabilityId, Availability> = {
+      morning: { icon: 'brightness_5_24', message: '7-14h', disabled: true },
+      afternoon: { icon: 'brightness_6_24', message: '14-20h', disabled: true },
+      evening: { icon: 'brightness_2_24', message: '20-7h', disabled: true },
+      weekends: { icon: 'event_note', message: 'Fines de semana', disabled: true },
+    };
+
+    for (const id of this.previousAvailabilityIds) {
+      selectedAvailabilities[id].disabled = false;
+    }
+    this.availabilities$.next(selectedAvailabilities);
+
     this.tutorFiltersService.reset$
       .pipe(
         tap(() => this.availabilities$.next(INITIAL_AVAILABILITY)),

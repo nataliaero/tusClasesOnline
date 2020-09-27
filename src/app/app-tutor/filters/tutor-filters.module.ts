@@ -11,10 +11,12 @@ import { AvailabilityFilterComponent } from './availability-filter.component';
 import { SortByFilterComponent } from './sort-by-filter.component';
 import { PriceFilterComponent } from './price-filter.component';
 import { TutorFiltersService } from './tutor-filters.service';
+import { LevelFilterComponent } from './level-filter.component';
 
 @NgModule({
   declarations: [
     AvailabilityFilterComponent,
+    LevelFilterComponent,
     PriceFilterComponent,
     SortByFilterComponent,
     TutorFiltersComponent,

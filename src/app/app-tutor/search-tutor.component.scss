@@ -24,8 +24,14 @@ $font-size-title-mobile: 16px;
   padding: variables.$spacing 0;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+
+  mat-icon {
+    color: variables.$secondary-color;
+  }
+
   @include mixins.tablet {
-    justify-content: center;
+    justify-content: space-between;
     font-size: $font-size-title-mobile;
     padding-bottom: 0;
   }
@@ -58,13 +64,17 @@ $font-size-title-mobile: 16px;
 }
 
 .search-tutor-filters {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 35%;
-
   @include mixins.mobile {
     display: none;
   }
+}
+
+.example-sidenav-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-tutor-filters-dialog {
+  display: flex;
+  justify-content: center;
 }
