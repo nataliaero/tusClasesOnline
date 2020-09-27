@@ -88,3 +88,13 @@ input:focus {
 .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
   color: variables.$primary-color;
 }
+
+.mat-paginator {
+  background-color: transparent;
+
+  .mat-paginator-outer-container .mat-paginator-container {
+    padding: 0;
+    justify-content: flex-start;
+    width: auto;
+  }
+}

@@ -9,7 +9,7 @@ import { TutorFilter } from './types';
 import { SearchTutorService } from './search-tutor.service';
 import { PageEvent } from '@angular/material/paginator';
 
-const INITIAL_PAGE_SIZE = 10;
+const INITIAL_PAGE_SIZE = 1;
 
 @Component({
   selector: 'app-filter-dialog',
@@ -64,11 +64,11 @@ export class FilterDialogComponent implements OnInit {
           (changeFilter)="onFilterChange($event)"
         ></app-tutor-filters>
       </div>
-      <div>
+      <div class="search-tutor-paginator">
         <mat-paginator
           [length]="tutorsLength$ | async"
           [pageSize]="pageSize$ | async"
-          [pageSizeOptions]="[1, 5, 10, 50, 100]"
+          [pageSizeOptions]="[1, 3, 5, 10, 50, 100]"
           (page)="onPageSelect($event)"
         ></mat-paginator>
       </div>
@@ -133,8 +133,9 @@ export class SearchTutorComponent implements OnInit, OnDestroy {
     return this.matDialog
       .open(FilterDialogComponent, {
         width: '100vw',
-        maxWidth: '100vw',
+        maxWidth: '500px',
         height: '100vh',
+        maxHeight: '850px',
         data,
       })
       .afterClosed();

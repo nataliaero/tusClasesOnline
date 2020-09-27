@@ -15,6 +15,9 @@ $max-width-availability: 60px;
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 80%;
+  @include mixins.tablet {
+    max-height: 90%;
+  }
 }
 
 @keyframes filter-positioning {

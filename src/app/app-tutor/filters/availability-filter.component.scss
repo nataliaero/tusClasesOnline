@@ -32,6 +32,8 @@ $max-width-availability: 60px;
 .search-tutor-availability-msg {
   color: variables.$primary-color;
   text-align: center;
+  line-height: 12px;
+  margin-top: variables.$half-unit;
 }
 
 .search-tutor-availability-msg-disabled {

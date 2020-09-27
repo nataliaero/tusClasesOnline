@@ -18,9 +18,9 @@
 .price-filter-slider {
   margin-left: variables.$spacing;
   width: 70%;
-  height: 40px;
+  height: 35px;
 
   ::ng-deep .mat-slider-wrapper {
-    top: 19px;
+    top: 17px;
   }
 }
