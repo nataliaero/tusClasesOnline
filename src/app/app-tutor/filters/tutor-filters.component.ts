@@ -80,6 +80,7 @@ export const INITIAL_FILTERS: TutorFilter = {
       <h4 class="tutor-filter-title">{{ msg.availability }}</h4>
       <app-availability-filter
         class="tutor-filter-availabilities"
+        [previousAvailabilityIds]="value?.availability"
         (selectAvailabilities)="onClickAvailability($event)"
       ></app-availability-filter>
       <div class="tutor-filter-separator"></div>

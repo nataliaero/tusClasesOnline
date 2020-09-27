@@ -8,7 +8,6 @@ export class SearchTutorService {
   selectedFilters$ = new BehaviorSubject<TutorFilter>(INITIAL_FILTERS);
 
   destroy(): void {
-    console.log('COMPLETE');
-    this.selectedFilters$.complete();
+    this.selectedFilters$.next(INITIAL_FILTERS);
   }
 }
