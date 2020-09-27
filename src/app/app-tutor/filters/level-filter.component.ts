@@ -2,16 +2,26 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Input,
   OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 import { SubjectLevels } from '../types';
 import { MESSAGES } from '../../../messages';
 import { takeUntil, tap } from 'rxjs/operators';
 import { TutorFiltersService } from './tutor-filters.service';
+
+const INITIAL_LEVELS = [
+  SubjectLevels.Preschool,
+  SubjectLevels.Primary,
+  SubjectLevels.Secondary,
+  SubjectLevels.Superior,
+  SubjectLevels.University,
+  SubjectLevels.Adults,
+];
 
 @Component({
   selector: 'app-level-filter',
@@ -42,6 +52,7 @@ import { TutorFiltersService } from './tutor-filters.service';
 })
 export class LevelFilterComponent implements OnInit, OnDestroy {
   constructor(private tutorFiltersService: TutorFiltersService) {}
+  @Input() previousLevels: SubjectLevels[] = INITIAL_LEVELS;
   @Output() changeLevels = new EventEmitter<SubjectLevels[]>();
 
   msg = {
@@ -71,29 +82,39 @@ export class LevelFilterComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  ngOnInit(): void {
-    this.tutorFiltersService.reset$
-      .pipe(
-        tap(() =>
-          this.levelFilterForm.setValue({
-            preschool: true,
-            primary: true,
-            secondary: true,
-            superior: true,
-            university: true,
-            adults: true,
-          }),
-        ),
-        takeUntil(this.destroy$),
-      )
-      .subscribe();
+  resetLevels$ = this.tutorFiltersService.reset$.pipe(
+    tap(() =>
+      this.levelFilterForm.setValue({
+        preschool: true,
+        primary: true,
+        secondary: true,
+        superior: true,
+        university: true,
+        adults: true,
+      }),
+    ),
+  );
 
-    this.levelFilterForm.valueChanges
-      .pipe(
-        tap(value => this.changeLevels.emit(this.getLevels(value))),
-        takeUntil(this.destroy$),
-      )
-      .subscribe();
+  levelFormChanges$ = this.levelFilterForm.valueChanges.pipe(
+    tap(value => this.changeLevels.emit(this.getLevels(value))),
+  );
+
+  ngOnInit(): void {
+    const selectedLevels = {
+      preschool: false,
+      primary: false,
+      secondary: false,
+      superior: false,
+      university: false,
+      adults: false,
+    };
+
+    for (const level of this.previousLevels) {
+      selectedLevels[level.toLowerCase()] = true;
+    }
+    this.levelFilterForm.setValue(selectedLevels);
+
+    merge(this.resetLevels$, this.levelFormChanges$).pipe(takeUntil(this.destroy$)).subscribe();
   }
 
   getLevels(value: any): SubjectLevels[] {

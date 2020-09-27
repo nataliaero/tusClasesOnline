@@ -20,6 +20,13 @@ export interface Availability {
 
 type Nil = undefined | null;
 
+const INITIAL_IDS = [
+  AvailabilityId.Morning,
+  AvailabilityId.Afternoon,
+  AvailabilityId.Evening,
+  AvailabilityId.Weekends,
+];
+
 const INITIAL_AVAILABILITY: Record<AvailabilityId, Availability> = {
   morning: { icon: 'brightness_5_24', message: '7-14h', disabled: false },
   afternoon: { icon: 'brightness_6_24', message: '14-20h', disabled: false },
@@ -50,7 +57,7 @@ const INITIAL_AVAILABILITY: Record<AvailabilityId, Availability> = {
 })
 export class AvailabilityFilterComponent implements OnInit, OnDestroy {
   constructor(private tutorFiltersService: TutorFiltersService) {}
-  @Input() previousAvailabilityIds: AvailabilityId[];
+  @Input() previousAvailabilityIds: AvailabilityId[] = INITIAL_IDS;
   @Output() selectAvailabilities = new EventEmitter<AvailabilityId[]>();
 
   availabilities$ = new BehaviorSubject<Record<AvailabilityId, Availability>>(INITIAL_AVAILABILITY);

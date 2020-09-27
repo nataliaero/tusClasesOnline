@@ -85,7 +85,10 @@ export const INITIAL_FILTERS: TutorFilter = {
       ></app-availability-filter>
       <div class="tutor-filter-separator"></div>
       <h4 class="tutor-filter-title">{{ msg.level }}</h4>
-      <app-level-filter (changeLevels)="onChangeLevels($event)"></app-level-filter>
+      <app-level-filter
+        [previousLevels]="value?.levels"
+        (changeLevels)="onChangeLevels($event)"
+      ></app-level-filter>
       <div class="tutor-filter-separator"></div>
       <app-sort-by-filter
         class="tutor-filter-sort-menu"
