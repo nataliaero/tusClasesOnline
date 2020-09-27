@@ -75,3 +75,16 @@ input:focus {
 .mat-slider-min-value:not(.mat-slider-thumb-label-showing) .mat-slider-thumb {
   background-color: white;
 }
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: variables.$primary-color;
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple {
+  color: variables.$primary-color;
+  background-color: variables.$primary-color;
+}
+
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+  color: variables.$primary-color;
+}

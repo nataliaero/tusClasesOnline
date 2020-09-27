@@ -1,16 +1,15 @@
 import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@angular/core';
 import { AppBarService } from 'src/services';
 import { MESSAGES } from '../../messages';
-import { TUTORS } from './tutors';
 import { MobileService } from '../../services';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TutorFilter } from './types';
-import { INITIAL_FILTERS } from './filters/tutor-filters.component';
 import { SearchTutorService } from './search-tutor.service';
+import { PageEvent } from '@angular/material/paginator';
 
-type Nil = undefined | null;
+const INITIAL_PAGE_SIZE = 10;
 
 @Component({
   selector: 'app-filter-dialog',
@@ -58,9 +57,20 @@ export class FilterDialogComponent implements OnInit {
 
       <div class="search-tutor-body">
         <div class="search-tutor-cards">
-          <app-tutor-card *ngFor="let tutor of tutors" [tutor]="tutor"></app-tutor-card>
+          <app-tutor-card *ngFor="let tutor of tutors$ | async" [tutor]="tutor"></app-tutor-card>
         </div>
-        <app-tutor-filters class="search-tutor-filters"></app-tutor-filters>
+        <app-tutor-filters
+          class="search-tutor-filters"
+          (changeFilter)="onFilterChange($event)"
+        ></app-tutor-filters>
+      </div>
+      <div>
+        <mat-paginator
+          [length]="tutorsLength$ | async"
+          [pageSize]="pageSize$ | async"
+          [pageSizeOptions]="[1, 5, 10, 50, 100]"
+          (page)="onPageSelect($event)"
+        ></mat-paginator>
       </div>
     </div>
   `,
@@ -77,7 +87,23 @@ export class SearchTutorComponent implements OnInit, OnDestroy {
 
   isMobileOrTablet$: Observable<boolean> = this.mobileService.isMobileOrTablet$;
   isMobile$: Observable<boolean> = this.mobileService.isMobile$;
-  tutors = TUTORS;
+
+  pageSize$ = new BehaviorSubject<number>(INITIAL_PAGE_SIZE);
+  pageIndex$ = new BehaviorSubject<number>(0);
+
+  tutors$ = combineLatest([
+    this.pageSize$,
+    this.pageIndex$,
+    this.searchTutorService.selectedFilters$,
+  ]).pipe(
+    switchMap(([pageSize, pageIndex, filters]) => {
+      return this.searchTutorService.getTutors(pageSize, pageIndex, filters);
+    }),
+  );
+
+  tutorsLength$ = this.searchTutorService.selectedFilters$.pipe(
+    switchMap(selectedFilters => this.searchTutorService.getTutorsLength(selectedFilters)),
+  );
 
   msg = {
     findIdealTutor: MESSAGES['searchTutor.findIdealTutor'],
@@ -92,6 +118,15 @@ export class SearchTutorComponent implements OnInit, OnDestroy {
     return this.openFilterDialog(this.searchTutorService.selectedFilters$.value)
       .pipe(take(1))
       .subscribe();
+  }
+
+  onFilterChange(selectedFilters: TutorFilter): void {
+    this.searchTutorService.selectedFilters$.next(selectedFilters);
+  }
+
+  onPageSelect(pageEvent: PageEvent): void {
+    this.pageSize$.next(pageEvent.pageSize);
+    this.pageIndex$.next(pageEvent.pageIndex);
   }
 
   private openFilterDialog(data: TutorFilter): Observable<void> {
