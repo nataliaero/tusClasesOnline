@@ -1,14 +1,11 @@
 @use '../../../variables';
 @use '../../../mixins';
 
-$input-width: 300px;
+$filters-width: 300px;
+$filters-width-mobile: 200px;
 $max-width-availability: 60px;
 
-.search-tutor-title {
-  margin-top: variables.$spacing;
-}
-
-.search-tutor-filters {
+.tutor-filter {
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -18,10 +15,6 @@ $max-width-availability: 60px;
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 80%;
-
-  @include mixins.mobile {
-    display: none;
-  }
 }
 
 @keyframes filter-positioning {
@@ -33,16 +26,16 @@ $max-width-availability: 60px;
   }
 }
 
-.search-tutor-filters-top {
+.tutor-filter-top {
   top: 120px;
   animation-name: filter-positioning;
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
 
-.search-tutor-separator {
+.tutor-filter-separator {
   height: 0.1px;
-  width: $input-width;
+  width: $filters-width;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,38 +43,50 @@ $max-width-availability: 60px;
   border: 0.1px solid #e2e2e2;
 }
 
-.filter-title {
+.tutor-filter-title {
   margin: variables.$spacing 0 variables.$unit 0;
 }
 
 .keyword-field {
-  width: $input-width;
+  width: $filters-width;
   ::ng-deep .mat-form-field-infix {
     padding: variables.$unit 0;
   }
+  @include mixins.mobile {
+    width: $filters-width-mobile;
+  }
 }
 
-.search-tutor-availabilities {
+.tutor-filter-availabilities {
   margin: variables.$unit 0 variables.$spacing 0;
-  width: $input-width;
+  width: $filters-width;
+  @include mixins.mobile {
+    width: $filters-width-mobile;
+  }
 }
 
-.search-tutor-price {
+.tutor-filter-price {
   margin-bottom: variables.$spacing;
-  width: $input-width;
+  width: $filters-width;
+  @include mixins.mobile {
+    width: $filters-width-mobile;
+  }
 }
 
-.search-tutor-sort-menu {
-  width: $input-width;
+.tutor-filter-sort-menu {
+  width: $filters-width;
   margin: variables.$spacing 0;
+  @include mixins.mobile {
+    width: $filters-width-mobile;
+  }
 }
 
-.search-tutor-reset {
+.tutor-filter-reset {
   color: variables.$red;
   margin: variables.$spacing 0;
   cursor: pointer;
 }
 
-.search-tutor-reset:active {
+.tutor-filter-reset:active {
   color: variables.$red-dark;
 }

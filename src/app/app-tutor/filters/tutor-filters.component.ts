@@ -1,12 +1,23 @@
-import { ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { debounceTime, map, takeUntil } from 'rxjs/operators';
 import { AppBarService } from '../../../services';
-import { AvailabilityId, SortByType, SubjectLevels } from '../types';
+import { AvailabilityId, SortByType, SubjectLevels, TutorFilter } from '../types';
 import { Availability } from './availability-filter.component';
 import { TutorFiltersService } from './tutor-filters.service';
 import { MESSAGES } from '../../../messages';
+
+type Nil = undefined | null;
 
 const DEBOUNCE_MS = 200;
 const MIN_PRICE = 0;
@@ -27,16 +38,25 @@ const INITIAL_LEVELS: SubjectLevels[] = [
   SubjectLevels.Adults,
 ];
 
+export const INITIAL_FILTERS: TutorFilter = {
+  keyword: '',
+  minPrice: MIN_PRICE,
+  maxPrice: MAX_PRICE,
+  availability: INITIAL_AVAILABILITY,
+  levels: INITIAL_LEVELS,
+  sortBy: null,
+};
+
 @Component({
   selector: 'app-tutor-filters',
   template: `
     <form
       novalidate
-      [class.search-tutor-filters]="true"
-      [class.search-tutor-filters-top]="scroll"
+      [class.tutor-filter]="true"
+      [class.tutor-filter-top]="scroll"
       [formGroup]="tutorFilterForm"
     >
-      <h4 class="filter-title">{{ msg.lookKeyWord }}</h4>
+      <h4 class="tutor-filter-title">{{ msg.lookKeyWord }}</h4>
       <mat-form-field class="keyword-field" appearance="outline">
         <input
           class="input"
@@ -47,35 +67,40 @@ const INITIAL_LEVELS: SubjectLevels[] = [
           tabIndex="-1"
         />
       </mat-form-field>
-      <div class="search-tutor-separator"></div>
-      <h4 class="filter-title">{{ msg.priceRange }}</h4>
+      <div class="tutor-filter-separator"></div>
+      <h4 class="tutor-filter-title">{{ msg.priceRange }}</h4>
       <app-price-filter
-        class="search-tutor-price"
+        class="tutor-filter-price"
+        [previousMinPrice]="value?.minPrice"
+        [previousMaxPrice]="value?.maxPrice"
         (changePriceMin)="onChangeMinPrice($event)"
         (changePriceMax)="onChangeMaxPrice($event)"
       ></app-price-filter>
-      <div class="search-tutor-separator"></div>
-      <h4 class="filter-title">{{ msg.availability }}</h4>
+      <div class="tutor-filter-separator"></div>
+      <h4 class="tutor-filter-title">{{ msg.availability }}</h4>
       <app-availability-filter
-        class="search-tutor-availabilities"
+        class="tutor-filter-availabilities"
         (selectAvailabilities)="onClickAvailability($event)"
       ></app-availability-filter>
-      <div class="search-tutor-separator"></div>
-      <h4 class="filter-title">{{ msg.level }}</h4>
+      <div class="tutor-filter-separator"></div>
+      <h4 class="tutor-filter-title">{{ msg.level }}</h4>
       <app-level-filter (changeLevels)="onChangeLevels($event)"></app-level-filter>
-      <div class="search-tutor-separator"></div>
+      <div class="tutor-filter-separator"></div>
       <app-sort-by-filter
-        class="search-tutor-sort-menu"
+        class="tutor-filter-sort-menu"
         (selectSortBy)="onClickSortByMenu($event)"
       ></app-sort-by-filter>
-      <div class="search-tutor-separator"></div>
-      <h4 class="search-tutor-reset" (click)="onResetFilters()">{{ msg.resetFilter }}</h4>
+      <div class="tutor-filter-separator"></div>
+      <h4 class="tutor-filter-reset" (click)="onResetFilters()">{{ msg.resetFilter }}</h4>
     </form>
   `,
   styleUrls: ['./tutor-filters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TutorFiltersComponent implements OnInit, OnDestroy {
+  @Input() value: TutorFilter = INITIAL_FILTERS;
+  @Output() changeFilter = new EventEmitter<TutorFilter>();
+
   constructor(
     private appBarService: AppBarService,
     private tutorFiltersService: TutorFiltersService,
@@ -117,17 +142,24 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.appBarService.updateStyle(true);
+    this.changeFilter.emit(this.value || INITIAL_FILTERS);
+
+    if (this.value) {
+      this.tutorFilterForm.setValue(this.value);
+    }
 
     this.tutorFilterForm.valueChanges
       .pipe(
-        map(value => ({
-          keyword: value.keyword,
-          levels: value.levels,
-          availability: value.availability,
-          minPrice: value.minPrice,
-          maxPrice: value.maxPrice,
-          sortBy: value.sortBy,
-        })),
+        map(value =>
+          this.changeFilter.emit({
+            keyword: value.keyword,
+            levels: value.levels,
+            availability: value.availability,
+            minPrice: value.minPrice,
+            maxPrice: value.maxPrice,
+            sortBy: value.sortBy,
+          }),
+        ),
         debounceTime(DEBOUNCE_MS),
         takeUntil(this.destroy$),
       )
@@ -180,14 +212,9 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
 
   onResetFilters(): void {
     this.tutorFiltersService.resetFilters();
-    this.tutorFilterForm.setValue({
-      keyword: '',
-      minPrice: MIN_PRICE,
-      maxPrice: MAX_PRICE,
-      availability: INITIAL_AVAILABILITY,
-      levels: INITIAL_LEVELS,
-      sortBy: null,
-    });
+    this.tutorFilterForm.setValue(INITIAL_FILTERS);
+    this.changeFilter.emit(INITIAL_FILTERS);
+    this.value = INITIAL_FILTERS;
   }
 
   ngOnDestroy(): void {

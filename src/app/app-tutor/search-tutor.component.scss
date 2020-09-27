@@ -64,12 +64,6 @@ $font-size-title-mobile: 16px;
 }
 
 .search-tutor-filters {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 35%;
-
   @include mixins.mobile {
     display: none;
   }
@@ -78,4 +72,9 @@ $font-size-title-mobile: 16px;
 .example-sidenav-container {
   display: flex;
   flex-direction: column;
+}
+
+.search-tutor-filters-dialog {
+  display: flex;
+  justify-content: center;
 }

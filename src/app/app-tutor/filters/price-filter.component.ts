@@ -2,15 +2,17 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Input,
   OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
 import { MESSAGES } from '../../../messages';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { combineLatest, Observable, Subject, BehaviorSubject } from 'rxjs';
 import { map, startWith, takeUntil, tap } from 'rxjs/operators';
 import { MatSliderChange } from '@angular/material/slider';
 import { TutorFiltersService } from './tutor-filters.service';
+import { isNil } from 'lodash-es';
 
 @Component({
   selector: 'app-price-filter',
@@ -19,6 +21,7 @@ import { TutorFiltersService } from './tutor-filters.service';
       <h4>{{ msg.minPrice }}</h4>
       <mat-slider
         class="price-filter-slider"
+        tabIndex="-1"
         [min]="minPrice"
         [max]="maxPrice"
         step="1"
@@ -31,6 +34,7 @@ import { TutorFiltersService } from './tutor-filters.service';
       <h4>{{ msg.maxPrice }}</h4>
       <mat-slider
         class="price-filter-slider"
+        tabIndex="-1"
         [min]="minPrice"
         [max]="maxPrice"
         step="1"
@@ -47,14 +51,16 @@ import { TutorFiltersService } from './tutor-filters.service';
 })
 export class PriceFilterComponent implements OnInit, OnDestroy {
   constructor(private tutorFiltersService: TutorFiltersService) {}
+  @Input() previousMinPrice = 0;
+  @Input() previousMaxPrice = 100;
   @Output() changePriceMin = new EventEmitter<number>();
   @Output() changePriceMax = new EventEmitter<number>();
 
   minPrice = 0;
   maxPrice = 100;
 
-  selectedMinPrice$ = new BehaviorSubject<number>(this.minPrice);
-  selectedMaxPrice$ = new BehaviorSubject<number>(this.maxPrice);
+  selectedMinPrice$ = new BehaviorSubject<number>(0);
+  selectedMaxPrice$ = new BehaviorSubject<number>(100);
 
   priceRange$: Observable<string> = combineLatest([
     this.selectedMinPrice$,
@@ -63,7 +69,7 @@ export class PriceFilterComponent implements OnInit, OnDestroy {
     map(
       ([selectedMinPrice, selectedMaxPrice]) => `${selectedMinPrice}€/h - ${selectedMaxPrice}€/h`,
     ),
-    startWith(`${this.minPrice}€/h - ${this.maxPrice}€/h`),
+    startWith(`${this.previousMinPrice}€/h - ${this.previousMaxPrice}€/h`),
   );
 
   msg = {
@@ -74,6 +80,9 @@ export class PriceFilterComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
+    this.selectedMinPrice$.next(isNil(this.previousMinPrice) ? 0 : this.previousMinPrice);
+    this.selectedMaxPrice$.next(isNil(this.previousMaxPrice) ? 100 : this.previousMaxPrice);
+
     this.tutorFiltersService.reset$
       .pipe(
         tap(() => {
