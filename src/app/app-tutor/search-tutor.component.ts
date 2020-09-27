@@ -22,7 +22,7 @@ const INITIAL_PAGE_SIZE = 1;
       ></app-tutor-filters>
     </app-dialog>
   `,
-  styleUrls: ['./search-tutor.component.scss'],
+  styleUrls: ['./search-tutor-filter-dialog.component.scss'],
 })
 export class FilterDialogComponent implements OnInit {
   constructor(
