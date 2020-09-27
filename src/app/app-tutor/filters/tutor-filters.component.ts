@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, map, takeUntil } from 'rxjs/operators';
 import { AppBarService } from '../../../services';
 import { AvailabilityId, SortByType, SubjectLevels } from '../types';
 import { Availability } from './availability-filter.component';
@@ -86,14 +86,7 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
     lookKeyWordPlaceholder: MESSAGES['searchTutor.lookKeyWordPlaceholder'],
     priceRange: MESSAGES['searchTutor.priceRange'],
     availability: MESSAGES['searchTutor.availability'],
-    weekends: MESSAGES['searchTutor.weekends'],
     level: MESSAGES['searchTutor.level'],
-    preschool: MESSAGES['searchTutor.preschool'],
-    primary: MESSAGES['searchTutor.primary'],
-    secondary: MESSAGES['searchTutor.secondary'],
-    superior: MESSAGES['searchTutor.superior'],
-    university: MESSAGES['searchTutor.university'],
-    adults: MESSAGES['searchTutor.adults'],
     resetFilter: MESSAGES['searchTutor.resetFilter'],
   };
 
@@ -135,7 +128,6 @@ export class TutorFiltersComponent implements OnInit, OnDestroy {
           maxPrice: value.maxPrice,
           sortBy: value.sortBy,
         })),
-        tap(console.log),
         debounceTime(DEBOUNCE_MS),
         takeUntil(this.destroy$),
       )
