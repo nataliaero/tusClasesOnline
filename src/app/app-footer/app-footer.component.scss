@@ -23,18 +23,21 @@
 .footer-items {
   display: flex;
 
-  @include mixins.mobile {
-    flex-direction: column;
-  }
-
   p {
     color: variables.$white;
-    padding: 0;
+    padding: 0 variables.$unit;
 
     cursor: pointer;
   }
 
   :hover {
     color: variables.$primary-color;
+  }
+
+  @include mixins.mobile {
+    flex-direction: column;
+    p {
+      padding: 0;
+    }
   }
 }
