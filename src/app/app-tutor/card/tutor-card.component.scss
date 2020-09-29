@@ -1,9 +1,9 @@
-@use '../../variables';
-@use '../../mixins';
+@use '../../../variables';
+@use '../../../mixins';
 
 $card-height: 224px;
 
-.tutor-card {
+:host {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -24,6 +24,7 @@ $card-height: 224px;
   background-color: variables.$white;
   margin: variables.$spacing 0;
   width: 100%;
+
   @include mixins.tablet {
     height: auto;
     margin: variables.$unit 0;
@@ -97,6 +98,7 @@ $card-height: 224px;
 
 .tutor-card-image {
   width: 100%;
+  cursor: pointer;
 }
 
 .tutor-card-name {
