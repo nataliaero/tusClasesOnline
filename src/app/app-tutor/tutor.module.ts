@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AppDialogModule } from '../app-dialog';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SearchTutorService } from './search-tutor.service';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SearchTutorService } from './search-tutor.service';
     AppDialogModule,
     CommonModule,
     MatDialogModule,
+    MatPaginatorModule,
     MatIconModule,
     TutorFiltersModule,
     TutorRoutingModule,
