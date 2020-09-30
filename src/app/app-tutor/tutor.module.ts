@@ -11,7 +11,7 @@ import { AppDialogModule } from '../app-dialog';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SearchTutorService } from './search-tutor.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { TutorDashboardComponent } from './tutor-dashboard.component';
+import { TutorDetailsComponent } from './tutor-details.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { TutorDashboardComponent } from './tutor-dashboard.component';
     SearchTutorComponent,
     TutorCardComponent,
     TutorCardActionsComponent,
-    TutorDashboardComponent,
+    TutorDetailsComponent,
   ],
   imports: [
     AppButtonModule,

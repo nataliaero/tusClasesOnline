@@ -52,6 +52,7 @@ export const enum AvailabilityId {
 }
 
 export interface Tutor {
+  id: string;
   name: string;
   firstSurname: string;
   secondSurname: string;

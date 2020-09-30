@@ -19,8 +19,8 @@ export class NavigationService {
     this.router.navigate(['/tutor/search-tutor']);
   }
 
-  goToTutorDashboard(): void {
-    this.router.navigate(['/tutor/tutor-dashboard']);
+  goToTutorDetails(id: string): void {
+    this.router.navigate([`/tutor/tutor-details/${id}`]);
   }
 
   goToRoot(): void {

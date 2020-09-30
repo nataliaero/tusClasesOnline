@@ -12,7 +12,12 @@ const MAX_LENGTH_DESCRIPTION = 150;
   template: `
     <div class="tutor-main">
       <div class="tutor-card-left">
-        <img class="tutor-card-image" (click)="onClickCard()" [src]="tutor.img" alt="Tutor" />
+        <img
+          class="tutor-card-image"
+          (click)="onClickCard(tutor.id)"
+          [src]="tutor.img"
+          alt="Tutor"
+        />
       </div>
 
       <div class="tutor-card-info">
@@ -23,7 +28,7 @@ const MAX_LENGTH_DESCRIPTION = 150;
           </div>
           <h4>{{ tutor.descriptionShort }}</h4>
           <p class="tutor-card-long">{{ getTutorLongDescription(tutor.descriptionLong) }}</p>
-          <p class="tutor-card-read-more" (click)="onClickCard()">{{ msg.readMore }}</p>
+          <p class="tutor-card-read-more" (click)="onClickCard(tutor.id)">{{ msg.readMore }}</p>
         </div>
 
         <div class="tutor-card-right">
@@ -87,7 +92,7 @@ export class TutorCardComponent {
     return `${longDescription.substr(0, MAX_LENGTH_DESCRIPTION)}...`;
   }
 
-  onClickCard(): void {
-    this.navigationService.goToTutorDashboard();
+  onClickCard(id: string): void {
+    this.navigationService.goToTutorDetails(id);
   }
 }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SearchTutorComponent } from './search-tutor.component';
-import { TutorDashboardComponent } from './tutor-dashboard.component';
+import { TutorDetailsComponent } from './tutor-details.component';
 
 const routes: Routes = [
   {
@@ -17,8 +17,8 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'tutor-dashboard',
-        component: TutorDashboardComponent,
+        path: 'tutor-details/:id',
+        component: TutorDetailsComponent,
       },
     ],
   },
