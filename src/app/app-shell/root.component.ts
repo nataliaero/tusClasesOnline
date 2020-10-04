@@ -9,7 +9,7 @@ import { NavigationService } from '../../services';
 export class RootComponent implements OnInit {
   constructor(private navigationService: NavigationService, private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.navigationService.goToHome();
   }
 }

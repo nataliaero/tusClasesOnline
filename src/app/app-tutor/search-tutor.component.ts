@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnDestroy, OnInit } from '@angular/core';
 import { AppBarService } from 'src/services';
 import { MESSAGES } from '../../messages';
 import { MobileService } from '../../services';

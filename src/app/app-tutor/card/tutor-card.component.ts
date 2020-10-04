@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { MESSAGES } from '../../../messages';
 import { Tutor } from '../types';
 import { MobileService, NavigationService } from '../../../services';
-import { map } from 'rxjs/operators';
 
 const MAX_LENGTH_DESCRIPTION = 150;
 
