@@ -1,0 +1,23 @@
+@use '../../../variables';
+
+$max-width-content: 1050px;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  padding-top: variables.$spacing * 3;
+  width: 100%;
+  background-color: transparent;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.tutor-details-content {
+  background-color: variables.$grey-xxlight;
+}
+
+.tutor-details-content-main {
+  background-color: variables.$white;
+  max-width: $max-width-content;
+}

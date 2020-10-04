@@ -68,7 +68,7 @@ export class TutorCardComponent {
     filtersTip: MESSAGES['searchTutor.filtersTip'],
     readMore: MESSAGES['searchTutor.readMore'],
     fee: MESSAGES['searchTutor.fee'],
-    ratings: MESSAGES['searchTutor.ratings'],
+    ratings: MESSAGES['tutor.ratings'],
     whatToLearn: MESSAGES['searchTutor.whatToLearn'],
     lookKeyWord: MESSAGES['searchTutor.lookKeyWord'],
     lookKeyWordPlaceholder: MESSAGES['searchTutor.lookKeyWordPlaceholder'],

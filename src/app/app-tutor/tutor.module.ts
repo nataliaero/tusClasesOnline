@@ -9,7 +9,7 @@ import { AppButtonModule } from '../app-button';
 import { MatIconModule } from '@angular/material/icon';
 import { AppDialogModule } from '../app-dialog';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SearchTutorService } from './search-tutor.service';
+import { TutorService } from './tutor.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { TutorDetailsComponent } from './tutor-details.component';
 
@@ -37,7 +37,7 @@ import { TutorDetailsComponent } from './tutor-details.component';
       provide: MatDialogRef,
       useValue: {},
     },
-    SearchTutorService,
+    TutorService,
   ],
 })
 export class TutorModule {}

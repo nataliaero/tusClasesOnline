@@ -1,0 +1,103 @@
+@use '../../../variables';
+
+$max-width-content: 1050px;
+$min-width-content: 250px;
+$image-height: 200px;
+$button-width: 260px;
+
+:host {
+  background-color: variables.$white;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.tutor-details-header-content {
+  display: flex;
+  flex-direction: row;
+  max-width: $max-width-content;
+  justify-content: space-between;
+  align-items: center;
+  padding: variables.$spacing * 3 0;
+  width: 100%;
+}
+
+.tutor-details-header-left {
+  display: flex;
+  flex-direction: row;
+}
+
+.tutor-details-header-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: $min-width-content;
+}
+
+.tutor-details-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tutor-details-rate {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  mat-icon {
+    color: variables.$yellow;
+  }
+}
+
+.tutor-details-header-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: $max-width-content;
+  margin-bottom: variables.$spacing * 2;
+  width: 100%;
+
+  app-button:first-child {
+    width: $button-width;
+    background-color: variables.$primary-color;
+    padding: variables.$spacing;
+  }
+
+  app-button:nth-child(2),
+  app-button:nth-child(3) {
+    width: $button-width;
+    border: 1px solid variables.$primary-color;
+    padding: variables.$spacing;
+  }
+}
+
+.tutor-details-image {
+  margin-right: variables.$spacing;
+  height: $image-height;
+}
+
+.tutor-details-video {
+  outline: 0px;
+}
+
+.tutor-details-name {
+  font-size: 28px;
+}
+
+.tutor-details-short-description {
+  margin-bottom: variables.$spacing;
+}
+
+.tutor-details-header-item {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: variables.$unit;
+
+  mat-icon {
+    margin-right: variables.$unit;
+  }
+}

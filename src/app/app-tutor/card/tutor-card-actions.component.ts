@@ -37,8 +37,8 @@ export class TutorCardActionsComponent {
   sendMsgColor = '#3bb3bd';
 
   msg = {
-    bookAClass: MESSAGES['searchTutor.bookAClass'],
-    sendMessage: MESSAGES['searchTutor.sendMessage'],
+    bookAClass: MESSAGES['button.bookAClass'],
+    sendMessage: MESSAGES['button.sendMessage'],
   };
 
   private isMobileOrTablet$: Observable<boolean> = this.mobileService.isMobileOrTablet$;

@@ -5,14 +5,12 @@ type Nil = undefined | null;
 @Component({
   selector: 'app-button',
   template: `
-    <div class="click-user">
-      <mat-icon *ngIf="icon" class="button-icon" [style.color]="color" [style.fontSize]="iconSize">
-        {{ icon }}
-      </mat-icon>
-      <p *ngIf="message" class="button-message" [style.color]="color" [style.fontSize]="fontSize">
-        {{ message }}
-      </p>
-    </div>
+    <mat-icon *ngIf="icon" class="button-icon" [style.color]="color" [style.fontSize]="iconSize">
+      {{ icon }}
+    </mat-icon>
+    <p *ngIf="message" class="button-message" [style.color]="color" [style.fontSize]="fontSize">
+      {{ message }}
+    </p>
   `,
   styleUrls: ['./app-button.component.scss'],
 })

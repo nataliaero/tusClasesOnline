@@ -6,7 +6,7 @@ import { TUTORS } from './tutors';
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class SearchTutorService {
+export class TutorService {
   selectedFilters$ = new BehaviorSubject<TutorFilter>(INITIAL_FILTERS);
 
   getTutorsLength(filters: TutorFilter): Observable<number> {

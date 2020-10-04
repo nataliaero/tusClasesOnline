@@ -1,32 +1,30 @@
 @use '../../variables';
 @use '../../mixins';
 
-.click-user {
+:host {
   display: flex;
   flex-direction: row;
-  justify-items: center;
+  justify-content: center;
   align-items: center;
   background-color: transparent;
   cursor: pointer;
   :hover {
     background-color: transparent;
   }
+}
 
-  .button-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: variables.$half-unit;
-  }
-
-  .button-message {
-    display: inline;
-    font-family: variables.$primary-font;
-  }
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: variables.$half-unit;
 
   @include mixins.tablet {
-    .button-icon {
-      margin-right: 0;
-    }
+    margin-right: 0;
   }
+}
+
+.button-message {
+  display: inline;
+  font-family: variables.$primary-font;
 }
