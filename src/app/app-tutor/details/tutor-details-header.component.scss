@@ -1,9 +1,13 @@
 @use '../../../variables';
+@use '../../../mixins';
 
 $max-width-content: 1050px;
 $min-width-content: 250px;
+$min-width-content-mobile: 175px;
 $image-height: 200px;
+$image-height-mobile: 150px;
 $button-width: 260px;
+$button-width-tablet: 200px;
 
 :host {
   background-color: variables.$white;
@@ -12,6 +16,7 @@ $button-width: 260px;
   width: 100%;
   justify-content: center;
   align-items: center;
+  padding: variables.$spacing * 3 variables.$unit variables.$spacing * 2 variables.$unit;
 }
 
 .tutor-details-header-content {
@@ -20,13 +25,28 @@ $button-width: 260px;
   max-width: $max-width-content;
   justify-content: space-between;
   align-items: center;
-  padding: variables.$spacing * 3 0;
   width: 100%;
+
+  @include mixins.tablet {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .tutor-details-header-left {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  margin-right: variables.$spacing;
+
+  @include mixins.tablet {
+    margin: 0;
+  }
+
+  @include mixins.mobile {
+    flex-direction: column;
+  }
 }
 
 .tutor-details-header-main {
@@ -34,6 +54,10 @@ $button-width: 260px;
   flex-direction: column;
   justify-content: space-between;
   min-width: $min-width-content;
+
+  @include mixins.mobile {
+    min-width: $min-width-content-mobile;
+  }
 }
 
 .tutor-details-title {
@@ -41,6 +65,10 @@ $button-width: 260px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  @include mixins.mobile {
+    justify-content: flex-start;
+  }
 }
 
 .tutor-details-rate {
@@ -58,13 +86,21 @@ $button-width: 260px;
   flex-direction: row;
   justify-content: space-between;
   max-width: $max-width-content;
-  margin-bottom: variables.$spacing * 2;
+  margin-top: variables.$spacing * 4;
   width: 100%;
 
   app-button:first-child {
     width: $button-width;
     background-color: variables.$primary-color;
     padding: variables.$spacing;
+    @include mixins.tablet {
+      width: $button-width-tablet;
+    }
+
+    @include mixins.mobile {
+      width: 100%;
+      margin: 0 variables.$unit;
+    }
   }
 
   app-button:nth-child(2),
@@ -72,24 +108,58 @@ $button-width: 260px;
     width: $button-width;
     border: 1px solid variables.$primary-color;
     padding: variables.$spacing;
+
+    @include mixins.tablet {
+      width: $button-width-tablet;
+    }
+
+    @include mixins.mobile {
+      width: 100%;
+      margin: 0 variables.$unit;
+    }
   }
 }
 
 .tutor-details-image {
   margin-right: variables.$spacing;
   height: $image-height;
+
+  @include mixins.mobile {
+    height: $image-height-mobile;
+    margin-bottom: variables.$spacing;
+  }
 }
 
 .tutor-details-video {
   outline: 0px;
+
+  @include mixins.tablet {
+    margin-top: variables.$spacing * 3;
+  }
+
+  @include mixins.mobile {
+    margin-top: variables.$spacing;
+    width: fit-content;
+  }
 }
 
 .tutor-details-name {
   font-size: 28px;
+
+  @include mixins.tablet {
+    font-size: 22px;
+  }
+
+  @include mixins.mobile {
+    margin-right: variables.$spacing;
+  }
 }
 
 .tutor-details-short-description {
   margin-bottom: variables.$spacing;
+  @include mixins.tablet {
+    font-size: 18px;
+  }
 }
 
 .tutor-details-header-item {

@@ -57,12 +57,14 @@ export interface Tutor {
   firstSurname: string;
   secondSurname: string;
   img: string;
+  video: string;
   country: string;
   descriptionShort: string;
   descriptionLong: string;
   rate: number;
   fee: number;
-  numberRatings: number;
+  ratingsCount: number;
+  classCount: number;
   speaks: Language[];
   subjects: Subject[];
   comments: Comment[];

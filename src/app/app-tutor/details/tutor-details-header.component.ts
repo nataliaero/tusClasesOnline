@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { MESSAGES } from '../../../messages';
 import { Tutor } from '../types';
+import { MobileService } from '../../../services';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tutor-details-header',
@@ -19,7 +22,7 @@ import { Tutor } from '../types';
             </div>
             <h2 class="tutor-details-short-description">{{ tutor.descriptionShort }}</h2>
             <div class="tutor-details-header-item">
-              <mat-icon>{{ ratingsIcon }}</mat-icon>
+              <mat-icon *ngIf="!isMobile$ | async">{{ ratingsIcon }}</mat-icon>
               <h3>{{ tutor.classCount }} {{ msg.numberClasses }}</h3>
             </div>
             <div class="tutor-details-header-item">
@@ -46,21 +49,21 @@ import { Tutor } from '../types';
           [icon]="bookClassIcon"
           [fontSize]="buttonFontSize"
           [iconSize]="buttonIconSize"
-          [message]="msg.bookAClass"
+          [message]="bookClassMessage$ | async"
         ></app-button>
         <app-button
           [color]="sendMsgColor"
           [icon]="sendMsgIcon"
           [fontSize]="buttonFontSize"
           [iconSize]="buttonIconSize"
-          [message]="msg.sendMessage"
+          [message]="sendMessage$ | async"
         ></app-button>
         <app-button
           [color]="sendMsgColor"
           [icon]="favoriteIcon"
           [fontSize]="buttonFontSize"
           [iconSize]="buttonIconSize"
-          [message]="msg.addFavorites"
+          [message]="favoriteMessage$ | async"
         ></app-button>
       </div>
     </ng-container>
@@ -68,6 +71,8 @@ import { Tutor } from '../types';
   styleUrls: ['./tutor-details-header.component.scss'],
 })
 export class TutorDetailsComponentHeader {
+  constructor(private mobileService: MobileService) {}
+
   @Input() tutor: Tutor;
 
   rateIcon = 'star';
@@ -89,6 +94,14 @@ export class TutorDetailsComponentHeader {
     ratings: MESSAGES['tutor.ratings'],
     videoNotSupported: MESSAGES['basic.videoNotSupported'],
   };
+
+  isMobile$: Observable<boolean> = this.mobileService.isMobile$;
+
+  bookClassMessage$ = this.isMobile$.pipe(map(isMobile => (isMobile ? null : this.msg.bookAClass)));
+  sendMessage$ = this.isMobile$.pipe(map(isMobile => (isMobile ? null : this.msg.sendMessage)));
+  favoriteMessage$ = this.isMobile$.pipe(
+    map(isMobile => (isMobile ? null : this.msg.addFavorites)),
+  );
 
   getTutorName(name: string, firstSurname: string): string {
     return `${name} ${firstSurname[0]}.`;
