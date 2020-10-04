@@ -19,6 +19,10 @@ export class NavigationService {
     this.router.navigate(['/tutor/search-tutor']);
   }
 
+  goToTutorDetails(id: string): void {
+    this.router.navigate([`/tutor/tutor-details/${id}`]);
+  }
+
   goToRoot(): void {
     this.router.navigate(['/']);
   }

@@ -21,6 +21,10 @@ export class SearchTutorService {
     return of(subset);
   }
 
+  getTutor(id: string): Observable<Tutor> {
+    return of(TUTORS.find(el => el.id === id));
+  }
+
   destroy(): void {
     this.selectedFilters$.next(INITIAL_FILTERS);
   }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MESSAGES } from '../../messages';
-import { MobileService } from '../../services';
+import { MESSAGES } from '../../../messages';
+import { MobileService } from '../../../services';
 import { map } from 'rxjs/operators';
 
 @Component({
