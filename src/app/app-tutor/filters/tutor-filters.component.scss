@@ -43,7 +43,7 @@ $max-width-availability: 60px;
   justify-content: center;
   align-items: center;
   margin: 0 variables.$spacing;
-  border: 0.1px solid #e2e2e2;
+  border: 0.1px solid variables.$grey-xxlight;
 }
 
 .tutor-filter-title {
@@ -85,11 +85,11 @@ $max-width-availability: 60px;
 }
 
 .tutor-filter-reset {
-  color: variables.$red;
+  color: variables.$terciary-color;
   margin: variables.$spacing 0;
   cursor: pointer;
 }
 
 .tutor-filter-reset:active {
-  color: variables.$red-dark;
+  color: variables.$terciary-color-dark;
 }

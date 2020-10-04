@@ -11,7 +11,18 @@ import { AppBarService } from '../../../services';
     <app-tutor-details-header [tutor]="tutor$ | async"></app-tutor-details-header>
 
     <div *ngIf="tutor$ | async as tutor" class="tutor-details-content">
-      <div class="tutor-details-content-main"></div>
+      <div class="tutor-details-about-the-tutor">
+        <h2 class="tutor-details-content-title">Sobre el tutor</h2>
+        <p>{{ tutor.descriptionLong }}</p>
+        <div class="tutor-details-separator"></div>
+        <h2 class="tutor-details-content-title">Materias</h2>
+        <div *ngFor="let el of tutor.subjects" class="tutor-details-subjects">
+          <div>
+            <mat-icon>chevron_right</mat-icon>
+            <span>{{ el.subject }}</span>
+          </div>
+        </div>
+      </div>
     </div>
   `,
   styleUrls: ['./tutor-details.component.scss'],

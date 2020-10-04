@@ -1,6 +1,7 @@
 @use '../../../variables';
 
 $max-width-content: 1050px;
+$separator-width: 986px;
 
 :host {
   display: flex;
@@ -14,10 +15,40 @@ $max-width-content: 1050px;
 }
 
 .tutor-details-content {
-  background-color: variables.$grey-xxlight;
+  background-color: variables.$grey-xxxlight;
+  margin: variables.$spacing * 2 0;
 }
 
-.tutor-details-content-main {
+.tutor-details-about-the-tutor {
   background-color: variables.$white;
   max-width: $max-width-content;
+  padding: variables.$spacing * 2 variables.$spacing * 4;
+  box-shadow: 6px 6px 5px -2px rgba(96, 96, 96, 1);
+}
+
+.tutor-details-content-title {
+  margin-bottom: variables.$spacing;
+}
+
+.tutor-details-separator {
+  height: 0.1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.1px solid variables.$grey-xxlight;
+  margin: variables.$spacing auto;
+}
+
+.tutor-details-subjects {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: variables.$unit;
+
+  div:first-child {
+    display: flex;
+  }
+
+  mat-icon {
+    color: variables.$primary-color;
+  }
 }
