@@ -13,6 +13,7 @@ export const MESSAGES = {
   'basic.notRobot': 'No soy un robot',
   'basic.acceptLegalTerms': 'Acepto el aviso legal y de privacidad',
   'basic.or': 'o',
+  'basic.videoNotSupported': 'Su navegador no soporta la etiqueta de vídeo',
   'appBar.tusClasesOnline': 'TusClasesOnline',
   'appBar.becomeTutor': 'Conviértete en tutor',
   'appBar.signIn': 'Entrar',
@@ -70,11 +71,9 @@ export const MESSAGES = {
   'searchTutor.findIdealTutor': 'Encuentra a tu tutor ideal',
   'searchTutor.filtersTip':
     'Utiliza los filtros para buscar clases particulares que se ajusten a tus necesidades',
-  'searchTutor.bookAClass': 'Reserva una clase',
-  'searchTutor.sendMessage': 'Envía un mensaje',
   'searchTutor.readMore': 'Leer más',
   'searchTutor.fee': 'EUR/h',
-  'searchTutor.ratings': 'valoraciones',
+
   'searchTutor.whatToLearn': '¿Qué quieres aprender?',
   'searchTutor.lookKeyWord': 'Busca por palabras clave',
   'searchTutor.lookKeyWordPlaceholder': 'Ej: Matemáticas',
@@ -98,4 +97,9 @@ export const MESSAGES = {
   'searchTutor.university': 'Universitarios',
   'searchTutor.adults': 'Adultos',
   'searchTutor.resetFilter': 'Reiniciar búsqueda',
+  'tutorDetails.numberClasses': 'clases impartidas',
+  'tutor.ratings': 'valoraciones',
+  'button.bookAClass': 'Reserva una clase',
+  'button.sendMessage': 'Envía un mensaje',
+  'button.addFavorites': 'Añade a tus favoritos',
 };

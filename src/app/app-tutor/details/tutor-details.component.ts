@@ -1,22 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { MESSAGES } from '../../messages';
+import { MESSAGES } from '../../../messages';
 import { ActivatedRoute } from '@angular/router';
-import { TutorService } from './tutor.service';
+import { TutorService } from '../tutor.service';
 import { switchMap } from 'rxjs/operators';
-import { AppBarService } from '../../services';
+import { AppBarService } from '../../../services';
 
 @Component({
   selector: 'app-tutor-details',
   template: `
-    <div *ngIf="tutor$ | async as tutor" class="tutor-details-header">
-      <div class="tutor-details-header-content">
-        <img class="tutor-details-image" [src]="tutor.img" alt="Tutor" />
-        <div class="tutor-details-main">
-          <h2>{{ getTutorName(tutor.name, tutor.firstSurname) }}</h2>
-          <h4>{{ tutor.descriptionShort }}</h4>
-        </div>
-      </div>
-      <div class="tutor-details-header-actions"></div>
+    <app-tutor-details-header [tutor]="tutor$ | async"></app-tutor-details-header>
+
+    <div *ngIf="tutor$ | async as tutor" class="tutor-details-content">
+      <div class="tutor-details-content-main"></div>
     </div>
   `,
   styleUrls: ['./tutor-details.component.scss'],
@@ -27,6 +22,10 @@ export class TutorDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private tutorService: TutorService,
   ) {}
+
+  rateIcon = 'star';
+  ratingsIcon = 'equalizer';
+  RATE_HOUR = '€/h';
 
   tutor$ = this.route.paramMap.pipe(
     switchMap(params => this.tutorService.getTutor(params.get('id'))),

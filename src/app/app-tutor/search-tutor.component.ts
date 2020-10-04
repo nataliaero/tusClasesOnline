@@ -6,7 +6,7 @@ import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TutorFilter } from './types';
-import { SearchTutorService } from './search-tutor.service';
+import { TutorService } from './tutor.service';
 import { PageEvent } from '@angular/material/paginator';
 
 const INITIAL_PAGE_SIZE = 10;
@@ -27,11 +27,11 @@ const INITIAL_PAGE_SIZE = 10;
 export class FilterDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<FilterDialogComponent>,
-    private searchTutorService: SearchTutorService,
+    private tutorService: TutorService,
   ) {}
 
   private selectedFilters: TutorFilter;
-  selectedFilters$ = this.searchTutorService.selectedFilters$;
+  selectedFilters$ = this.tutorService.selectedFilters$;
 
   ngOnInit(): void {
     this.dialogRef.afterClosed().subscribe(() => this.selectedFilters$.next(this.selectedFilters));
@@ -80,7 +80,7 @@ export class SearchTutorComponent implements OnInit, OnDestroy {
     private appBarService: AppBarService,
     private matDialog: MatDialog,
     private mobileService: MobileService,
-    private searchTutorService: SearchTutorService,
+    private tutorService: TutorService,
   ) {}
 
   isMobileOrTablet$: Observable<boolean> = this.mobileService.isMobileOrTablet$;
@@ -92,15 +92,15 @@ export class SearchTutorComponent implements OnInit, OnDestroy {
   tutors$ = combineLatest([
     this.pageSize$,
     this.pageIndex$,
-    this.searchTutorService.selectedFilters$,
+    this.tutorService.selectedFilters$,
   ]).pipe(
     switchMap(([pageSize, pageIndex, filters]) => {
-      return this.searchTutorService.getTutors(pageSize, pageIndex, filters);
+      return this.tutorService.getTutors(pageSize, pageIndex, filters);
     }),
   );
 
-  tutorsLength$ = this.searchTutorService.selectedFilters$.pipe(
-    switchMap(selectedFilters => this.searchTutorService.getTutorsLength(selectedFilters)),
+  tutorsLength$ = this.tutorService.selectedFilters$.pipe(
+    switchMap(selectedFilters => this.tutorService.getTutorsLength(selectedFilters)),
   );
 
   msg = {
@@ -113,13 +113,13 @@ export class SearchTutorComponent implements OnInit, OnDestroy {
   }
 
   onOpenFiltersDialog(): Subscription {
-    return this.openFilterDialog(this.searchTutorService.selectedFilters$.value)
+    return this.openFilterDialog(this.tutorService.selectedFilters$.value)
       .pipe(take(1))
       .subscribe();
   }
 
   onFilterChange(selectedFilters: TutorFilter): void {
-    this.searchTutorService.selectedFilters$.next(selectedFilters);
+    this.tutorService.selectedFilters$.next(selectedFilters);
   }
 
   onPageSelect(pageEvent: PageEvent): void {
@@ -140,6 +140,6 @@ export class SearchTutorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.searchTutorService.destroy();
+    this.tutorService.destroy();
   }
 }
