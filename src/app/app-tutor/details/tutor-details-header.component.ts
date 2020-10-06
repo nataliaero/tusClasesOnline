@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { MESSAGES } from '../../../messages';
 import { Tutor } from '../types';
 import { MobileService } from '../../../services';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-tutor-details-header',
@@ -17,7 +18,9 @@ import { Observable } from 'rxjs';
               <div class="tutor-details-actions">
                 <mat-icon class="tutor-details-star">{{ rateIcon }}</mat-icon>
                 <h3>{{ tutor.rate }}</h3>
-                <mat-icon class="tutor-details-favorite">{{ favoriteIcon }}</mat-icon>
+                <mat-icon [class]="getFavoriteStyle()" (click)="onClickFavorite()">
+                  {{ getFavoriteIcon() }}
+                </mat-icon>
                 <mat-icon class="tutor-details-message">{{ sendMsgIcon }}</mat-icon>
               </div>
             </div>
@@ -66,10 +69,10 @@ export class TutorDetailsComponentHeader {
   ratingsIcon = 'equalizer';
   RATE_HOUR = '€/h';
 
+  favorite = false;
+
   bookClassIcon = 'event_available';
   sendMsgIcon = 'mail_outline';
-  favoriteIcon = 'favorite_border';
-  favoriteSelectedIcon = 'favorite';
   buttonFontSize = '16px';
   buttonIconSize = '18px';
   sendMsgColor = '#3bb3bd';
@@ -87,5 +90,18 @@ export class TutorDetailsComponentHeader {
 
   getTutorName(name: string, firstSurname: string): string {
     return `${name} ${firstSurname[0]}.`;
+  }
+
+  getFavoriteIcon(): string {
+    return this.favorite ? 'favorite' : 'favorite_border';
+  }
+
+  getFavoriteStyle(): string {
+    return this.favorite ? 'tutor-details-favorite-filled' : 'tutor-details-favorite';
+  }
+
+  onClickFavorite(): void {
+    this.favorite = !this.favorite;
+    // TBD save favorite for the student
   }
 }

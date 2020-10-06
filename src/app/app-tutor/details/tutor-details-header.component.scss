@@ -87,6 +87,12 @@ $button-width-tablet: 200px;
   cursor: pointer;
 }
 
+.tutor-details-favorite-filled {
+  color: variables.$terciary-color;
+  margin: 0 variables.$spacing;
+  cursor: pointer;
+}
+
 .tutor-details-message {
   color: variables.$primary-color;
   cursor: pointer;
