@@ -1,4 +1,5 @@
 @use '../../../variables';
+@use '../../../mixins';
 
 $max-width-content: 1050px;
 $separator-width: 986px;
@@ -24,6 +25,9 @@ $separator-width: 986px;
   max-width: $max-width-content;
   padding: variables.$spacing * 2 variables.$spacing * 4;
   box-shadow: 6px 6px 5px -2px rgba(96, 96, 96, 1);
+  @include mixins.tablet {
+    padding: variables.$spacing * 2;
+  }
 }
 
 .tutor-details-content-title {
@@ -67,5 +71,8 @@ $separator-width: 986px;
   margin-top: variables.$spacing;
   video {
     width: 600px;
+    @include mixins.mobile {
+      width: auto;
+    }
   }
 }
