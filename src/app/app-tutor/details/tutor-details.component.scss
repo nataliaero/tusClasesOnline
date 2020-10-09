@@ -42,10 +42,19 @@ $separator-width: 986px;
 .tutor-details-subjects {
   display: flex;
   flex-direction: row;
-  margin-bottom: variables.$unit;
+  margin-bottom: variables.$unit * 3;
+  width: 100%;
 
   div:first-child {
     display: flex;
+    width: 40%;
+  }
+
+  .tutor-details-tags {
+    border: 1px solid variables.$primary-color;
+    border-radius: variables.$border-radius;
+    padding: variables.$unit;
+    margin: variables.$spacing;
   }
 
   mat-icon {

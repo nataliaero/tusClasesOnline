@@ -81,7 +81,7 @@ export class TutorDetailsComponentHeader {
     bookAClass: MESSAGES['button.bookAClass'],
     sendMessage: MESSAGES['button.sendMessage'],
     addFavorites: MESSAGES['button.addFavorites'],
-    numberClasses: MESSAGES['tutorDetails.numberClasses'],
+    numberClasses: MESSAGES['tutor.numberClasses'],
     ratings: MESSAGES['tutor.ratings'],
     videoNotSupported: MESSAGES['basic.videoNotSupported'],
   };
