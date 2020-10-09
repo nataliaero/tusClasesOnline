@@ -61,3 +61,11 @@ $separator-width: 986px;
     color: variables.$primary-color;
   }
 }
+
+.tutor-video {
+  text-align: center;
+  margin-top: variables.$spacing;
+  video {
+    width: 600px;
+  }
+}

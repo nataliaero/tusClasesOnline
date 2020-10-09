@@ -15,6 +15,13 @@ import { DegreeType, SubjectLevels } from '../types';
       <div class="tutor-details-about-the-tutor">
         <h2 class="tutor-details-content-title">{{ msg.aboutTheTutor }}</h2>
         <p>{{ tutor.descriptionLong }}</p>
+        <div class="tutor-video">
+          <video controls controlsList="nodownload" disablePictureInPicture>
+            <source [src]="tutor.video" type="video/mp4" />
+            {{ msg.videoNotSupported }}
+          </video>
+        </div>
+
         <div class="tutor-details-separator"></div>
         <h2 class="tutor-details-content-title">{{ msg.subjects }}</h2>
         <div *ngFor="let el of tutor.subjects" class="tutor-details-subjects">

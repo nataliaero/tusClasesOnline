@@ -2,9 +2,9 @@
 @use '../../../mixins';
 
 $max-width-content: 1050px;
-$min-width-content: 300px;
+$min-width-content: 400px;
 $min-width-content-mobile: 175px;
-$image-height: 200px;
+$image-height: 300px;
 $image-height-mobile: 150px;
 $button-width: 260px;
 $button-width-tablet: 200px;
@@ -12,48 +12,42 @@ $button-width-tablet: 200px;
 :host {
   background-color: variables.$white;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 100%;
   justify-content: center;
   align-items: center;
   padding: variables.$spacing * 3 variables.$unit variables.$spacing * 2 variables.$unit;
 }
 
-.tutor-details-header-content {
+.tutor-details-header {
   display: flex;
   flex-direction: row;
-  max-width: $max-width-content;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-
-  @include mixins.tablet {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+  max-width: 1050px;
+  padding: 0 64px;
 }
 
 .tutor-details-header-left {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-right: variables.$spacing;
+  width: 40%;
+  img {
+    height: $image-height;
+    margin-right: variables.$spacing;
 
-  @include mixins.tablet {
-    margin: 0;
-  }
-
-  @include mixins.mobile {
-    flex-direction: column;
+    @include mixins.mobile {
+      margin-bottom: variables.$spacing;
+    }
   }
 }
 
-.tutor-details-header-main {
+.tutor-details-header-right {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-width: $min-width-content;
+  width: 60%;
+  height: $image-height;
 
   @include mixins.mobile {
     min-width: $min-width-content-mobile;
@@ -83,13 +77,13 @@ $button-width-tablet: 200px;
 
 .tutor-details-favorite {
   color: variables.$primary-color;
-  margin: 0 variables.$spacing;
+  margin: 0 variables.$spacing * 2;
   cursor: pointer;
 }
 
 .tutor-details-favorite-filled {
   color: variables.$terciary-color;
-  margin: 0 variables.$spacing;
+  margin: 0 variables.$spacing * 2;
   cursor: pointer;
 }
 
@@ -101,9 +95,9 @@ $button-width-tablet: 200px;
 .tutor-details-send-message {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   max-width: $max-width-content;
-  margin-top: variables.$spacing * 2;
+  margin-top: variables.$spacing;
   width: 100%;
 
   app-button {
@@ -115,28 +109,6 @@ $button-width-tablet: 200px;
       width: $button-width-tablet;
       margin: 0 auto;
     }
-  }
-}
-
-.tutor-details-image {
-  margin-right: variables.$spacing;
-  height: $image-height;
-
-  @include mixins.mobile {
-    margin-bottom: variables.$spacing;
-  }
-}
-
-.tutor-details-video {
-  outline: 0px;
-
-  @include mixins.tablet {
-    margin-top: variables.$spacing * 3;
-  }
-
-  @include mixins.mobile {
-    margin-top: variables.$spacing;
-    width: fit-content;
   }
 }
 
