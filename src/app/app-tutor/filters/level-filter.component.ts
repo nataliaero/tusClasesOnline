@@ -62,12 +62,12 @@ export class LevelFilterComponent implements OnInit, OnDestroy {
     availability: MESSAGES['searchTutor.availability'],
     weekends: MESSAGES['searchTutor.weekends'],
     level: MESSAGES['searchTutor.level'],
-    preschool: MESSAGES['searchTutor.preschool'],
-    primary: MESSAGES['searchTutor.primary'],
-    secondary: MESSAGES['searchTutor.secondary'],
-    superior: MESSAGES['searchTutor.superior'],
-    university: MESSAGES['searchTutor.university'],
-    adults: MESSAGES['searchTutor.adults'],
+    preschool: MESSAGES['tutor.preschool'],
+    primary: MESSAGES['tutor.primary'],
+    secondary: MESSAGES['tutor.secondary'],
+    superior: MESSAGES['tutor.superior'],
+    university: MESSAGES['tutor.university'],
+    adults: MESSAGES['tutor.adults'],
     resetFilter: MESSAGES['searchTutor.resetFilter'],
   };
 

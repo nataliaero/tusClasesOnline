@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { MESSAGES } from '../../../messages';
 import { Tutor } from '../types';
 import { MobileService } from '../../../services';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-tutor-details-header',
@@ -15,9 +15,13 @@ import { Observable } from 'rxjs';
           <div class="tutor-details-header-main">
             <div class="tutor-details-title">
               <h2 class="tutor-details-name">{{ getTutorName(tutor.name, tutor.firstSurname) }}</h2>
-              <div class="tutor-details-rate">
-                <mat-icon>{{ rateIcon }}</mat-icon>
+              <div class="tutor-details-actions">
+                <mat-icon class="tutor-details-star">{{ rateIcon }}</mat-icon>
                 <h3>{{ tutor.rate }}</h3>
+                <mat-icon [class]="getFavoriteStyle()" (click)="onClickFavorite()">
+                  {{ getFavoriteIcon() }}
+                </mat-icon>
+                <mat-icon class="tutor-details-message">{{ sendMsgIcon }}</mat-icon>
               </div>
             </div>
             <h2 class="tutor-details-short-description">{{ tutor.descriptionShort }}</h2>
@@ -44,26 +48,12 @@ import { Observable } from 'rxjs';
           {{ msg.videoNotSupported }}
         </video>
       </div>
-      <div class="tutor-details-header-actions">
+      <div class="tutor-details-send-message">
         <app-button
           [icon]="bookClassIcon"
           [fontSize]="buttonFontSize"
           [iconSize]="buttonIconSize"
-          [message]="bookClassMessage$ | async"
-        ></app-button>
-        <app-button
-          [color]="sendMsgColor"
-          [icon]="sendMsgIcon"
-          [fontSize]="buttonFontSize"
-          [iconSize]="buttonIconSize"
-          [message]="sendMessage$ | async"
-        ></app-button>
-        <app-button
-          [color]="sendMsgColor"
-          [icon]="favoriteIcon"
-          [fontSize]="buttonFontSize"
-          [iconSize]="buttonIconSize"
-          [message]="favoriteMessage$ | async"
+          [message]="msg.bookAClass"
         ></app-button>
       </div>
     </ng-container>
@@ -79,31 +69,39 @@ export class TutorDetailsComponentHeader {
   ratingsIcon = 'equalizer';
   RATE_HOUR = '€/h';
 
+  favorite = false;
+
   bookClassIcon = 'event_available';
-  sendMsgIcon = 'mail';
-  favoriteIcon = 'favorite_border';
-  buttonFontSize = '14px';
-  buttonIconSize = '16px';
+  sendMsgIcon = 'mail_outline';
+  buttonFontSize = '16px';
+  buttonIconSize = '18px';
   sendMsgColor = '#3bb3bd';
 
   msg = {
     bookAClass: MESSAGES['button.bookAClass'],
     sendMessage: MESSAGES['button.sendMessage'],
     addFavorites: MESSAGES['button.addFavorites'],
-    numberClasses: MESSAGES['tutorDetails.numberClasses'],
+    numberClasses: MESSAGES['tutor.numberClasses'],
     ratings: MESSAGES['tutor.ratings'],
     videoNotSupported: MESSAGES['basic.videoNotSupported'],
   };
 
   isMobile$: Observable<boolean> = this.mobileService.isMobile$;
 
-  bookClassMessage$ = this.isMobile$.pipe(map(isMobile => (isMobile ? null : this.msg.bookAClass)));
-  sendMessage$ = this.isMobile$.pipe(map(isMobile => (isMobile ? null : this.msg.sendMessage)));
-  favoriteMessage$ = this.isMobile$.pipe(
-    map(isMobile => (isMobile ? null : this.msg.addFavorites)),
-  );
-
   getTutorName(name: string, firstSurname: string): string {
     return `${name} ${firstSurname[0]}.`;
+  }
+
+  getFavoriteIcon(): string {
+    return this.favorite ? 'favorite' : 'favorite_border';
+  }
+
+  getFavoriteStyle(): string {
+    return this.favorite ? 'tutor-details-favorite-filled' : 'tutor-details-favorite';
+  }
+
+  onClickFavorite(): void {
+    this.favorite = !this.favorite;
+    // TBD save favorite for the student
   }
 }

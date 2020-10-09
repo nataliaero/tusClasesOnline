@@ -18,7 +18,8 @@ html {
 .mat-typography h3,
 .mat-typography h4,
 .mat-typography h5,
-.mat-typography p {
+.mat-typography p,
+.mat-typography span {
   font-family: variables.$primary-font;
   margin: 0;
   padding: 0;

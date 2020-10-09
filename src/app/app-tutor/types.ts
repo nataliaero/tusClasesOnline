@@ -38,6 +38,38 @@ export interface Subject {
   levels: SubjectLevels[];
 }
 
+export enum DegreeType {
+  /**
+   * Máster/postgrado
+   */
+  Master = 'master',
+  /**
+   * Licenciatura
+   */
+  Degree = 'degree',
+  /**
+   * Diplomatura
+   */
+  UndergradutaeDegree = 'undegraduateDegree',
+  /**
+   * Certificación
+   */
+  Certificate = 'certificate',
+  /**
+   * Doctorado
+   */
+  Doctorate = 'doctorate',
+  /**
+   * Otros
+   */
+  Other = 'other',
+}
+
+export interface Degree {
+  title: DegreeType;
+  description: string;
+}
+
 export interface Comment {
   name: string;
   date: number;
@@ -69,4 +101,6 @@ export interface Tutor {
   subjects: Subject[];
   comments: Comment[];
   availability: AvailabilityId[];
+  classDurationMinutes: number;
+  degrees: Degree[];
 }

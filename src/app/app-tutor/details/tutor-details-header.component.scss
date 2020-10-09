@@ -2,7 +2,7 @@
 @use '../../../mixins';
 
 $max-width-content: 1050px;
-$min-width-content: 250px;
+$min-width-content: 300px;
 $min-width-content-mobile: 175px;
 $image-height: 200px;
 $image-height-mobile: 150px;
@@ -71,51 +71,49 @@ $button-width-tablet: 200px;
   }
 }
 
-.tutor-details-rate {
+.tutor-details-actions {
   display: flex;
   flex-direction: row;
   align-items: center;
-
-  mat-icon {
-    color: variables.$yellow;
-  }
 }
 
-.tutor-details-header-actions {
+.tutor-details-star {
+  color: variables.$yellow;
+}
+
+.tutor-details-favorite {
+  color: variables.$primary-color;
+  margin: 0 variables.$spacing;
+  cursor: pointer;
+}
+
+.tutor-details-favorite-filled {
+  color: variables.$terciary-color;
+  margin: 0 variables.$spacing;
+  cursor: pointer;
+}
+
+.tutor-details-message {
+  color: variables.$primary-color;
+  cursor: pointer;
+}
+
+.tutor-details-send-message {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   max-width: $max-width-content;
-  margin-top: variables.$spacing * 4;
+  margin-top: variables.$spacing * 2;
   width: 100%;
 
-  app-button:first-child {
+  app-button {
     width: $button-width;
     background-color: variables.$primary-color;
     padding: variables.$spacing;
-    @include mixins.tablet {
-      width: $button-width-tablet;
-    }
-
-    @include mixins.mobile {
-      width: 100%;
-      margin: 0 variables.$unit;
-    }
-  }
-
-  app-button:nth-child(2),
-  app-button:nth-child(3) {
-    width: $button-width;
-    border: 1px solid variables.$primary-color;
-    padding: variables.$spacing;
 
     @include mixins.tablet {
       width: $button-width-tablet;
-    }
-
-    @include mixins.mobile {
-      width: 100%;
-      margin: 0 variables.$unit;
+      margin: 0 auto;
     }
   }
 }
@@ -125,7 +123,6 @@ $button-width-tablet: 200px;
   height: $image-height;
 
   @include mixins.mobile {
-    height: $image-height-mobile;
     margin-bottom: variables.$spacing;
   }
 }

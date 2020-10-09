@@ -1,4 +1,4 @@
-import { AvailabilityId, LanguageLevel, SubjectLevels, Tutor } from './types';
+import { AvailabilityId, LanguageLevel, SubjectLevels, Tutor, DegreeType } from './types';
 
 export const TUTORS: Tutor[] = [
   {
@@ -16,6 +16,16 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 10,
+    classDurationMinutes: 60,
+    degrees: [
+      { title: DegreeType.Degree, description: 'Licenciado En Lengua Inglesa' },
+      { title: DegreeType.Degree, description: 'Licenciado en ingenieria de software' },
+      { title: DegreeType.Master, description: 'Postgrado en ciberseguridad' },
+      {
+        title: DegreeType.Doctorate,
+        description: 'Doctorado en ciberseguridad por la Universidad de Estocolmo',
+      },
+    ],
     speaks: [
       { language: 'Español', level: LanguageLevel.Native },
       { language: 'Inglés', level: LanguageLevel.C1 },
@@ -26,37 +36,22 @@ export const TUTORS: Tutor[] = [
         subject: 'Programación',
         levels: [
           SubjectLevels.Primary,
-          SubjectLevels.Primary,
+          SubjectLevels.Secondary,
           SubjectLevels.Superior,
           SubjectLevels.Adults,
         ],
       },
       {
         subject: 'Python, C++, Java',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Primary, SubjectLevels.Superior, SubjectLevels.Adults],
       },
       {
         subject: 'Front-end: Angular y React',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Primary, SubjectLevels.Superior, SubjectLevels.Adults],
       },
       {
         subject: 'Back-end: AWS',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Superior, SubjectLevels.Adults],
       },
     ],
     availability: [AvailabilityId.Morning, AvailabilityId.Afternoon, AvailabilityId.Weekends],
@@ -83,6 +78,7 @@ export const TUTORS: Tutor[] = [
     img: '/assets/tutor3.jpg',
     video: '/assets/video-prueba.mp4',
     country: 'España',
+    classDurationMinutes: 60,
     descriptionShort: 'Profesora de matemáticas',
     descriptionLong:
       'Tengo más de 10 años de experiencia como profesora de matemáticas a alumnos de diferentes edades, desde primaria hasta educación superior. He trabajado en varios colegios públicos y privados y hablo perfecto inglés además de español.',
@@ -90,6 +86,11 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 9,
+    degrees: [
+      { title: DegreeType.Certificate, description: 'Tesol 160 Hours' },
+      { title: DegreeType.Certificate, description: 'Tefl 140 Hours' },
+      { title: DegreeType.Certificate, description: 'City & Guilds D32' },
+    ],
     speaks: [
       { language: 'Español', level: LanguageLevel.Native },
       { language: 'Inglés', level: LanguageLevel.C2 },
@@ -100,7 +101,7 @@ export const TUTORS: Tutor[] = [
         subject: 'Álgebra',
         levels: [
           SubjectLevels.Primary,
-          SubjectLevels.Primary,
+          SubjectLevels.Superior,
           SubjectLevels.Superior,
           SubjectLevels.University,
           SubjectLevels.Adults,
@@ -110,7 +111,7 @@ export const TUTORS: Tutor[] = [
         subject: 'Matemáticas',
         levels: [
           SubjectLevels.Primary,
-          SubjectLevels.Primary,
+          SubjectLevels.Secondary,
           SubjectLevels.Superior,
           SubjectLevels.University,
           SubjectLevels.Adults,
@@ -119,7 +120,6 @@ export const TUTORS: Tutor[] = [
       {
         subject: 'Cálculo',
         levels: [
-          SubjectLevels.Primary,
           SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
@@ -164,6 +164,12 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 59,
+    classDurationMinutes: 30,
+    degrees: [
+      { title: DegreeType.Degree, description: 'Filología inglesa' },
+      { title: DegreeType.Degree, description: 'Filología rusa' },
+      { title: DegreeType.Certificate, description: 'City & Guilds D32' },
+    ],
     speaks: [
       { language: 'Ruso', level: LanguageLevel.Native },
       { language: 'Español', level: LanguageLevel.C2 },
@@ -174,7 +180,6 @@ export const TUTORS: Tutor[] = [
         subject: 'Ruso',
         levels: [
           SubjectLevels.Primary,
-          SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
           SubjectLevels.Adults,
@@ -184,7 +189,6 @@ export const TUTORS: Tutor[] = [
         subject: 'Inglés',
         levels: [
           SubjectLevels.Preschool,
-          SubjectLevels.Primary,
           SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
@@ -223,6 +227,12 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 10,
+    classDurationMinutes: 30,
+    degrees: [
+      { title: DegreeType.Degree, description: 'Filología inglesa' },
+      { title: DegreeType.Degree, description: 'Filología rusa' },
+      { title: DegreeType.Certificate, description: 'City & Guilds D32' },
+    ],
     speaks: [
       { language: 'Ruso', level: LanguageLevel.Native },
       { language: 'Español', level: LanguageLevel.C2 },
@@ -232,7 +242,7 @@ export const TUTORS: Tutor[] = [
       {
         subject: 'Ruso',
         levels: [
-          SubjectLevels.Primary,
+          SubjectLevels.Preschool,
           SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
@@ -242,7 +252,7 @@ export const TUTORS: Tutor[] = [
       {
         subject: 'Inglés',
         levels: [
-          SubjectLevels.Primary,
+          SubjectLevels.Preschool,
           SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
@@ -281,6 +291,18 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 10,
+    classDurationMinutes: 60,
+    degrees: [
+      { title: DegreeType.Certificate, description: 'City & Guilds D32' },
+      {
+        title: DegreeType.Degree,
+        description: 'Ingeriería de software en la Universidad Politécnica de Valencia',
+      },
+      {
+        title: DegreeType.Doctorate,
+        description: 'Doctorado en ciberseguridad en la Universidad de Lausanne en Suiza',
+      },
+    ],
     speaks: [
       { language: 'Español', level: LanguageLevel.Native },
       { language: 'Inglés', level: LanguageLevel.C2 },
@@ -291,7 +313,7 @@ export const TUTORS: Tutor[] = [
         subject: 'Programación',
         levels: [
           SubjectLevels.Primary,
-          SubjectLevels.Primary,
+          SubjectLevels.Secondary,
           SubjectLevels.Superior,
           SubjectLevels.University,
           SubjectLevels.Adults,
@@ -299,33 +321,15 @@ export const TUTORS: Tutor[] = [
       },
       {
         subject: 'Python, C++, Java',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.University,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Superior, SubjectLevels.University, SubjectLevels.Adults],
       },
       {
         subject: 'Front-end: Angular y React',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.University,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Superior, SubjectLevels.University, SubjectLevels.Adults],
       },
       {
         subject: 'Back-end: AWS',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.University,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Superior, SubjectLevels.University, SubjectLevels.Adults],
       },
     ],
     availability: [
@@ -364,6 +368,8 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 0,
+    classDurationMinutes: 60,
+    degrees: [],
     speaks: [
       { language: 'Español', level: LanguageLevel.Native },
       { language: 'Inglés', level: LanguageLevel.C2 },
@@ -374,7 +380,6 @@ export const TUTORS: Tutor[] = [
         subject: 'Álgebra',
         levels: [
           SubjectLevels.Primary,
-          SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
           SubjectLevels.Adults,
@@ -382,23 +387,11 @@ export const TUTORS: Tutor[] = [
       },
       {
         subject: 'Matemáticas',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.University,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Superior, SubjectLevels.University, SubjectLevels.Adults],
       },
       {
         subject: 'Cálculo',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.University,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Superior, SubjectLevels.University, SubjectLevels.Adults],
       },
     ],
     availability: [
@@ -443,6 +436,8 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 10,
+    classDurationMinutes: 60,
+    degrees: [],
     speaks: [
       { language: 'Ruso', level: LanguageLevel.Native },
       { language: 'Español', level: LanguageLevel.C2 },
@@ -452,7 +447,7 @@ export const TUTORS: Tutor[] = [
       {
         subject: 'Ruso',
         levels: [
-          SubjectLevels.Primary,
+          SubjectLevels.Preschool,
           SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
@@ -462,7 +457,7 @@ export const TUTORS: Tutor[] = [
       {
         subject: 'Inglés',
         levels: [
-          SubjectLevels.Primary,
+          SubjectLevels.Preschool,
           SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
@@ -501,6 +496,18 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 12,
+    classDurationMinutes: 60,
+    degrees: [
+      { title: DegreeType.Certificate, description: 'City & Guilds D32' },
+      {
+        title: DegreeType.Degree,
+        description: 'Ingeriería de software en la Universidad Politécnica de Valencia',
+      },
+      {
+        title: DegreeType.Doctorate,
+        description: 'Doctorado en software avanzado en la Universidad Politécnica de Valencia',
+      },
+    ],
     speaks: [
       { language: 'Ruso', level: LanguageLevel.Native },
       { language: 'Español', level: LanguageLevel.B2 },
@@ -521,7 +528,6 @@ export const TUTORS: Tutor[] = [
         subject: 'Inglés',
         levels: [
           SubjectLevels.Preschool,
-          SubjectLevels.Primary,
           SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
@@ -560,6 +566,8 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 10,
+    classDurationMinutes: 60,
+    degrees: [],
     speaks: [
       { language: 'Español', level: LanguageLevel.Native },
       { language: 'Inglés', level: LanguageLevel.C1 },
@@ -568,39 +576,19 @@ export const TUTORS: Tutor[] = [
     subjects: [
       {
         subject: 'Programación',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Primary, SubjectLevels.Superior, SubjectLevels.Adults],
       },
       {
         subject: 'Python, C++, Java',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Primary, SubjectLevels.Superior, SubjectLevels.Adults],
       },
       {
         subject: 'Front-end: Angular y React',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Primary, SubjectLevels.Superior, SubjectLevels.Adults],
       },
       {
         subject: 'Back-end: AWS',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Primary, SubjectLevels.Superior, SubjectLevels.Adults],
       },
     ],
     availability: [AvailabilityId.Morning, AvailabilityId.Afternoon, AvailabilityId.Weekends],
@@ -634,6 +622,8 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 10,
+    classDurationMinutes: 60,
+    degrees: [],
     speaks: [
       { language: 'Español', level: LanguageLevel.Native },
       { language: 'Inglés', level: LanguageLevel.C2 },
@@ -644,7 +634,6 @@ export const TUTORS: Tutor[] = [
         subject: 'Álgebra',
         levels: [
           SubjectLevels.Primary,
-          SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
           SubjectLevels.Adults,
@@ -653,7 +642,7 @@ export const TUTORS: Tutor[] = [
       {
         subject: 'Matemáticas',
         levels: [
-          SubjectLevels.Primary,
+          SubjectLevels.Preschool,
           SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
@@ -662,13 +651,7 @@ export const TUTORS: Tutor[] = [
       },
       {
         subject: 'Cálculo',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.University,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Superior, SubjectLevels.University, SubjectLevels.Adults],
       },
     ],
     availability: [AvailabilityId.Morning, AvailabilityId.Afternoon, AvailabilityId.Weekends],
@@ -708,6 +691,8 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 10,
+    classDurationMinutes: 60,
+    degrees: [],
     speaks: [
       { language: 'Ruso', level: LanguageLevel.Native },
       { language: 'Español', level: LanguageLevel.C2 },
@@ -716,19 +701,12 @@ export const TUTORS: Tutor[] = [
     subjects: [
       {
         subject: 'Ruso',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.University,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Superior, SubjectLevels.University, SubjectLevels.Adults],
       },
       {
         subject: 'Inglés',
         levels: [
           SubjectLevels.Preschool,
-          SubjectLevels.Primary,
           SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
@@ -767,6 +745,18 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 10,
+    classDurationMinutes: 60,
+    degrees: [
+      { title: DegreeType.Certificate, description: 'City & Guilds D32' },
+      {
+        title: DegreeType.Degree,
+        description: 'Ingeriería de software en la Universidad Politécnica de Valencia',
+      },
+      {
+        title: DegreeType.Doctorate,
+        description: 'Doctorado en ciberseguridad en la Universidad de Lausanne en Suiza',
+      },
+    ],
     speaks: [
       { language: 'Ruso', level: LanguageLevel.Native },
       { language: 'Español', level: LanguageLevel.C2 },
@@ -775,23 +765,11 @@ export const TUTORS: Tutor[] = [
     subjects: [
       {
         subject: 'Ruso',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.University,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Primary],
       },
       {
         subject: 'Inglés',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.University,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Primary],
       },
     ],
     availability: [AvailabilityId.Morning, AvailabilityId.Weekends],
@@ -825,6 +803,8 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 10,
+    classDurationMinutes: 60,
+    degrees: [],
     speaks: [
       { language: 'Español', level: LanguageLevel.Native },
       { language: 'Inglés', level: LanguageLevel.C2 },
@@ -833,43 +813,19 @@ export const TUTORS: Tutor[] = [
     subjects: [
       {
         subject: 'Programación',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.University,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Adults],
       },
       {
         subject: 'Python, C++, Java',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.University,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Adults],
       },
       {
         subject: 'Front-end: Angular y React',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.University,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Adults],
       },
       {
         subject: 'Back-end: AWS',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.University,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Adults],
       },
     ],
     availability: [
@@ -908,6 +864,8 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 10,
+    classDurationMinutes: 60,
+    degrees: [],
     speaks: [
       { language: 'Español', level: LanguageLevel.Native },
       { language: 'Inglés', level: LanguageLevel.C2 },
@@ -916,13 +874,7 @@ export const TUTORS: Tutor[] = [
     subjects: [
       {
         subject: 'Álgebra',
-        levels: [
-          SubjectLevels.Primary,
-          SubjectLevels.Primary,
-          SubjectLevels.Superior,
-          SubjectLevels.University,
-          SubjectLevels.Adults,
-        ],
+        levels: [SubjectLevels.Primary, SubjectLevels.Secondary],
       },
       {
         subject: 'Matemáticas',
@@ -987,6 +939,8 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 10,
+    classDurationMinutes: 60,
+    degrees: [],
     speaks: [
       { language: 'Ruso', level: LanguageLevel.Native },
       { language: 'Español', level: LanguageLevel.C2 },
@@ -997,7 +951,6 @@ export const TUTORS: Tutor[] = [
         subject: 'Ruso',
         levels: [
           SubjectLevels.Primary,
-          SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
           SubjectLevels.Adults,
@@ -1006,7 +959,6 @@ export const TUTORS: Tutor[] = [
       {
         subject: 'Inglés',
         levels: [
-          SubjectLevels.Primary,
           SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
@@ -1045,6 +997,8 @@ export const TUTORS: Tutor[] = [
     fee: 15,
     ratingsCount: 4,
     classCount: 100,
+    classDurationMinutes: 60,
+    degrees: [],
     speaks: [
       { language: 'Ruso', level: LanguageLevel.Native },
       { language: 'Español', level: LanguageLevel.B2 },
@@ -1055,7 +1009,6 @@ export const TUTORS: Tutor[] = [
         subject: 'Ruso',
         levels: [
           SubjectLevels.Primary,
-          SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
           SubjectLevels.Adults,
@@ -1065,7 +1018,6 @@ export const TUTORS: Tutor[] = [
         subject: 'Inglés',
         levels: [
           SubjectLevels.Preschool,
-          SubjectLevels.Primary,
           SubjectLevels.Primary,
           SubjectLevels.Superior,
           SubjectLevels.University,
