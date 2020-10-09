@@ -34,7 +34,7 @@ import { DegreeType, SubjectLevels } from '../types';
           <span>{{ el.level }}</span>
         </div>
         <div class="tutor-details-separator"></div>
-        <h2 class="tutor-details-content-title">Estudios y certificaciones</h2>
+        <h2 class="tutor-details-content-title">{{ msg.certifications }}</h2>
         <div *ngFor="let el of tutor.degrees" class="tutor-details-subjects">
           <div>
             <mat-icon>chevron_right</mat-icon>
@@ -72,6 +72,7 @@ export class TutorDetailsComponent implements OnInit {
     superior: MESSAGES['tutor.superior'],
     university: MESSAGES['tutor.university'],
     adults: MESSAGES['tutor.adults'],
+    certifications: MESSAGES['tutor.certifications'],
     master: MESSAGES['tutor.master'],
     degree: MESSAGES['tutor.degree'],
     undegraduateDegree: MESSAGES['tutor.undegraduateDegree'],

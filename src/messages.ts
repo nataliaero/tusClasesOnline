@@ -102,6 +102,7 @@ export const MESSAGES = {
   'tutor.speaks': 'Habla',
   'tutor.numberClasses': 'clases impartidas',
   'tutor.ratings': 'valoraciones',
+  'tutor.certifications': 'Estudios y certificaciones',
   'tutor.master': 'Máster/postgrado',
   'tutor.degree': 'Licenciatura',
   'tutor.undegraduateDegree': 'Diplomatura',
