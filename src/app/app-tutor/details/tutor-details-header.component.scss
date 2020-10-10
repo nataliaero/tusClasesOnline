@@ -6,7 +6,6 @@ $min-width-content: 400px;
 $min-width-content-mobile: 175px;
 $image-height: 280px;
 $image-height-tablet: 250px;
-$image-height-mobile: 150px;
 $button-width: 260px;
 $button-width-tablet: 200px;
 
@@ -77,20 +76,20 @@ $button-width-tablet: 200px;
   }
 }
 
-.tutor-details-title {
+.tutor-details-header-title {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 
-.tutor-details-actions {
+.tutor-details-header-actions {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.tutor-details-star {
+.tutor-details-header-star {
   color: variables.$yellow;
 }
 
@@ -106,7 +105,7 @@ $button-width-tablet: 200px;
   cursor: pointer;
 }
 
-.tutor-details-message {
+.tutor-details-header-message {
   color: variables.$primary-color;
   cursor: pointer;
 }
@@ -138,7 +137,7 @@ $button-width-tablet: 200px;
   }
 }
 
-.tutor-details-name {
+.tutor-details-header-name {
   font-size: 28px;
 
   @include mixins.tablet {

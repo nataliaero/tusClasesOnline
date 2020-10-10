@@ -12,15 +12,17 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
       <div class="tutor-details-header">
         <div class="tutor-details-header-left "><img [src]="tutor.img" alt="Tutor" /></div>
         <div class="tutor-details-header-right">
-          <div class="tutor-details-title">
-            <h2 class="tutor-details-name">{{ getTutorName(tutor.name, tutor.firstSurname) }}</h2>
-            <div class="tutor-details-actions">
-              <mat-icon class="tutor-details-star">{{ rateIcon }}</mat-icon>
+          <div class="tutor-details-header-title">
+            <h2 class="tutor-details-header-name">
+              {{ getTutorName(tutor.name, tutor.firstSurname) }}
+            </h2>
+            <div class="tutor-details-header-actions">
+              <mat-icon class="tutor-details-header-star">{{ rateIcon }}</mat-icon>
               <h2>{{ tutor.rate }}</h2>
               <mat-icon [class]="getFavoriteStyle()" (click)="onClickFavorite()">
                 {{ getFavoriteIcon() }}
               </mat-icon>
-              <mat-icon class="tutor-details-message">{{ sendMsgIcon }}</mat-icon>
+              <mat-icon class="tutor-details-header-message">{{ sendMsgIcon }}</mat-icon>
             </div>
           </div>
           <h2 class="tutor-details-short-description">{{ tutor.descriptionShort }}</h2>
