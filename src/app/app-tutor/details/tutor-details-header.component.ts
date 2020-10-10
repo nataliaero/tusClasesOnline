@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MESSAGES } from '../../../messages';
 import { Tutor } from '../types';
 import { MobileService } from '../../../services';
@@ -49,6 +49,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
     </ng-container>
   `,
   styleUrls: ['./tutor-details-header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TutorDetailsComponentHeader {
   constructor(private mobileService: MobileService) {}
