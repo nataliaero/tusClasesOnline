@@ -1,7 +1,7 @@
 @use '../../../variables';
+@use '../../../mixins';
 
 $max-width-content: 1050px;
-$separator-width: 986px;
 
 :host {
   display: flex;
@@ -24,6 +24,9 @@ $separator-width: 986px;
   max-width: $max-width-content;
   padding: variables.$spacing * 2 variables.$spacing * 4;
   box-shadow: 6px 6px 5px -2px rgba(96, 96, 96, 1);
+  @include mixins.tablet {
+    padding: variables.$spacing * 2;
+  }
 }
 
 .tutor-details-content-title {
@@ -39,7 +42,9 @@ $separator-width: 986px;
   margin: variables.$spacing auto;
 }
 
-.tutor-details-subjects {
+.tutor-details-subjects,
+.tutor-details-speaks,
+.tutor-details-degrees {
   display: flex;
   flex-direction: row;
   margin-bottom: variables.$unit * 3;
@@ -47,17 +52,37 @@ $separator-width: 986px;
 
   div:first-child {
     display: flex;
+    align-items: center;
     width: 40%;
-  }
-
-  .tutor-details-tags {
-    border: 1px solid variables.$primary-color;
-    border-radius: variables.$border-radius;
-    padding: variables.$unit;
-    margin: variables.$spacing;
   }
 
   mat-icon {
     color: variables.$primary-color;
+  }
+
+  p {
+    width: 60%;
+  }
+}
+
+.tutor-details-subjects,
+.tutor-details-degrees {
+  @include mixins.mobile {
+    div,
+    p {
+      width: 100%;
+    }
+    flex-direction: column;
+  }
+}
+
+.tutor-video {
+  text-align: center;
+  margin-top: variables.$spacing;
+  video {
+    width: 600px;
+    @include mixins.mobile {
+      width: 100%;
+    }
   }
 }

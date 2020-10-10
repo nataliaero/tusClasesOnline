@@ -15,6 +15,13 @@ import { DegreeType, SubjectLevels } from '../types';
       <div class="tutor-details-about-the-tutor">
         <h2 class="tutor-details-content-title">{{ msg.aboutTheTutor }}</h2>
         <p>{{ tutor.descriptionLong }}</p>
+        <div class="tutor-video">
+          <video controls controlsList="nodownload" disablePictureInPicture>
+            <source [src]="tutor.video" type="video/mp4" />
+            {{ msg.videoNotSupported }}
+          </video>
+        </div>
+
         <div class="tutor-details-separator"></div>
         <h2 class="tutor-details-content-title">{{ msg.subjects }}</h2>
         <div *ngFor="let el of tutor.subjects" class="tutor-details-subjects">
@@ -22,25 +29,25 @@ import { DegreeType, SubjectLevels } from '../types';
             <mat-icon>chevron_right</mat-icon>
             <span>{{ el.subject }}</span>
           </div>
-          <span>{{ getLevels(el.levels) }}</span>
+          <p>{{ getLevels(el.levels) }}</p>
         </div>
         <div class="tutor-details-separator"></div>
         <h2 class="tutor-details-content-title">{{ msg.speaks }}</h2>
-        <div *ngFor="let el of tutor.speaks" class="tutor-details-subjects">
+        <div *ngFor="let el of tutor.speaks" class="tutor-details-speaks">
           <div>
             <mat-icon>chevron_right</mat-icon>
             <span>{{ el.language }}</span>
           </div>
-          <span>{{ el.level }}</span>
+          <p>{{ el.level }}</p>
         </div>
         <div class="tutor-details-separator"></div>
         <h2 class="tutor-details-content-title">{{ msg.certifications }}</h2>
-        <div *ngFor="let el of tutor.degrees" class="tutor-details-subjects">
+        <div *ngFor="let el of tutor.degrees" class="tutor-details-degrees">
           <div>
             <mat-icon>chevron_right</mat-icon>
             <span>{{ getDegree(el.title) }}</span>
           </div>
-          <span>{{ el.description }}</span>
+          <p>{{ el.description }}</p>
         </div>
       </div>
     </div>

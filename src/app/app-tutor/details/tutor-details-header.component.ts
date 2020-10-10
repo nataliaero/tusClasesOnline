@@ -9,52 +9,42 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   selector: 'app-tutor-details-header',
   template: `
     <ng-container *ngIf="tutor">
-      <div class="tutor-details-header-content">
-        <div class="tutor-details-header-left">
-          <img class="tutor-details-image" [src]="tutor.img" alt="Tutor" />
-          <div class="tutor-details-header-main">
-            <div class="tutor-details-title">
-              <h2 class="tutor-details-name">{{ getTutorName(tutor.name, tutor.firstSurname) }}</h2>
-              <div class="tutor-details-actions">
-                <mat-icon class="tutor-details-star">{{ rateIcon }}</mat-icon>
-                <h3>{{ tutor.rate }}</h3>
-                <mat-icon [class]="getFavoriteStyle()" (click)="onClickFavorite()">
-                  {{ getFavoriteIcon() }}
-                </mat-icon>
-                <mat-icon class="tutor-details-message">{{ sendMsgIcon }}</mat-icon>
-              </div>
-            </div>
-            <h2 class="tutor-details-short-description">{{ tutor.descriptionShort }}</h2>
-            <div class="tutor-details-header-item">
-              <mat-icon *ngIf="!isMobile$ | async">{{ ratingsIcon }}</mat-icon>
-              <h3>{{ tutor.classCount }} {{ msg.numberClasses }}</h3>
-            </div>
-            <div class="tutor-details-header-item">
-              <h3>{{ tutor.ratingsCount }} {{ msg.ratings }}</h3>
-            </div>
-            <div class="tutor-details-header-item">
-              <h3>{{ tutor.fee }} {{ RATE_HOUR }}</h3>
+      <div class="tutor-details-header">
+        <div class="tutor-details-header-left "><img [src]="tutor.img" alt="Tutor" /></div>
+        <div class="tutor-details-header-right">
+          <div class="tutor-details-header-title">
+            <h2 class="tutor-details-header-name">
+              {{ getTutorName(tutor.name, tutor.firstSurname) }}
+            </h2>
+            <div class="tutor-details-header-actions">
+              <mat-icon class="tutor-details-header-star">{{ rateIcon }}</mat-icon>
+              <h2>{{ tutor.rate }}</h2>
+              <mat-icon [class]="getFavoriteStyle()" (click)="onClickFavorite()">
+                {{ getFavoriteIcon() }}
+              </mat-icon>
+              <mat-icon class="tutor-details-header-message">{{ sendMsgIcon }}</mat-icon>
             </div>
           </div>
+          <h2 class="tutor-details-short-description">{{ tutor.descriptionShort }}</h2>
+          <div class="tutor-details-header-item">
+            <mat-icon *ngIf="(isMobile$ | async) === false">{{ ratingsIcon }}</mat-icon>
+            <h3>{{ tutor.classCount }} {{ msg.numberClasses }}</h3>
+          </div>
+          <div class="tutor-details-header-item">
+            <h3>{{ tutor.ratingsCount }} {{ msg.ratings }}</h3>
+          </div>
+          <div class="tutor-details-header-item">
+            <h3>{{ tutor.fee }} {{ RATE_HOUR }}</h3>
+          </div>
+          <div class="tutor-details-send-message">
+            <app-button
+              [icon]="bookClassIcon"
+              [fontSize]="buttonFontSize"
+              [iconSize]="buttonIconSize"
+              [message]="msg.bookAClass"
+            ></app-button>
+          </div>
         </div>
-        <video
-          class="tutor-details-video"
-          height="200"
-          controls
-          controlsList="nodownload"
-          disablePictureInPicture
-        >
-          <source [src]="tutor.video" type="video/mp4" />
-          {{ msg.videoNotSupported }}
-        </video>
-      </div>
-      <div class="tutor-details-send-message">
-        <app-button
-          [icon]="bookClassIcon"
-          [fontSize]="buttonFontSize"
-          [iconSize]="buttonIconSize"
-          [message]="msg.bookAClass"
-        ></app-button>
       </div>
     </ng-container>
   `,

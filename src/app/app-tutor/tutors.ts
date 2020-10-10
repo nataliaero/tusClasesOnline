@@ -19,7 +19,11 @@ export const TUTORS: Tutor[] = [
     classDurationMinutes: 60,
     degrees: [
       { title: DegreeType.Degree, description: 'Licenciado En Lengua Inglesa' },
-      { title: DegreeType.Degree, description: 'Licenciado en ingenieria de software' },
+      {
+        title: DegreeType.Degree,
+        description:
+          'Licenciado en ingenieria de software por la Universidad Politécnica de Madrid (España)',
+      },
       { title: DegreeType.Master, description: 'Postgrado en ciberseguridad' },
       {
         title: DegreeType.Doctorate,
@@ -35,10 +39,12 @@ export const TUTORS: Tutor[] = [
       {
         subject: 'Programación',
         levels: [
+          SubjectLevels.Preschool,
           SubjectLevels.Primary,
           SubjectLevels.Secondary,
           SubjectLevels.Superior,
           SubjectLevels.Adults,
+          SubjectLevels.University,
         ],
       },
       {
