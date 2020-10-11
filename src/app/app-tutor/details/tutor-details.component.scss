@@ -1,4 +1,7 @@
 @use '../../../variables';
+@use '../../../mixins';
+
+$max-width-content: 1050px;
 
 :host {
   display: flex;
@@ -11,12 +14,60 @@
   align-items: center;
 }
 
-app-calendar-available-time {
+.tutor-details-calendar {
+  background-color: variables.$grey-xxxlight;
+  margin-bottom: variables.$spacing * 2;
+}
+
+.tutor-details-calendar-content {
   background-color: variables.$white;
+  max-width: $max-width-content;
+  padding: variables.$spacing * 2 variables.$spacing * 4;
+  box-shadow: 6px 6px 5px -2px rgba(96, 96, 96, 1);
+  @include mixins.tablet {
+    padding: variables.$spacing * 2;
+  }
+}
+
+.tutor-details-calendar-separator {
+  height: 0.1px;
   display: flex;
-  flex-direction: row;
-  width: 100%;
   justify-content: center;
   align-items: center;
-  padding: variables.$spacing * 3 0 variables.$spacing * 2 0;
+  border: 0.1px solid variables.$grey-xxlight;
+  margin: variables.$half-unit auto;
+  margin-bottom: variables.$spacing;
+}
+
+.tutor-details-calendar-paginator {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: variables.$spacing 0;
+
+  mat-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid variables.$grey-xlight;
+    padding: 0 variables.$spacing;
+    color: variables.$secondary-color;
+    cursor: pointer;
+  }
+
+  .icon-enabled {
+    border: 1px solid variables.$grey-xlight;
+    color: variables.$secondary-color;
+    cursor: pointer;
+  }
+
+  .icon-disabled {
+    border: 1px solid variables.$grey-xlight;
+    color: variables.$grey-xlight;
+    cursor: none;
+  }
+}
+
+.tutor-details-calendar-paginator-dates {
+  margin-left: variables.$spacing;
 }

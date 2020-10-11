@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { AVAILABLE_TIME, AvailableTime } from '../app-calendar';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Tutor, TutorFilter } from './types';
+
 import { INITIAL_FILTERS } from './filters/tutor-filters.component';
+import { Injectable } from '@angular/core';
 import { TUTORS } from './tutors';
 import { map } from 'rxjs/operators';
-import { AvailableTime, AVAILABLE_TIME } from '../app-calendar';
 
 @Injectable()
 export class TutorService {
@@ -26,7 +27,11 @@ export class TutorService {
     return of(TUTORS.find(el => el.id === id));
   }
 
-  getTutorAvailableTimes(id: string): Observable<AvailableTime[]> {
+  getTutorAvailableTimes(
+    tutorId: string,
+    initialDate: number,
+    finalDate: number,
+  ): Observable<AvailableTime[]> {
     return of(AVAILABLE_TIME);
   }
 
