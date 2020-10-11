@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { AvailableTime } from './types';
 
+import { AvailableTime } from './types';
 
 @Component({
   selector: 'app-calendar-available-time',
@@ -14,5 +14,3 @@ import { AvailableTime } from './types';
 export class AppAvailableCalendarComponent {
   @Input() availableTimes: AvailableTime[];
 }
-
-

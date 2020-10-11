@@ -7,5 +7,9 @@
   "tabWidth": 2,
   "trailingComma": "all",
   "useTabs": false,
-  "htmlWhitespaceSensitivity": "ignore"
+  "htmlWhitespaceSensitivity": "ignore",
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": true
+  }
 }

@@ -1,19 +1,20 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+
 import { ActivatedRoute } from '@angular/router';
+import { AppBarService } from '../../../services';
 import { TutorService } from '../tutor.service';
 import { switchMap } from 'rxjs/operators';
-import { AppBarService } from '../../../services';
 
 @Component({
   selector: 'app-tutor-details',
   template: `
     <app-tutor-details-header [tutor]="tutor$ | async"></app-tutor-details-header>
-    <app-tutor-details-about [tutor]="tutor$ | async" ></app-tutor-details-about>
+    <app-tutor-details-about [tutor]="tutor$ | async"></app-tutor-details-about>
     <div>
-      <app-calendar-available-time [availableTimes]="availableTimes$ | async">
-      </app-calendar-available-time>
+      <app-calendar-available-time
+        [availableTimes]="availableTimes$ | async"
+      ></app-calendar-available-time>
     </div>
-
   `,
   styleUrls: ['./tutor-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
