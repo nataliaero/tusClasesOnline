@@ -10,3 +10,13 @@
   justify-content: center;
   align-items: center;
 }
+
+app-calendar-available-time {
+  background-color: variables.$white;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: variables.$spacing * 3 0 variables.$spacing * 2 0;
+}

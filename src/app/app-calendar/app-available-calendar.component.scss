@@ -1,0 +1,19 @@
+@use '../../variables';
+@use '../../mixins';
+
+:host {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar-separator {
+  height: 1px;
+  background-color: variables.$primary-color;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: variables.$unit 0;
+}

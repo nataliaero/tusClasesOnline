@@ -4,6 +4,7 @@ import { Tutor, TutorFilter } from './types';
 import { INITIAL_FILTERS } from './filters/tutor-filters.component';
 import { TUTORS } from './tutors';
 import { map } from 'rxjs/operators';
+import { AvailableTime, AVAILABLE_TIME } from '../app-calendar';
 
 @Injectable()
 export class TutorService {
@@ -23,6 +24,10 @@ export class TutorService {
 
   getTutor(id: string): Observable<Tutor> {
     return of(TUTORS.find(el => el.id === id));
+  }
+
+  getTutorAvailableTimes(id: string): Observable<AvailableTime[]> {
+    return of(AVAILABLE_TIME);
   }
 
   destroy(): void {
