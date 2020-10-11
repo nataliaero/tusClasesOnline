@@ -1,14 +1,27 @@
 @use '../../variables';
 @use '../../mixins';
 
-$separator-width: 70px;
+$separator-width: 80px;
 
 :host {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
   width: 100%;
+}
+
+.calendar-available-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+
+  p:first-of-type {
+    margin-bottom: variables.$half-unit;
+  }
+}
+
+.calendar-available-time:not(:first-of-type) {
+  margin-left: variables.$unit * 3;
 }
 
 .calendar-separator {
@@ -18,10 +31,20 @@ $separator-width: 70px;
   width: $separator-width;
 }
 
-.calendar-available-week-day {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-left: variables.$spacing;
+.week-day-now {
+  color: variables.$primary-color;
+}
+
+.month-day-now {
+  color: variables.$primary-color;
+}
+
+.calendar-times {
+  p {
+    cursor: pointer;
+  }
+
+  p:hover {
+    color: variables.$primary-color;
+  }
 }

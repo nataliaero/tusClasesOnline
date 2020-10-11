@@ -30,7 +30,7 @@ const MONTHS = [
     <app-tutor-details-about [tutor]="tutor$ | async"></app-tutor-details-about>
     <div *ngIf="tutor$ | async as tutor" class="tutor-details-calendar">
       <div class="tutor-details-calendar-content">
-        <h2>Reserva una clase particular online</h2>
+        <h2>Reserva tus clases online</h2>
         <div class="tutor-details-calendar-separator"></div>
         <p>Las clases tienen una duración de {{ tutor.classDurationMinutes }} minutos</p>
         <div class="tutor-details-calendar-paginator">
@@ -42,6 +42,7 @@ const MONTHS = [
         </div>
         <app-calendar-available-time
           [availableTimes]="availableTimes$ | async"
+          [isInitialDateNow]="isInitialDateNow()"
         ></app-calendar-available-time>
       </div>
     </div>
@@ -60,11 +61,7 @@ export class TutorDetailsComponent implements OnInit {
     switchMap(params => this.tutorService.getTutor(params.get('id'))),
   );
 
-  /**
-   * Today's date in milliseconds from 1970
-   */
   DATE_NOW = Date.now();
-
   initialDate$ = new BehaviorSubject<number>(this.DATE_NOW);
   finalDate$ = new BehaviorSubject<number>(this.DATE_NOW + INCREASE_DAY * 6);
 
@@ -74,7 +71,7 @@ export class TutorDetailsComponent implements OnInit {
     ),
   );
 
-  private isInitialDateNow(): boolean {
+  isInitialDateNow(): boolean {
     return String(new Date(this.initialDate$.value)) === String(new Date(this.DATE_NOW));
   }
 
