@@ -56,6 +56,10 @@ export class TutorDetailsComponent implements OnInit {
     private tutorService: TutorService,
   ) {}
 
+  tutor$ = this.route.paramMap.pipe(
+    switchMap(params => this.tutorService.getTutor(params.get('id'))),
+  );
+
   /**
    * Today's date in milliseconds from 1970
    */
@@ -70,16 +74,12 @@ export class TutorDetailsComponent implements OnInit {
     ),
   );
 
-  tutor$ = this.route.paramMap.pipe(
-    switchMap(params => this.tutorService.getTutor(params.get('id'))),
-  );
-
   private isInitialDateNow(): boolean {
     return String(new Date(this.initialDate$.value)) === String(new Date(this.DATE_NOW));
   }
 
   getClassReduceDate(): string {
-    return this.isInitialDateNow ? 'icon-disabled' : 'icon-enabled';
+    return this.isInitialDateNow() ? 'icon-disabled' : 'icon-enabled';
   }
 
   getPaginatorDates(initial: number, final: number): string {
@@ -89,8 +89,8 @@ export class TutorDetailsComponent implements OnInit {
     const initialYear = initialDate.getFullYear();
     const finalYear = finalDate.getFullYear();
 
-    const initialMonth = MONTHS[initialDate.getMonth() - 1];
-    const finalMonth = MONTHS[finalDate.getMonth() - 1];
+    const initialMonth = MONTHS[initialDate.getMonth()];
+    const finalMonth = MONTHS[finalDate.getMonth()];
 
     const initialDay = initialDate.getDate();
     const finalDay = finalDate.getDate();

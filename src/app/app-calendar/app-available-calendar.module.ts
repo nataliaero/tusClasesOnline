@@ -1,6 +1,6 @@
+import { AppAvailableCalendarComponent } from './app-available-calendar.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { AppAvailableCalendarComponent } from './app-available-calendar.component';
 
 @NgModule({
   declarations: [AppAvailableCalendarComponent],

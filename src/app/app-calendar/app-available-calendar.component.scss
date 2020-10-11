@@ -1,19 +1,27 @@
 @use '../../variables';
 @use '../../mixins';
 
+$separator-width: 70px;
+
 :host {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .calendar-separator {
-  height: 1px;
+  height: 3px;
   background-color: variables.$primary-color;
-  width: 20%;
+  margin: variables.$unit 0;
+  width: $separator-width;
+}
+
+.calendar-available-week-day {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: variables.$unit 0;
+  margin-left: variables.$spacing;
 }
