@@ -5,6 +5,14 @@ $separator-width: 80px;
 
 :host {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.calendar-available-times {
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
   width: 100%;
 }
@@ -47,4 +55,37 @@ $separator-width: 80px;
   p:hover {
     color: variables.$primary-color;
   }
+}
+
+.calendar-paginator {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: variables.$spacing 0;
+
+  mat-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid variables.$grey-xlight;
+    padding: 0 variables.$spacing;
+    color: variables.$secondary-color;
+    cursor: pointer;
+  }
+
+  .icon-enabled {
+    border: 1px solid variables.$grey-xlight;
+    color: variables.$secondary-color;
+    cursor: pointer;
+  }
+
+  .icon-disabled {
+    border: 1px solid variables.$grey-xlight;
+    color: variables.$grey-xlight;
+    cursor: none;
+  }
+}
+
+.calendar-paginator-dates {
+  margin-left: variables.$spacing;
 }
