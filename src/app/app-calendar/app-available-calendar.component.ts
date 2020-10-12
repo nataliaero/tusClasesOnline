@@ -47,10 +47,11 @@ interface CalendarElement {
     <div *ngIf="availableTimes$ | async as availableTimes" class="calendar-available-times">
       <table
         *ngIf="displayedColumns$ | async as displayedColumns"
+        class="calendar-table"
         mat-table
         [dataSource]="dataSource$ | async"
       >
-        <ng-container matColumnDef="hours">
+        <ng-container matColumnDef="hours" sticky>
           <th mat-header-cell *matHeaderCellDef>Horas</th>
           <td mat-cell *matCellDef="let element">{{ element.hours }}</td>
         </ng-container>
@@ -64,7 +65,7 @@ interface CalendarElement {
           <td mat-cell *matCellDef="let element">{{ element[getWeekDay(availableTime.date)] }}</td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
