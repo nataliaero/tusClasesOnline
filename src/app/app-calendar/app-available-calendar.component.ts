@@ -1,8 +1,8 @@
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { Component, Input } from '@angular/core';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 import { CalendarService } from './calendar.service';
-import { switchMap } from 'rxjs/operators';
 
 const WEEK_DAY = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
@@ -23,6 +23,17 @@ const MONTHS = [
   'Diciembre',
 ];
 
+interface CalendarElement {
+  hours: string;
+  Lunes: string;
+  Martes: string;
+  Miércoles: string;
+  Jueves: string;
+  Viernes: string;
+  Sábado: string;
+  Domingo: string;
+}
+
 @Component({
   selector: 'app-calendar-available-time',
   template: `
@@ -34,22 +45,28 @@ const MONTHS = [
       </p>
     </div>
     <div *ngIf="availableTimes$ | async as availableTimes" class="calendar-available-times">
-      <div
-        *ngFor="let availableTime of availableTimes; first as isFirst"
-        class="calendar-available-time"
+      <table
+        *ngIf="displayedColumns$ | async as displayedColumns"
+        mat-table
+        [dataSource]="dataSource$ | async"
       >
-        <div class="calendar-separator"></div>
-        <p [class.week-day-now]="isInitialDateNow && isFirst">
-          {{ getWeekDay(availableTime.date) }}
-        </p>
-        <p [class.month-day-now]="isInitialDateNow && isFirst">
-          {{ getMonthDay(availableTime.date) }}
-        </p>
-        <div class="calendar-separator"></div>
-        <div *ngFor="let time of availableTime.times" class="calendar-times">
-          <p>{{ getTime(time) }}</p>
-        </div>
-      </div>
+        <ng-container matColumnDef="hours">
+          <th mat-header-cell *matHeaderCellDef>Horas</th>
+          <td mat-cell *matCellDef="let element">{{ element.hours }}</td>
+        </ng-container>
+
+        <!-- Week Columns -->
+        <ng-container
+          *ngFor="let availableTime of availableTimes"
+          [matColumnDef]="getWeekDay(availableTime.date)"
+        >
+          <th mat-header-cell *matHeaderCellDef>{{ getWeekDay(availableTime.date) }}</th>
+          <td mat-cell *matCellDef="let element">{{ element[getWeekDay(availableTime.date)] }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
     </div>
   `,
   styleUrls: ['./app-available-calendar.component.scss'],
@@ -68,6 +85,34 @@ export class AppAvailableCalendarComponent {
     switchMap(([initialDate, finalDate]) =>
       this.calendarService.getTutorAvailableTimes(this.tutorId, initialDate, finalDate),
     ),
+  );
+
+  displayedColumns$: Observable<string[]> = this.availableTimes$.pipe(
+    map(availableTimes => {
+      const columns = ['hours'];
+      const weekDays = availableTimes.map(el => this.getWeekDay(el.date));
+      columns.push(...weekDays);
+      return columns;
+    }),
+  );
+
+  dataSource$: Observable<CalendarElement[]> = this.availableTimes$.pipe(
+    map(availableTimes => {
+      const row = { hours: '' };
+      availableTimes.forEach(el => {
+        row[this.getWeekDay(el.date)] = '';
+      });
+
+      const data = [];
+      for (let index = 9; index < 22; index++) {
+        data.push({
+          ...row,
+          hours: `${index}:00`,
+        });
+      }
+
+      return data;
+    }),
   );
 
   getWeekDay(date: number): string {

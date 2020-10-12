@@ -2,11 +2,12 @@ import { AppAvailableCalendarComponent } from './app-available-calendar.componen
 import { CalendarService } from './calendar.service';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [AppAvailableCalendarComponent],
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, MatTableModule],
   exports: [AppAvailableCalendarComponent],
   providers: [CalendarService],
 })
