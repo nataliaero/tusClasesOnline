@@ -2,6 +2,7 @@ import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { Component, Input } from '@angular/core';
 import { map, switchMap, tap } from 'rxjs/operators';
 
+import { AvailableTime } from './types';
 import { CalendarService } from './calendar.service';
 
 const WEEK_DAY = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -52,8 +53,10 @@ interface CalendarElement {
         [dataSource]="dataSource$ | async"
       >
         <ng-container matColumnDef="hours" sticky>
-          <th mat-header-cell *matHeaderCellDef>Horas</th>
-          <td mat-cell *matCellDef="let element">{{ element.hours }}</td>
+          <th mat-header-cell *matHeaderCellDef><p>Horas</p></th>
+          <td mat-cell *matCellDef="let element">
+            <p>{{ element.hours }}</p>
+          </td>
         </ng-container>
 
         <!-- Week Columns -->
@@ -61,8 +64,18 @@ interface CalendarElement {
           *ngFor="let availableTime of availableTimes"
           [matColumnDef]="getWeekDay(availableTime.date)"
         >
-          <th mat-header-cell *matHeaderCellDef>{{ getWeekDay(availableTime.date) }}</th>
-          <td mat-cell *matCellDef="let element">{{ element[getWeekDay(availableTime.date)] }}</td>
+          <th mat-header-cell *matHeaderCellDef>
+            <p>{{ getWeekDay(availableTime.date) }}</p>
+            <p>{{ getDay(availableTime.date) }}</p>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div
+              *ngIf="isClassAvailable(availableTime.date, element.hours) | async"
+              class="calendar-book-class"
+            >
+              <p>Reservar</p>
+            </div>
+          </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
@@ -105,7 +118,7 @@ export class AppAvailableCalendarComponent {
       });
 
       const data = [];
-      for (let index = 9; index < 22; index++) {
+      for (let index = 6; index < 24; index++) {
         data.push({
           ...row,
           hours: `${index}:00`,
@@ -118,6 +131,12 @@ export class AppAvailableCalendarComponent {
 
   getWeekDay(date: number): string {
     return WEEK_DAY[new Date(date).getDay()];
+  }
+
+  getDay(date: number): string {
+    const day = new Date(date).getDate();
+    const month = new Date(date).getMonth() + 1;
+    return `${day}/${month}`;
   }
 
   getMonthDay(date: number): number {
@@ -167,5 +186,18 @@ export class AppAvailableCalendarComponent {
   onIncreaseDate(): void {
     this.initialDate$.next(this.initialDate$.value + INCREASE_DAY * 6);
     this.finalDate$.next(this.finalDate$.value + INCREASE_DAY * 6);
+  }
+
+  isClassAvailable(date: number, hour: string): Observable<boolean> {
+    return this.availableTimes$.pipe(
+      map(availableTimes => {
+        const findDay = availableTimes.find(el => el.date === date);
+        if (!findDay) {
+          return false;
+        }
+        const hourId = hour.split(':').join('');
+        return findDay.times.includes(hourId);
+      }),
+    );
   }
 }

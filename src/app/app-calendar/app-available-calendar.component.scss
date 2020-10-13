@@ -21,6 +21,39 @@ $separator-width: 80px;
 
 .calendar-table {
   width: 100%;
+  th,
+  td {
+    text-align: center;
+  }
+
+  .mat-cell,
+  .mat-header-cell {
+    width: 100px;
+    text-align: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .mat-header-cell {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  th.mat-header-cell:first-of-type,
+  td.mat-cell:first-of-type,
+  td.mat-footer-cell:first-of-type {
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  th.mat-header-cell:first-of-type,
+  td.mat-cell:first-of-type,
+  td.mat-footer-cell:first-of-type {
+    padding-left: 0;
+  }
+
+  th.mat-header-cell:last-of-type,
+  td.mat-cell:last-of-type,
+  td.mat-footer-cell:last-of-type {
+    padding-right: 0;
+  }
 }
 
 .calendar-available-time {
@@ -94,4 +127,17 @@ $separator-width: 80px;
 
 .calendar-paginator-dates {
   margin-left: variables.$spacing;
+}
+
+.calendar-book-class {
+  background-color: variables.$primary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  p {
+    color: variables.$white;
+  }
 }
