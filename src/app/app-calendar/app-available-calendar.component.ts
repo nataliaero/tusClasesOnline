@@ -3,6 +3,7 @@ import { CALENDAR_MESSAGES, MONTHS, WEEK_DAY } from './app-available-calendar-me
 import { Component, Input } from '@angular/core';
 import { map, switchMap, tap } from 'rxjs/operators';
 
+import { AvailableTime } from './types';
 import { CalendarService } from './calendar.service';
 
 const INCREASE_DAY = 86400000;
@@ -35,6 +36,7 @@ interface CalendarElement {
         mat-table
         [dataSource]="dataSource$ | async"
       >
+        <!-- Hours Column -->
         <ng-container matColumnDef="hours" sticky>
           <th mat-header-cell *matHeaderCellDef>
             <p>{{ msg.hours }}</p>
@@ -57,8 +59,9 @@ interface CalendarElement {
             <div
               *ngIf="isClassAvailable(availableTime.date, element.hours) | async"
               class="calendar-book-class"
+              (click)="onSelectAvailableTime($event, availableTime.date, element.hours)"
             >
-              <p>{{ msg.book }}</p>
+              {{ msg.book }}
             </div>
           </td>
         </ng-container>
@@ -81,11 +84,16 @@ export class AppAvailableCalendarComponent {
   initialDate$ = new BehaviorSubject<number>(this.DATE_NOW);
   finalDate$ = new BehaviorSubject<number>(this.DATE_NOW + INCREASE_DAY * 6);
 
-  availableTimes$ = combineLatest([this.initialDate$, this.finalDate$]).pipe(
+  availableTimes$: Observable<AvailableTime[]> = combineLatest([
+    this.initialDate$,
+    this.finalDate$,
+  ]).pipe(
     switchMap(([initialDate, finalDate]) =>
       this.calendarService.getTutorAvailableTimes(this.tutorId, initialDate, finalDate),
     ),
   );
+
+  selectedTimes$ = new BehaviorSubject<AvailableTime[]>([]);
 
   displayedColumns$: Observable<string[]> = this.availableTimes$.pipe(
     map(availableTimes => {
@@ -185,5 +193,36 @@ export class AppAvailableCalendarComponent {
         return findDay.times.includes(hourId);
       }),
     );
+  }
+
+  getSelectedAvailableTimes(): AvailableTime[] {
+    return this.selectedTimes$.value;
+  }
+
+  onSelectAvailableTime(event: any, date: number, hour: string): void {
+    const classList = event.target.classList;
+    const classes = event.target.className;
+    classes.includes('calendar-book-class-selected')
+      ? classList.remove('calendar-book-class-selected')
+      : classList.add('calendar-book-class-selected');
+
+    const selectedTimes = this.getSelectedAvailableTimes();
+    const hourId = hour.split(':').join('');
+    const findDate = selectedTimes.find(el => el.date === date);
+    if (!findDate) {
+      this.selectedTimes$.next([...selectedTimes, { date, times: [hourId] }]);
+      return;
+    }
+
+    const findHour = findDate.times.includes(hourId);
+    if (!findHour) {
+      findDate.times.push(hourId);
+      this.selectedTimes$.next(selectedTimes);
+      return;
+    }
+
+    const findHourIndex = findDate.times.indexOf(hourId);
+    findDate.times.splice(findHourIndex, 1);
+    this.selectedTimes$.next(selectedTimes);
   }
 }

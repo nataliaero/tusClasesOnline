@@ -71,9 +71,7 @@ $calendar-height: 500px;
   height: 100%;
   width: 100%;
   cursor: pointer;
-  p {
-    color: variables.$white;
-  }
+  color: variables.$white;
 }
 
 .calendar-book-class:hover {
@@ -86,4 +84,8 @@ $calendar-height: 500px;
 
 .calendar-book-class-selected {
   background-color: variables.$yellow;
+}
+
+.calendar-book-class-selected:hover {
+  background-color: variables.$yellow-dark;
 }
