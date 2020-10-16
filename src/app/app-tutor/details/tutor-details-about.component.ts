@@ -26,25 +26,29 @@ import { MESSAGES } from '../../../messages';
         <p>{{ getLevels(el.levels) }}</p>
       </div>
 
-      <div class="tutor-details-separator"></div>
-      <h2 class="tutor-details-content-title">{{ msg.speaks }}</h2>
-      <div *ngFor="let el of tutor.speaks" class="tutor-details-speaks">
-        <div>
-          <mat-icon>chevron_right</mat-icon>
-          <span>{{ el.language }}</span>
+      <ng-container *ngIf="tutor.speaks.length">
+        <div class="tutor-details-separator"></div>
+        <h2 class="tutor-details-content-title">{{ msg.speaks }}</h2>
+        <div *ngFor="let el of tutor.speaks" class="tutor-details-speaks">
+          <div>
+            <mat-icon>chevron_right</mat-icon>
+            <span>{{ el.language }}</span>
+          </div>
+          <p>{{ el.level }}</p>
         </div>
-        <p>{{ el.level }}</p>
-      </div>
+      </ng-container>
 
-      <div class="tutor-details-separator"></div>
-      <h2 class="tutor-details-content-title">{{ msg.certifications }}</h2>
-      <div *ngFor="let el of tutor.degrees" class="tutor-details-degrees">
-        <div>
-          <mat-icon>chevron_right</mat-icon>
-          <span>{{ getDegree(el.title) }}</span>
+      <ng-container *ngIf="tutor.degrees.length">
+        <div class="tutor-details-separator"></div>
+        <h2 class="tutor-details-content-title">{{ msg.certifications }}</h2>
+        <div *ngFor="let el of tutor.degrees" class="tutor-details-degrees">
+          <div>
+            <mat-icon>chevron_right</mat-icon>
+            <span>{{ getDegree(el.title) }}</span>
+          </div>
+          <p>{{ el.description }}</p>
         </div>
-        <p>{{ el.description }}</p>
-      </div>
+      </ng-container>
     </div>
   `,
   styleUrls: ['./tutor-details-about.component.scss'],

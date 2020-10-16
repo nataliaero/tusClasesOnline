@@ -63,6 +63,12 @@ $calendar-height: 500px;
   margin-left: variables.$spacing;
 }
 
+.calendar-hour-cell {
+  p {
+    padding: variables.$unit;
+  }
+}
+
 .calendar-book-class {
   background-color: variables.$primary-color;
   display: flex;
@@ -72,6 +78,7 @@ $calendar-height: 500px;
   width: 100%;
   cursor: pointer;
   color: variables.$white;
+  padding: variables.$unit;
 }
 
 .calendar-book-class:hover {

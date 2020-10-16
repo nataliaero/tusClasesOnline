@@ -41,7 +41,12 @@ interface CalendarElement {
           <th mat-header-cell *matHeaderCellDef>
             <p>{{ msg.hours }}</p>
           </th>
-          <td mat-cell *matCellDef="let element">
+          <td
+            mat-cell
+            *matCellDef="let element"
+            class="calendar-hour-cell"
+            style="text-align:center"
+          >
             <p>{{ element.hours }}</p>
           </td>
         </ng-container>
