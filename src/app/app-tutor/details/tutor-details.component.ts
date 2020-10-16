@@ -1,5 +1,12 @@
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { BehaviorSubject, combineLatest } from 'rxjs';
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { AppBarService } from '../../../services';
@@ -26,7 +33,7 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./tutor-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TutorDetailsComponent implements OnInit {
+export class TutorDetailsComponent implements OnInit, AfterViewInit {
   constructor(
     private appBarService: AppBarService,
     private route: ActivatedRoute,
@@ -38,11 +45,16 @@ export class TutorDetailsComponent implements OnInit {
   );
 
   onClickBookClass(): void {
-    const calendar = document.getElementById('calendar');
-    calendar.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('calendar').scrollIntoView({ behavior: 'smooth' });
   }
 
   ngOnInit(): void {
     this.appBarService.updateStyle(true);
+  }
+
+  ngAfterViewInit(): void {
+    this.route.fragment.subscribe(f => {
+      document.getElementById('calendar').scrollIntoView();
+    });
   }
 }
