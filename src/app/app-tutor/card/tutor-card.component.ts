@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { MESSAGES } from '../../../messages';
-import { Tutor } from '../types';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MobileService, NavigationService } from '../../../services';
+
+import { MESSAGES } from '../../../messages';
+import { Observable } from 'rxjs';
+import { Tutor } from '../types';
 
 const MAX_LENGTH_DESCRIPTION = 150;
 
@@ -44,6 +45,8 @@ const MAX_LENGTH_DESCRIPTION = 150;
 
           <app-tutor-card-actions
             *ngIf="(isMobileOrTablet$ | async) === false"
+            (bookClass)="onBookClass(tutor.id)"
+            (sendMessage)="onSendMessage()"
           ></app-tutor-card-actions>
         </div>
       </div>
@@ -51,6 +54,8 @@ const MAX_LENGTH_DESCRIPTION = 150;
     <app-tutor-card-actions
       class="tutor-card-actions"
       *ngIf="isMobileOrTablet$ | async"
+      (bookClass)="onBookClass(tutor.id)"
+      (sendMessage)="onSendMessage()"
     ></app-tutor-card-actions>
   `,
   styleUrls: ['./tutor-card.component.scss'],
@@ -58,6 +63,8 @@ const MAX_LENGTH_DESCRIPTION = 150;
 export class TutorCardComponent {
   constructor(private mobileService: MobileService, private navigationService: NavigationService) {}
   @Input() tutor: Tutor;
+  @Output() bookClass = new EventEmitter<void>();
+  @Output() sendMessage = new EventEmitter<void>();
 
   RATE_HOUR = 'EUR/h';
   rateIcon = 'star';
@@ -93,5 +100,13 @@ export class TutorCardComponent {
 
   onClickCard(id: string): void {
     this.navigationService.goToTutorDetails(id);
+  }
+
+  onBookClass(id: string): void {
+    this.navigationService.goToTutorDetailsCalendar(id);
+  }
+
+  onSendMessage(): void {
+    console.log('onSendMessage');
   }
 }

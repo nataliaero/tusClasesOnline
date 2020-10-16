@@ -1,8 +1,6 @@
 @use '../../../variables';
 @use '../../../mixins';
 
-$button-width: 160px;
-
 .tutor-card-right-actions {
   display: flex;
   flex-direction: column;
@@ -15,7 +13,7 @@ $button-width: 160px;
 }
 
 .tutor-card-book-class-button {
-  width: $button-width;
+  width: 100%;
   background-color: variables.$primary-color;
   padding: variables.$unit;
   margin-bottom: variables.$unit;
@@ -28,7 +26,7 @@ $button-width: 160px;
 }
 
 .tutor-card-send-msg-button {
-  width: $button-width;
+  width: 100%;
   border: 1px solid variables.$primary-color;
   padding: variables.$unit;
   @include mixins.tablet {
