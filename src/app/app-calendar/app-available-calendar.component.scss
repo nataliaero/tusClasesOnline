@@ -1,7 +1,8 @@
 @use '../../variables';
 @use '../../mixins';
 
-$separator-width: 80px;
+$width-table-cell: 100px;
+$calendar-height: 500px;
 
 :host {
   display: flex;
@@ -15,84 +16,17 @@ $separator-width: 80px;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  height: 500px;
+  height: $calendar-height;
   overflow: auto;
 }
 
 .calendar-table {
   width: 100%;
-  th,
-  td {
-    text-align: center;
-  }
 
   .mat-cell,
   .mat-header-cell {
-    width: 100px;
+    width: $width-table-cell;
     text-align: center;
-    border-right: 1px solid rgba(0, 0, 0, 0.12);
-  }
-
-  .mat-header-cell {
-    border-top: 1px solid rgba(0, 0, 0, 0.12);
-  }
-
-  th.mat-header-cell:first-of-type,
-  td.mat-cell:first-of-type,
-  td.mat-footer-cell:first-of-type {
-    border-left: 1px solid rgba(0, 0, 0, 0.12);
-  }
-
-  th.mat-header-cell:first-of-type,
-  td.mat-cell:first-of-type,
-  td.mat-footer-cell:first-of-type {
-    padding-left: 0;
-  }
-
-  th.mat-header-cell:last-of-type,
-  td.mat-cell:last-of-type,
-  td.mat-footer-cell:last-of-type {
-    padding-right: 0;
-  }
-}
-
-.calendar-available-time {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-
-  p:first-of-type {
-    margin-bottom: variables.$half-unit;
-  }
-}
-
-.calendar-available-time:not(:first-of-type) {
-  margin-left: variables.$unit * 3;
-}
-
-.calendar-separator {
-  height: 3px;
-  background-color: variables.$primary-color;
-  margin: variables.$unit 0;
-  width: $separator-width;
-}
-
-.week-day-now {
-  color: variables.$primary-color;
-}
-
-.month-day-now {
-  color: variables.$primary-color;
-}
-
-.calendar-times {
-  p {
-    cursor: pointer;
-  }
-
-  p:hover {
-    color: variables.$primary-color;
   }
 }
 
@@ -140,4 +74,16 @@ $separator-width: 80px;
   p {
     color: variables.$white;
   }
+}
+
+.calendar-book-class:hover {
+  background-color: variables.$primary-color-dark;
+}
+
+.calendar-book-class-unselected {
+  background-color: variables.$primary-color;
+}
+
+.calendar-book-class-selected {
+  background-color: variables.$yellow;
 }

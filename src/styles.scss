@@ -99,3 +99,36 @@ input:focus {
     width: auto;
   }
 }
+
+$border-style: 1px solid rgba(0, 0, 0, 0.12);
+
+table {
+  .mat-cell,
+  .mat-header-cell {
+    border-right: $border-style;
+  }
+
+  .mat-header-cell {
+    border-top: $border-style;
+    background-color: variables.$grey-xxxlight;
+  }
+
+  th.mat-header-cell:first-of-type,
+  td.mat-cell:first-of-type,
+  td.mat-footer-cell:first-of-type {
+    border-left: $border-style;
+    background-color: variables.$grey-xxxlight;
+  }
+
+  th.mat-header-cell:first-of-type,
+  td.mat-cell:first-of-type,
+  td.mat-footer-cell:first-of-type {
+    padding-left: 0;
+  }
+
+  th.mat-header-cell:last-of-type,
+  td.mat-cell:last-of-type,
+  td.mat-footer-cell:last-of-type {
+    padding-right: 0;
+  }
+}

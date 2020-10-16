@@ -1,38 +1,21 @@
 import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
+import { CALENDAR_MESSAGES, MONTHS, WEEK_DAY } from './app-available-calendar-messages';
 import { Component, Input } from '@angular/core';
 import { map, switchMap, tap } from 'rxjs/operators';
 
-import { AvailableTime } from './types';
 import { CalendarService } from './calendar.service';
-
-const WEEK_DAY = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
 const INCREASE_DAY = 86400000;
 
-const MONTHS = [
-  'Enero',
-  'Febrero',
-  'Marzo',
-  'Abril',
-  'Mayo',
-  'Junio',
-  'Julio',
-  'Agosto',
-  'Septiembre',
-  'Octubre',
-  'Noviembre',
-  'Diciembre',
-];
-
 interface CalendarElement {
   hours: string;
-  Lunes: string;
-  Martes: string;
-  Miércoles: string;
-  Jueves: string;
-  Viernes: string;
-  Sábado: string;
-  Domingo: string;
+  monday: string;
+  tuesday: string;
+  wednesday: string;
+  thursday: string;
+  friday: string;
+  saturday: string;
+  sunday: string;
 }
 
 @Component({
@@ -53,7 +36,9 @@ interface CalendarElement {
         [dataSource]="dataSource$ | async"
       >
         <ng-container matColumnDef="hours" sticky>
-          <th mat-header-cell *matHeaderCellDef><p>Horas</p></th>
+          <th mat-header-cell *matHeaderCellDef>
+            <p>{{ msg.hours }}</p>
+          </th>
           <td mat-cell *matCellDef="let element">
             <p>{{ element.hours }}</p>
           </td>
@@ -73,7 +58,7 @@ interface CalendarElement {
               *ngIf="isClassAvailable(availableTime.date, element.hours) | async"
               class="calendar-book-class"
             >
-              <p>Reservar</p>
+              <p>{{ msg.book }}</p>
             </div>
           </td>
         </ng-container>
@@ -91,6 +76,7 @@ export class AppAvailableCalendarComponent {
 
   constructor(private calendarService: CalendarService) {}
 
+  msg = CALENDAR_MESSAGES;
   DATE_NOW = Date.now();
   initialDate$ = new BehaviorSubject<number>(this.DATE_NOW);
   finalDate$ = new BehaviorSubject<number>(this.DATE_NOW + INCREASE_DAY * 6);
