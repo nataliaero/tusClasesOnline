@@ -1,4 +1,4 @@
-import { AvailabilityId, LanguageLevel, SubjectLevels, Tutor, DegreeType } from './types';
+import { AvailabilityId, DegreeType, LanguageLevel, SubjectLevels, Tutor } from './types';
 
 export const TUTORS: Tutor[] = [
   {
@@ -239,11 +239,7 @@ export const TUTORS: Tutor[] = [
       { title: DegreeType.Degree, description: 'Filología rusa' },
       { title: DegreeType.Certificate, description: 'City & Guilds D32' },
     ],
-    speaks: [
-      { language: 'Ruso', level: LanguageLevel.Native },
-      { language: 'Español', level: LanguageLevel.C2 },
-      { language: 'Inglés', level: LanguageLevel.C2 },
-    ],
+    speaks: [],
     subjects: [
       {
         subject: 'Ruso',
@@ -309,11 +305,7 @@ export const TUTORS: Tutor[] = [
         description: 'Doctorado en ciberseguridad en la Universidad de Lausanne en Suiza',
       },
     ],
-    speaks: [
-      { language: 'Español', level: LanguageLevel.Native },
-      { language: 'Inglés', level: LanguageLevel.C2 },
-      { language: 'Francés', level: LanguageLevel.B1 },
-    ],
+    speaks: [],
     subjects: [
       {
         subject: 'Programación',

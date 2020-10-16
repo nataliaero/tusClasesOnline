@@ -1,0 +1,138 @@
+@use '../../variables';
+@use '../../mixins';
+
+$width-table-cell: 100px;
+$calendar-height: 500px;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.calendar-available-times {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: $calendar-height;
+  overflow: auto;
+}
+
+.calendar-table {
+  width: 100%;
+
+  .mat-cell,
+  .mat-header-cell {
+    width: $width-table-cell;
+    text-align: center;
+  }
+}
+
+.calendar-paginator {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: variables.$spacing 0;
+
+  mat-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid variables.$grey-xlight;
+    padding: 0 variables.$spacing;
+    color: variables.$secondary-color;
+    cursor: pointer;
+  }
+
+  .icon-enabled {
+    border: 1px solid variables.$grey-xlight;
+    color: variables.$secondary-color;
+    cursor: pointer;
+  }
+
+  .icon-disabled {
+    border: 1px solid variables.$grey-xlight;
+    color: variables.$grey-xlight;
+    cursor: none;
+  }
+}
+
+.calendar-paginator-dates {
+  margin-left: variables.$spacing;
+}
+
+.calendar-hour-cell {
+  p {
+    padding: 0 variables.$unit;
+  }
+}
+
+.calendar-book-class {
+  background-color: variables.$primary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  color: variables.$white;
+  padding: variables.$unit;
+}
+
+.calendar-book-class:hover {
+  background-color: variables.$primary-color-dark;
+}
+
+.calendar-book-class-selected {
+  background-color: variables.$yellow;
+}
+
+.calendar-book-class-selected:hover {
+  background-color: variables.$yellow-dark;
+}
+
+.calendar-book-class-booked {
+  background-color: variables.$green;
+}
+
+.calendar-book-class-booked:hover {
+  background-color: variables.$green-dark;
+}
+
+.calendar-book-available-times {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-self: flex-end;
+  margin: variables.$spacing * 2 0;
+  color: variables.$secondary-color;
+
+  app-button {
+    padding: variables.$unit variables.$spacing;
+    background-color: variables.$green;
+    margin: 0 variables.$unit;
+  }
+
+  app-button:hover {
+    background-color: variables.$green-dark;
+  }
+
+  app-button:active {
+    background-color: variables.$green-xdark;
+  }
+
+  .calendar-cancel {
+    color: variables.$green;
+    cursor: pointer;
+  }
+
+  .calendar-cancel:hover {
+    color: variables.$green-dark;
+  }
+
+  .calendar-cancel:active {
+    color: variables.$green-xdark;
+  }
+}

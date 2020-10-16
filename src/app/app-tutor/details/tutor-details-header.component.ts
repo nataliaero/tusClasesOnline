@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { MESSAGES } from '../../../messages';
-import { Tutor } from '../types';
 import { MobileService } from '../../../services';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Observable } from 'rxjs';
+import { Tutor } from '../types';
 
 @Component({
   selector: 'app-tutor-details-header',
@@ -42,6 +42,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
               [fontSize]="buttonFontSize"
               [iconSize]="buttonIconSize"
               [message]="msg.bookAClass"
+              (click)="bookClass.emit()"
             ></app-button>
           </div>
         </div>
@@ -51,10 +52,11 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./tutor-details-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TutorDetailsComponentHeader {
+export class TutorDetailsHeaderComponent {
   constructor(private mobileService: MobileService) {}
 
   @Input() tutor: Tutor;
+  @Output() bookClass = new EventEmitter<void>();
 
   rateIcon = 'star';
   ratingsIcon = 'equalizer';

@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Tutor, TutorFilter } from './types';
+
 import { INITIAL_FILTERS } from './filters/tutor-filters.component';
+import { Injectable } from '@angular/core';
 import { TUTORS } from './tutors';
-import { map } from 'rxjs/operators';
 
 @Injectable()
 export class TutorService {

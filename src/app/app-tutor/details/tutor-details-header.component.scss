@@ -96,12 +96,18 @@ $button-width-tablet: 200px;
 .tutor-details-favorite {
   color: variables.$primary-color;
   margin: 0 variables.$spacing * 2;
+  @include mixins.mobile {
+    margin: 0 variables.$unit;
+  }
   cursor: pointer;
 }
 
 .tutor-details-favorite-filled {
   color: variables.$terciary-color;
   margin: 0 variables.$spacing * 2;
+  @include mixins.mobile {
+    margin: 0 variables.$unit;
+  }
   cursor: pointer;
 }
 

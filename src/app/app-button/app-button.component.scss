@@ -28,3 +28,7 @@
   display: inline;
   font-family: variables.$primary-font;
 }
+
+.button-icon + .button-message {
+  margin-right: variables.$unit;
+}
