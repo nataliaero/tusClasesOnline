@@ -1,4 +1,5 @@
 import { AppAvailableCalendarComponent } from './app-available-calendar.component';
+import { AppButtonModule } from '../app-button';
 import { CalendarService } from './calendar.service';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,7 +8,7 @@ import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [AppAvailableCalendarComponent],
-  imports: [CommonModule, MatIconModule, MatTableModule],
+  imports: [AppButtonModule, CommonModule, MatIconModule, MatTableModule],
   exports: [AppAvailableCalendarComponent],
   providers: [CalendarService],
 })

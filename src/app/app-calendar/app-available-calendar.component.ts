@@ -70,6 +70,10 @@ interface CalendarElement {
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
+    <div *ngIf="selectedTimesLength$ | async" class="calendar-book-available-times">
+      <span>¿Quieres reservar las clases seleccionadas?</span>
+      <app-button [message]="'Validar'" (click)="onBookAvailableTimes()"></app-button>
+    </div>
   `,
   styleUrls: ['./app-available-calendar.component.scss'],
   providers: [CalendarService],
@@ -83,10 +87,12 @@ export class AppAvailableCalendarComponent {
   DATE_NOW = Date.now();
   initialDate$ = new BehaviorSubject<number>(this.DATE_NOW);
   finalDate$ = new BehaviorSubject<number>(this.DATE_NOW + INCREASE_DAY * 6);
+  reloadAvailableTimes$ = new BehaviorSubject<boolean>(true);
 
   availableTimes$: Observable<AvailableTime[]> = combineLatest([
     this.initialDate$,
     this.finalDate$,
+    this.reloadAvailableTimes$,
   ]).pipe(
     switchMap(([initialDate, finalDate]) =>
       this.calendarService.getTutorAvailableTimes(this.tutorId, initialDate, finalDate),
@@ -94,6 +100,8 @@ export class AppAvailableCalendarComponent {
   );
 
   selectedTimes$ = new BehaviorSubject<AvailableTime[]>([]);
+
+  selectedTimesLength$ = this.selectedTimes$.pipe(map(el => el.length));
 
   displayedColumns$: Observable<string[]> = this.availableTimes$.pipe(
     map(availableTimes => {
@@ -223,6 +231,17 @@ export class AppAvailableCalendarComponent {
 
     const findHourIndex = findDate.times.indexOf(hourId);
     findDate.times.splice(findHourIndex, 1);
+    if (!findDate.times.length) {
+      const findDateIndex = selectedTimes.findIndex(el => el.date === date);
+      selectedTimes.splice(findDateIndex, 1);
+    }
     this.selectedTimes$.next(selectedTimes);
+    console.log(this.selectedTimes$.value);
+  }
+
+  onBookAvailableTimes(): void {
+    // POST booked times
+    this.selectedTimes$.next([]);
+    this.reloadAvailableTimes$.next(true);
   }
 }
