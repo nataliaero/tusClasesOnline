@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { MESSAGES } from '../../../messages';
 import { MobileService } from '../../../services';
@@ -42,6 +42,7 @@ import { Tutor } from '../types';
               [fontSize]="buttonFontSize"
               [iconSize]="buttonIconSize"
               [message]="msg.bookAClass"
+              (click)="bookClass.emit()"
             ></app-button>
           </div>
         </div>
@@ -55,6 +56,7 @@ export class TutorDetailsHeaderComponent {
   constructor(private mobileService: MobileService) {}
 
   @Input() tutor: Tutor;
+  @Output() bookClass = new EventEmitter<void>();
 
   rateIcon = 'star';
   ratingsIcon = 'equalizer';

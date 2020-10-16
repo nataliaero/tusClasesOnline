@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TutorDetailsComponent } from './details/tutor-details.component';
+
+import { NgModule } from '@angular/core';
 import { SearchTutorComponent } from './search-tutor.component';
+import { TutorDetailsComponent } from './details/tutor-details.component';
 
 const routes: Routes = [
   {
