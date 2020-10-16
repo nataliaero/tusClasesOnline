@@ -23,6 +23,10 @@ export class NavigationService {
     this.router.navigate([`/tutor/tutor-details/${id}`]);
   }
 
+  goToTutorDetailsCalendar(id: string): void {
+    this.router.navigate([`/tutor/tutor-details/${id}`], { fragment: 'calendar' });
+  }
+
   goToRoot(): void {
     this.router.navigate(['/']);
   }

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, Output } from '@angular/core';
+
 import { MESSAGES } from '../../../messages';
 import { MobileService } from '../../../services';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -14,6 +15,7 @@ import { map } from 'rxjs/operators';
         [fontSize]="buttonFontSize"
         [iconSize]="buttonIconSize"
         [message]="bookClassMessage$ | async"
+        (click)="bookClass.emit()"
       ></app-button>
       <app-button
         class="tutor-card-send-msg-button"
@@ -22,6 +24,7 @@ import { map } from 'rxjs/operators';
         [fontSize]="buttonFontSize"
         [iconSize]="buttonIconSize"
         [message]="sendMessage$ | async"
+        (click)="sendMessage.emit()"
       ></app-button>
     </div>
   `,
@@ -29,6 +32,8 @@ import { map } from 'rxjs/operators';
 })
 export class TutorCardActionsComponent {
   constructor(private mobileService: MobileService) {}
+  @Output() bookClass = new EventEmitter<void>();
+  @Output() sendMessage = new EventEmitter<void>();
 
   bookClassIcon = 'event_available';
   sendMsgIcon = 'mail';
