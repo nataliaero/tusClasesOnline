@@ -65,7 +65,7 @@ $calendar-height: 500px;
 
 .calendar-hour-cell {
   p {
-    padding: variables.$unit;
+    padding: 0 variables.$unit;
   }
 }
 

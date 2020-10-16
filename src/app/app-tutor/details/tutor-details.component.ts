@@ -20,7 +20,7 @@ import { switchMap } from 'rxjs/operators';
         <div class="tutor-details-calendar-separator"></div>
         <p>Las clases tienen una duración de {{ tutor.classDurationMinutes }} minutos</p>
         <app-calendar-available-time
-          [tutorId]="tutor.id"
+          [tutor]="tutor$ | async"
           id="calendar"
         ></app-calendar-available-time>
       </div>

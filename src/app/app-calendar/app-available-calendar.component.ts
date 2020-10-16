@@ -5,6 +5,7 @@ import { map, switchMap, tap } from 'rxjs/operators';
 
 import { AvailableTime } from './types';
 import { CalendarService } from './calendar.service';
+import { Tutor } from '../app-tutor/types';
 
 const INCREASE_DAY = 86400000;
 
@@ -85,7 +86,7 @@ interface CalendarElement {
   providers: [CalendarService],
 })
 export class AppAvailableCalendarComponent {
-  @Input() tutorId: string;
+  @Input() tutor: Tutor;
 
   constructor(private calendarService: CalendarService) {}
 
@@ -101,7 +102,7 @@ export class AppAvailableCalendarComponent {
     this.reloadAvailableTimes$,
   ]).pipe(
     switchMap(([initialDate, finalDate]) =>
-      this.calendarService.getTutorAvailableTimes(this.tutorId, initialDate, finalDate),
+      this.calendarService.getTutorAvailableTimes(this.tutor.id, initialDate, finalDate),
     ),
   );
 
@@ -131,6 +132,12 @@ export class AppAvailableCalendarComponent {
           ...row,
           hours: `${index}:00`,
         });
+        if (this.tutor.classDurationMinutes === 30) {
+          data.push({
+            ...row,
+            hours: `${index}:30`,
+          });
+        }
       }
 
       return data;
