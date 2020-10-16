@@ -112,7 +112,7 @@ $calendar-height: 500px;
   app-button {
     padding: variables.$unit variables.$spacing;
     background-color: variables.$green;
-    margin-left: variables.$unit;
+    margin: 0 variables.$unit;
   }
 
   app-button:hover {
@@ -121,5 +121,18 @@ $calendar-height: 500px;
 
   app-button:active {
     background-color: variables.$green-xdark;
+  }
+
+  .calendar-cancel {
+    color: variables.$green;
+    cursor: pointer;
+  }
+
+  .calendar-cancel:hover {
+    color: variables.$green-dark;
+  }
+
+  .calendar-cancel:active {
+    color: variables.$green-xdark;
   }
 }

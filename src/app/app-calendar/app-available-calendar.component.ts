@@ -78,6 +78,7 @@ interface CalendarElement {
     <div *ngIf="selectedTimesLength$ | async" class="calendar-book-available-times">
       <span>¿Quieres reservar las clases seleccionadas?</span>
       <app-button [message]="'Validar'" (click)="onBookAvailableTimes()"></app-button>
+      <p class="calendar-cancel" (click)="onCancelAvailableTimes()">Cancelar</p>
     </div>
   `,
   styleUrls: ['./app-available-calendar.component.scss'],
@@ -241,11 +242,15 @@ export class AppAvailableCalendarComponent {
       selectedTimes.splice(findDateIndex, 1);
     }
     this.selectedTimes$.next(selectedTimes);
-    console.log(this.selectedTimes$.value);
   }
 
   onBookAvailableTimes(): void {
     // POST booked times
+    this.selectedTimes$.next([]);
+    this.reloadAvailableTimes$.next(true);
+  }
+
+  onCancelAvailableTimes(): void {
     this.selectedTimes$.next([]);
     this.reloadAvailableTimes$.next(true);
   }
