@@ -53,8 +53,8 @@ export class TutorDetailsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.route.fragment.subscribe(() => {
-      document.getElementById('calendar').scrollIntoView();
+    this.route.fragment.subscribe(fragment => {
+      document.getElementById(fragment).scrollIntoView();
     });
   }
 }
