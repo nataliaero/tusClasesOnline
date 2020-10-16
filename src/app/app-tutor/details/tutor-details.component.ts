@@ -19,10 +19,7 @@ import { switchMap } from 'rxjs/operators';
         <h2>Reserva tus clases online</h2>
         <div class="tutor-details-calendar-separator"></div>
         <p>Las clases tienen una duración de {{ tutor.classDurationMinutes }} minutos</p>
-        <app-calendar-available-time
-          [tutor]="tutor$ | async"
-          id="calendar"
-        ></app-calendar-available-time>
+        <app-calendar [tutor]="tutor$ | async" id="calendar"></app-calendar>
       </div>
     </div>
   `,

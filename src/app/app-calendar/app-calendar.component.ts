@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
-import { CALENDAR_MESSAGES, MONTHS, WEEK_DAY } from './app-available-calendar-messages';
+import { CALENDAR_MESSAGES, MONTHS, WEEK_DAY } from './app-calendar-messages';
 import { Component, Input } from '@angular/core';
 import { map, switchMap, tap } from 'rxjs/operators';
 
@@ -21,7 +21,7 @@ interface CalendarElement {
 }
 
 @Component({
-  selector: 'app-calendar-available-time',
+  selector: 'app-calendar',
   template: `
     <div class="calendar-paginator">
       <mat-icon [class]="getClassReduceDate()" (click)="onReduceDate()">chevron_left</mat-icon>
@@ -82,10 +82,10 @@ interface CalendarElement {
       <p class="calendar-cancel" (click)="onCancelAvailableTimes()">Cancelar</p>
     </div>
   `,
-  styleUrls: ['./app-available-calendar.component.scss'],
+  styleUrls: ['./app-calendar.component.scss'],
   providers: [CalendarService],
 })
-export class AppAvailableCalendarComponent {
+export class AppCalendarComponent {
   @Input() tutor: Tutor;
 
   constructor(private calendarService: CalendarService) {}

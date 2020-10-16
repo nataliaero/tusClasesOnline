@@ -1,5 +1,5 @@
-import { AppAvailableCalendarModule } from '../../app-calendar';
 import { AppButtonModule } from '../../app-button';
+import { AppCalendarModule } from '../../app-calendar';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
@@ -9,7 +9,7 @@ import { TutorDetailsHeaderComponent } from './tutor-details-header.component';
 
 @NgModule({
   declarations: [TutorDetailsAboutComponent, TutorDetailsHeaderComponent, TutorDetailsComponent],
-  imports: [AppButtonModule, AppAvailableCalendarModule, CommonModule, MatIconModule],
+  imports: [AppButtonModule, AppCalendarModule, CommonModule, MatIconModule],
   exports: [TutorDetailsComponent],
 })
 export class TutorDetailsModule {}
