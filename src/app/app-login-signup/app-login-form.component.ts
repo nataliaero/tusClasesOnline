@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Session, saveSession } from '../session';
 import { map, startWith, take, tap } from 'rxjs/operators';
 
 import { AppLoginApiService } from './app-login-api.service';
 import { BehaviorSubject } from 'rxjs';
 import { MESSAGES } from '../../messages';
+import { Session } from '../session';
+import { SessionService } from '../session';
 
 @Component({
   selector: 'app-login-form',
@@ -83,7 +84,10 @@ export class AppLoginFormComponent {
   @Output() register = new EventEmitter<string>();
   @Output() login = new EventEmitter<Session>();
 
-  constructor(private appLoginApiService: AppLoginApiService) {}
+  constructor(
+    private appLoginApiService: AppLoginApiService,
+    private sessionService: SessionService,
+  ) {}
 
   msg = {
     enter: MESSAGES['login.enter'],
@@ -160,8 +164,7 @@ export class AppLoginFormComponent {
           } else {
             this.isLoginFailed$.next(false);
             this.login.emit(session);
-            saveSession(session);
-            // TODO save session and cookies
+            this.sessionService.setSession(session);
           }
         }),
       )

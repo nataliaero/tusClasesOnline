@@ -1,6 +1,6 @@
 import { Session, serializeSession } from './session.io';
 
-const SESSION_STORAGE_ID = '@tusClasesOnline/session';
+export const SESSION_STORAGE_ID = '@tusClasesOnline/session';
 
 export function saveSession(session: Session): void {
   try {
