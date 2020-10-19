@@ -1,7 +1,6 @@
-import { Injectable, Inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { AppLoginComponent } from './app-login.component';
 import { AppSignupComponent } from './app-signup.component';
+import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 
 @Injectable()

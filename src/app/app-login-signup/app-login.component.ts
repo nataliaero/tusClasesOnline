@@ -1,9 +1,11 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { take } from 'rxjs/operators';
-import { MESSAGES } from '../../messages';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+
 import { AppSignupService } from './app-signup.service';
+import { MESSAGES } from '../../messages';
+import { MatDialogRef } from '@angular/material/dialog';
 import { RegisterType } from './types';
+import { Session } from '../session';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +24,7 @@ import { RegisterType } from './types';
           <span>{{ msg.initializeSession }}</span>
         </div>
       </div>
-      <app-login-form (register)="onRegister($event)"></app-login-form>
+      <app-login-form (register)="onRegister($event)" (login)="onLogin($event)"></app-login-form>
     </app-dialog>
   `,
   styleUrls: ['./app-login.component.scss'],
@@ -48,5 +50,11 @@ export class AppLoginComponent {
       registerType === RegisterType.Tutor ? this.msg.registerTutor : this.msg.registerStudent;
     this.appSignupService.openSignupDialog(title).pipe(take(1)).subscribe();
     this.dialogRef.close();
+  }
+
+  onLogin(session: Session): void {
+    console.log(session);
+    this.dialogRef.close();
+    // Navigate to student or tutor adequate page
   }
 }

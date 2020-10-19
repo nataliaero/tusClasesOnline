@@ -91,3 +91,8 @@ $height-button: 40px;
     width: $width-form-field-mobile;
   }
 }
+
+.invalid-credentials {
+  margin-top: -(variables.$unit * 3);
+  margin-bottom: variables.$spacing;
+}

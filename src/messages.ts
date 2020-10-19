@@ -9,6 +9,7 @@ export const MESSAGES = {
   'basic.passwordError':
     'La contraseña debe tener entre 8 y 15 caracteres y al menos un número, una letra y un caracter especial.',
   'basic.repeatPasswordError': 'Las contraseñas no coinciden.',
+  'basic.invalidCredentials': 'Tu usuario y/o contraseña no son válidos',
   'basic.rememberMe': 'Recuérdame',
   'basic.notRobot': 'No soy un robot',
   'basic.acceptLegalTerms': 'Acepto el aviso legal y de privacidad',

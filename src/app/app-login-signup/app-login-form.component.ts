@@ -1,9 +1,12 @@
-import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
-import { MESSAGES } from '../../messages';
-import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { startWith, map } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { map, startWith, take, tap } from 'rxjs/operators';
+
+import { AppLoginApiService } from './app-login-api.service';
 import { BehaviorSubject } from 'rxjs';
-import { passwordValidators } from './validators';
+import { MESSAGES } from '../../messages';
+import { Session } from '../session';
+import { SessionService } from '../session';
 
 @Component({
   selector: 'app-login-form',
@@ -47,6 +50,10 @@ import { passwordValidators } from './validators';
           {{ msg.mandatoryField }}
         </mat-error>
       </mat-form-field>
+      <mat-error *ngIf="isLoginFailed$ | async" class="invalid-credentials">
+        {{ msg.invalidCredentials }}
+      </mat-error>
+
       <div class="check-box">
         <mat-checkbox [formControl]="rememberMeFormControl">
           {{ msg.rememberMe }}
@@ -75,6 +82,12 @@ import { passwordValidators } from './validators';
 })
 export class AppLoginFormComponent {
   @Output() register = new EventEmitter<string>();
+  @Output() login = new EventEmitter<Session>();
+
+  constructor(
+    private appLoginApiService: AppLoginApiService,
+    private sessionService: SessionService,
+  ) {}
 
   msg = {
     enter: MESSAGES['login.enter'],
@@ -90,11 +103,12 @@ export class AppLoginFormComponent {
     registerTutor: MESSAGES['login.registerTutor'],
     or: MESSAGES['basic.or'],
     register: MESSAGES['login.register'],
+    invalidCredentials: MESSAGES['basic.invalidCredentials'],
   };
 
   loginForm: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required], passwordValidators),
+    password: new FormControl('', [Validators.required]),
     rememberMe: new FormControl(''),
   });
 
@@ -110,6 +124,7 @@ export class AppLoginFormComponent {
     return this.loginForm.get('rememberMe') as FormControl;
   }
 
+  isLoginFailed$ = new BehaviorSubject<boolean>(false);
   passwordType$ = new BehaviorSubject<string>('password');
   passwordIcon$ = new BehaviorSubject<string>('visibility');
 
@@ -132,9 +147,27 @@ export class AppLoginFormComponent {
   }
 
   submit(): void {
-    console.log('submit');
     if (this.loginForm.invalid) {
       return;
     }
+
+    this.appLoginApiService
+      .login({
+        username: this.usernameFormControl.value,
+        password: this.passwordFormControl.value,
+      })
+      .pipe(
+        take(1),
+        tap(session => {
+          if (!session) {
+            this.isLoginFailed$.next(true);
+          } else {
+            this.isLoginFailed$.next(false);
+            this.login.emit(session);
+            this.sessionService.setSession(session);
+          }
+        }),
+      )
+      .subscribe();
   }
 }
