@@ -13,11 +13,11 @@ export interface SignupDialogData {
       <div class="content">
         <div class="login-button facebook-button" tabIndex="-1">
           <img class="image-button" src="/assets/facebookLogo.png" alt="Facebook Logo" />
-          <span>{{ msg.enterWithFacebook }}</span>
+          {{ msg.enterWithFacebook }}
         </div>
         <div mat-raised-button class="login-button google-button" tabIndex="-1">
           <img class="image-button" src="/assets/googleLogo.png" alt="Google Logo" />
-          {{ msg.enterWithFacebook }}
+          {{ msg.enterWithGoogle }}
         </div>
         <div class="separator">
           <span>{{ msg.registerEmail }}</span>
