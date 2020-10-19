@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { passwordValidators, repeatPasswordValidators } from './validators';
@@ -99,6 +99,8 @@ import { MESSAGES } from '../../messages';
 export class AppSignUpFormComponent {
   constructor(private appLoginApiService: AppLoginApiService) {}
 
+  @Output() register = new EventEmitter<void>();
+
   msg = {
     enter: MESSAGES['signup.register'],
     email: MESSAGES['basic.email'],
@@ -172,6 +174,8 @@ export class AppSignUpFormComponent {
       username: this.usernameFormControl.value,
       password: this.passwordFormControl.value,
     });
+
+    this.register.emit();
   }
 
   private isRepeatPasswordCorrect(): ValidationErrors {

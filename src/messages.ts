@@ -54,6 +54,8 @@ export const MESSAGES = {
   'login.register': 'Regístrate',
   'login.enter': 'Acceder',
   'login.notRegisterYet': '¿Aún no te has registrado?',
+  'confirm.code': 'Código de confirmación',
+  'confirm.validate': 'Validar',
   'signup.registerStudent': 'Regístrate como alumno',
   'signup.registerTutor': 'Regístrate como tutor',
   'signup.enterWithFacebook': 'Regístrate con Facebook',
