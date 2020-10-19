@@ -1,6 +1,9 @@
 import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { MESSAGES } from '../../messages';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AppLoginApiService } from './app-login-api.service';
+import { AppConfirmService } from './app-confirm.service';
+import { take } from 'rxjs/operators';
 
 export interface SignupDialogData {
   title: string;
@@ -23,14 +26,18 @@ export interface SignupDialogData {
           <span>{{ msg.registerEmail }}</span>
         </div>
       </div>
-      <app-signup-form></app-signup-form>
+      <app-signup-form (register)="onRegister($event)"></app-signup-form>
     </app-dialog>
   `,
   styleUrls: ['./app-login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppSignupComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: SignupDialogData) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: SignupDialogData,
+    public dialogRef: MatDialogRef<AppSignupComponent>,
+    private appConfirmService: AppConfirmService,
+  ) {}
 
   msg = {
     enterWithFacebook: MESSAGES['signup.enterWithFacebook'],
@@ -38,4 +45,9 @@ export class AppSignupComponent {
     registerEmail: MESSAGES['signup.registerEmail'],
     enter: MESSAGES['login.enter'],
   };
+
+  onRegister(username: string): void {
+    this.dialogRef.close();
+    this.appConfirmService.openConfirmDialog(username).pipe(take(1)).subscribe();
+  }
 }

@@ -1,5 +1,7 @@
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
+import { AppConfirmComponent } from './app-confirm.component';
+import { AppConfirmService } from './app-confirm.service';
 import { AppDialogModule } from '../app-dialog';
 import { AppLoginApiService } from './app-login-api.service';
 import { AppLoginComponent } from './app-login.component';
@@ -18,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
+    AppConfirmComponent,
     AppLoginComponent,
     AppLoginFormComponent,
     AppSignupComponent,
@@ -36,6 +39,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [AppLoginComponent, AppLoginFormComponent, AppSignupComponent, AppSignUpFormComponent],
   providers: [
     AppLoginApiService,
+    AppConfirmService,
     AppLoginService,
     AppSignupService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
