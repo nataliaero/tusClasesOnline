@@ -16,7 +16,7 @@ const CLIENT_ID = environment.clientId;
 const USER_POOL_ID = environment.userPoolId;
 
 @Injectable()
-export class AppLoginApiService {
+export class AppAuthorizationService {
   private getUserPool(): CognitoUserPool {
     const poolData = {
       UserPoolId: USER_POOL_ID,

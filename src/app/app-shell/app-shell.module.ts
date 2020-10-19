@@ -1,20 +1,21 @@
-import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
+
+import { AppAuthorizationModule } from '../app-authorization';
+import { AppBarComponent } from './app-bar/app-bar.component';
+import { AppButtonModule } from '../app-button';
 import { AppShellComponent } from './app-shell.component';
 import { AppShellRoutingModule } from './app-shell.routing';
-import { RootComponent } from './root.component';
-import { AppBarComponent } from './app-bar/app-bar.component';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { AppButtonModule } from '../app-button';
-import { AppLoginSignupModule } from '../app-login-signup';
+import { CommonModule } from '@angular/common';
 import { FooterModule } from '../app-footer';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { RootComponent } from './root.component';
 
 @NgModule({
   declarations: [AppShellComponent, RootComponent, AppBarComponent],
   imports: [
     AppButtonModule,
-    AppLoginSignupModule,
+    AppAuthorizationModule,
     AppShellRoutingModule,
     CommonModule,
     MatIconModule,
