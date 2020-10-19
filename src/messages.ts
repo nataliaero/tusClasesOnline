@@ -41,7 +41,7 @@ export const MESSAGES = {
   'appBar.signIn': 'Entrar',
   'home.findBestTutors': 'Encuentra los mejores tutores',
   'home.startToday': 'Empieza hoy mismo con una clase particular',
-  'home.searchQuestion': '¿Qué quieres aprender?',
+  'home.searchQuestion': '  ¿Qué quieres aprender?',
   'home.firstClass':
     'Para que puedas probar nuestra plataforma, te ofrecemos tu primera clase gratis y sin compromiso',
   'home.firstClassTitle': 'Primera clase gratuita',
