@@ -40,7 +40,7 @@ export interface ConfirmDialogData {
       </form>
     </app-dialog>
   `,
-  styleUrls: ['./app-login-form.component.scss'],
+  styleUrls: ['./app-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppConfirmComponent {

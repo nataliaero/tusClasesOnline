@@ -77,7 +77,7 @@ import { SessionService } from '../session';
       <span class="link" (click)="onClickRegister('Tutor')">{{ msg.registerTutor }}</span>
     </div>
   `,
-  styleUrls: ['./app-login-form.component.scss'],
+  styleUrls: ['./app-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppLoginFormComponent {

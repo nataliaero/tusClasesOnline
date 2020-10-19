@@ -93,7 +93,7 @@ import { MESSAGES } from '../../messages';
       </button>
     </form>
   `,
-  styleUrls: ['./app-login-form.component.scss'],
+  styleUrls: ['./app-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppSignUpFormComponent {
