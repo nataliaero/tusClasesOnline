@@ -1,14 +1,15 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { map, startWith } from 'rxjs/operators';
-import { passwordValidators, repeatPasswordValidators } from './validators';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { map, startWith, take, tap } from 'rxjs/operators';
 
-import { AppLoginApiService } from './app-login-api.service';
+import { AppAuthorizationService } from './app-authorization.service';
 import { BehaviorSubject } from 'rxjs';
 import { MESSAGES } from '../../messages';
+import { Session } from '../session';
+import { SessionService } from '../session';
 
 @Component({
-  selector: 'app-signup-form',
+  selector: 'app-login-form',
   template: `
     <form novalidate [formGroup]="loginForm" (ngSubmit)="submit()">
       <div class="username-message">{{ msg.email }}</div>
@@ -29,7 +30,10 @@ import { MESSAGES } from '../../messages';
           {{ msg.emailError }}
         </mat-error>
       </mat-form-field>
-      <div class="password-message">{{ msg.password }}</div>
+      <div class="password-message">
+        <div>{{ msg.password }}</div>
+        <div class="link">{{ msg.forgetPassword }}</div>
+      </div>
       <mat-form-field class="form-field" appearance="outline">
         <input
           class="input"
@@ -45,41 +49,14 @@ import { MESSAGES } from '../../messages';
         <mat-error *ngIf="passwordFormControl.hasError('required')">
           {{ msg.mandatoryField }}
         </mat-error>
-        <mat-error *ngIf="passwordFormControl.hasError('passwordPattern')">
-          {{ msg.passwordError }}
-        </mat-error>
       </mat-form-field>
-      <div class="password-message">{{ msg.repeatPassword }}</div>
-      <mat-form-field class="form-field" appearance="outline">
-        <input
-          class="input"
-          matInput
-          name="repeatPassword"
-          [formControl]="repeatPasswordFormControl"
-          tabIndex="-1"
-          [type]="passwordType$ | async"
-        />
-        <mat-icon class="password-visibility" matSuffix (click)="onClickPasswordVisibility()">
-          {{ passwordIcon$ | async }}
-        </mat-icon>
-        <mat-error *ngIf="repeatPasswordFormControl.hasError('required')">
-          {{ msg.mandatoryField }}
-        </mat-error>
-        <mat-error *ngIf="repeatPasswordFormControl.hasError('passwordPattern')">
-          {{ msg.passwordError }}
-        </mat-error>
-        <mat-error *ngIf="repeatPasswordFormControl.hasError('passwordMatch')">
-          {{ msg.repeatPasswordError }}
-        </mat-error>
-      </mat-form-field>
+      <mat-error *ngIf="isLoginFailed$ | async" class="invalid-credentials">
+        {{ msg.invalidCredentials }}
+      </mat-error>
+
       <div class="check-box">
         <mat-checkbox [formControl]="rememberMeFormControl">
           {{ msg.rememberMe }}
-        </mat-checkbox>
-      </div>
-      <div class="check-box">
-        <mat-checkbox [formControl]="acceptLegalTermsFormControl">
-          {{ msg.acceptLegalTerms }}
         </mat-checkbox>
       </div>
       <button
@@ -92,37 +69,47 @@ import { MESSAGES } from '../../messages';
         {{ msg.enter }}
       </button>
     </form>
+    <div class="register-question">{{ msg.notRegisterYet }}</div>
+    <div class="register-links">
+      <span>{{ msg.register }}</span>
+      <span class="link" (click)="onClickRegister('Student')">{{ msg.registerStudent }}</span>
+      <span>{{ msg.or }}</span>
+      <span class="link" (click)="onClickRegister('Tutor')">{{ msg.registerTutor }}</span>
+    </div>
   `,
-  styleUrls: ['./app-login-form.component.scss'],
+  styleUrls: ['./app-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppSignUpFormComponent {
-  constructor(private appLoginApiService: AppLoginApiService) {}
-
+export class AppLoginFormComponent {
   @Output() register = new EventEmitter<string>();
+  @Output() login = new EventEmitter<Session>();
+
+  constructor(
+    private appAuthorizationService: AppAuthorizationService,
+    private sessionService: SessionService,
+  ) {}
 
   msg = {
-    enter: MESSAGES['signup.register'],
+    enter: MESSAGES['login.enter'],
     email: MESSAGES['basic.email'],
     password: MESSAGES['basic.password'],
-    repeatPassword: MESSAGES['basic.repeatPassword'],
-    repeatPasswordError: MESSAGES['basic.repeatPasswordError'],
-    passwordError: MESSAGES['basic.passwordError'],
     rememberMe: MESSAGES['basic.rememberMe'],
     forgetPassword: MESSAGES['basic.forgetPassword'],
     notRobot: MESSAGES['basic.notRobot'],
     notRegisterYet: MESSAGES['login.notRegisterYet'],
     mandatoryField: MESSAGES['basic.mandatoryField'],
     emailError: MESSAGES['basic.emailError'],
-    acceptLegalTerms: MESSAGES['basic.acceptLegalTerms'],
+    registerStudent: MESSAGES['login.registerStudent'],
+    registerTutor: MESSAGES['login.registerTutor'],
+    or: MESSAGES['basic.or'],
+    register: MESSAGES['login.register'],
+    invalidCredentials: MESSAGES['basic.invalidCredentials'],
   };
 
   loginForm: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required], passwordValidators),
-    repeatPassword: new FormControl('', [Validators.required], repeatPasswordValidators),
+    password: new FormControl('', [Validators.required]),
     rememberMe: new FormControl(''),
-    acceptLegalTerms: new FormControl('', [Validators.requiredTrue]),
   });
 
   get usernameFormControl(): FormControl {
@@ -133,18 +120,11 @@ export class AppSignUpFormComponent {
     return this.loginForm.get('password') as FormControl;
   }
 
-  get repeatPasswordFormControl(): FormControl {
-    return this.loginForm.get('repeatPassword') as FormControl;
-  }
-
   get rememberMeFormControl(): FormControl {
     return this.loginForm.get('rememberMe') as FormControl;
   }
 
-  get acceptLegalTermsFormControl(): FormControl {
-    return this.loginForm.get('acceptLegalTerms') as FormControl;
-  }
-
+  isLoginFailed$ = new BehaviorSubject<boolean>(false);
   passwordType$ = new BehaviorSubject<string>('password');
   passwordIcon$ = new BehaviorSubject<string>('visibility');
 
@@ -162,25 +142,32 @@ export class AppSignUpFormComponent {
     }
   }
 
-  submit(): void {
-    console.log('submit');
-    this.repeatPasswordFormControl.setErrors(this.isRepeatPasswordCorrect());
+  onClickRegister(registerType: string): void {
+    this.register.emit(registerType);
+  }
 
+  submit(): void {
     if (this.loginForm.invalid) {
       return;
     }
 
-    this.appLoginApiService.register({
-      username: this.usernameFormControl.value,
-      password: this.passwordFormControl.value,
-    });
-
-    this.register.emit(this.usernameFormControl.value);
-  }
-
-  private isRepeatPasswordCorrect(): ValidationErrors {
-    return this.repeatPasswordFormControl.value === this.passwordFormControl.value
-      ? null
-      : { passwordMatch: true };
+    this.appAuthorizationService
+      .login({
+        username: this.usernameFormControl.value,
+        password: this.passwordFormControl.value,
+      })
+      .pipe(
+        take(1),
+        tap(session => {
+          if (!session) {
+            this.isLoginFailed$.next(true);
+          } else {
+            this.isLoginFailed$.next(false);
+            this.login.emit(session);
+            this.sessionService.setSession(session);
+          }
+        }),
+      )
+      .subscribe();
   }
 }

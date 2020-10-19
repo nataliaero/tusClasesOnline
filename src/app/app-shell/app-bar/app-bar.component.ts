@@ -1,9 +1,10 @@
-import { Component, HostListener } from '@angular/core';
-import { MESSAGES } from '../../../messages';
-import { AppLoginService, AppSignupService } from '../../app-login-signup';
-import { map, take } from 'rxjs/operators';
-import { Observable, Subscription } from 'rxjs';
 import { AppBarService, MobileService, NavigationService } from '../../../services';
+import { AppLoginService, AppSignupService } from '../../app-authorization';
+import { Component, HostListener } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+
+import { MESSAGES } from '../../../messages';
 
 @Component({
   selector: 'app-bar',

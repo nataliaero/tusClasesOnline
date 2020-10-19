@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { MESSAGES } from '../../messages';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AppLoginApiService } from './app-login-api.service';
 import { AppConfirmService } from './app-confirm.service';
 import { take } from 'rxjs/operators';
 

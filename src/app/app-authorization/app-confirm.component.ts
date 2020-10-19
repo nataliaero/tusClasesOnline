@@ -4,7 +4,7 @@ import { map, startWith } from 'rxjs/operators';
 
 import { MESSAGES } from '../../messages';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AppLoginApiService } from './app-login-api.service';
+import { AppAuthorizationService } from './app-authorization.service';
 
 export interface ConfirmDialogData {
   username: string;
@@ -40,7 +40,7 @@ export interface ConfirmDialogData {
       </form>
     </app-dialog>
   `,
-  styleUrls: ['./app-login-form.component.scss'],
+  styleUrls: ['./app-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppConfirmComponent {
@@ -49,7 +49,7 @@ export class AppConfirmComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData,
     public dialogRef: MatDialogRef<AppConfirmComponent>,
-    private appLoginApiService: AppLoginApiService,
+    private appAuthorizationService: AppAuthorizationService,
   ) {}
 
   msg = {
@@ -75,7 +75,7 @@ export class AppConfirmComponent {
     if (this.confirmForm.invalid) {
       return;
     }
-    this.appLoginApiService.confirm(this.data.username, this.confirmFormControl.value);
+    this.appAuthorizationService.confirm(this.data.username, this.confirmFormControl.value);
     this.dialogRef.close();
   }
 }
