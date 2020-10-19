@@ -8,9 +8,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-confirm-form',
   template: `
-    <app-dialog [title]="'HOLA'">
+    <app-dialog [title]="msg.validateAccount">
       <form novalidate [formGroup]="confirmForm" (ngSubmit)="submit()">
-        <div class="username-message">{{ msg.code }}</div>
+        <div class="confirm-message">{{ msg.code }}</div>
         <mat-form-field class="form-field" appearance="outline">
           <input
             class="input"
@@ -44,6 +44,7 @@ export class AppConfirmComponent {
   constructor(public dialogRef: MatDialogRef<AppConfirmComponent>) {}
 
   msg = {
+    validateAccount: MESSAGES['confirm.validateAccount'],
     code: MESSAGES['confirm.code'],
     validate: MESSAGES['confirm.validate'],
     mandatoryField: MESSAGES['basic.mandatoryField'],

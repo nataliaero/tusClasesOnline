@@ -18,7 +18,8 @@ $height-button: 40px;
   }
 }
 
-.username-message {
+.username-message,
+.confirm-message {
   width: $width-form-field;
   margin: 0 auto;
   text-align: left;
