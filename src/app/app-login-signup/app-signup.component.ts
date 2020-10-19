@@ -26,7 +26,7 @@ export interface SignupDialogData {
           <span>{{ msg.registerEmail }}</span>
         </div>
       </div>
-      <app-signup-form (register)="onRegister()"></app-signup-form>
+      <app-signup-form (register)="onRegister($event)"></app-signup-form>
     </app-dialog>
   `,
   styleUrls: ['./app-login.component.scss'],
@@ -46,8 +46,8 @@ export class AppSignupComponent {
     enter: MESSAGES['login.enter'],
   };
 
-  onRegister(): void {
+  onRegister(username: string): void {
     this.dialogRef.close();
-    this.appConfirmService.openConfirmDialog().pipe(take(1)).subscribe();
+    this.appConfirmService.openConfirmDialog(username).pipe(take(1)).subscribe();
   }
 }

@@ -1,4 +1,4 @@
-import { CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
+import { CognitoUser, CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { Observable, of } from 'rxjs';
 
 import { Injectable } from '@angular/core';
@@ -17,6 +17,15 @@ const USER_POOL_ID = environment.userPoolId;
 
 @Injectable()
 export class AppLoginApiService {
+  private getUserPool(): CognitoUserPool {
+    const poolData = {
+      UserPoolId: USER_POOL_ID,
+      ClientId: CLIENT_ID,
+    };
+
+    return new CognitoUserPool(poolData);
+  }
+
   /**
    * If no session is returned, login failed.
    */
@@ -29,12 +38,7 @@ export class AppLoginApiService {
   }
 
   register(params: LoginParams): void {
-    const poolData = {
-      UserPoolId: USER_POOL_ID,
-      ClientId: CLIENT_ID,
-    };
-
-    const userPool = new CognitoUserPool(poolData);
+    const userPool = this.getUserPool();
 
     const attributeList = [];
 
@@ -47,6 +51,22 @@ export class AppLoginApiService {
     userPool.signUp(params.username, params.password, attributeList, null, (err, res) => {
       console.log('err', err);
       console.log('res', res);
+    });
+  }
+
+  confirm(username: string, confirmCode: string): void {
+    const userPool = this.getUserPool();
+
+    const userData = {
+      Username: username,
+      Pool: userPool,
+    };
+
+    const cognitoUser = new CognitoUser(userData);
+
+    cognitoUser.confirmRegistration(confirmCode, true, (err, res) => {
+      console.log('err ', err);
+      console.log('res ', res);
     });
   }
 }

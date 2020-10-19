@@ -1,9 +1,14 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 
 import { MESSAGES } from '../../messages';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AppLoginApiService } from './app-login-api.service';
+
+export interface ConfirmDialogData {
+  username: string;
+}
 
 @Component({
   selector: 'app-confirm-form',
@@ -41,7 +46,11 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class AppConfirmComponent {
   @Output() confirm = new EventEmitter<void>();
 
-  constructor(public dialogRef: MatDialogRef<AppConfirmComponent>) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData,
+    public dialogRef: MatDialogRef<AppConfirmComponent>,
+    private appLoginApiService: AppLoginApiService,
+  ) {}
 
   msg = {
     validateAccount: MESSAGES['confirm.validateAccount'],
@@ -66,6 +75,7 @@ export class AppConfirmComponent {
     if (this.confirmForm.invalid) {
       return;
     }
+    this.appLoginApiService.confirm(this.data.username, this.confirmFormControl.value);
     this.dialogRef.close();
   }
 }

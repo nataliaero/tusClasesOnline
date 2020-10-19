@@ -99,7 +99,7 @@ import { MESSAGES } from '../../messages';
 export class AppSignUpFormComponent {
   constructor(private appLoginApiService: AppLoginApiService) {}
 
-  @Output() register = new EventEmitter<void>();
+  @Output() register = new EventEmitter<string>();
 
   msg = {
     enter: MESSAGES['signup.register'],
@@ -175,7 +175,7 @@ export class AppSignUpFormComponent {
       password: this.passwordFormControl.value,
     });
 
-    this.register.emit();
+    this.register.emit(this.usernameFormControl.value);
   }
 
   private isRepeatPasswordCorrect(): ValidationErrors {

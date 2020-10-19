@@ -7,11 +7,12 @@ import { Observable } from 'rxjs';
 export class AppConfirmService {
   constructor(private matDialog: MatDialog) {}
 
-  openConfirmDialog(): Observable<void> {
+  openConfirmDialog(username: string): Observable<void> {
     return this.matDialog
       .open(AppConfirmComponent, {
         width: '600px',
         maxWidth: '90vw',
+        data: { username },
       })
       .afterClosed();
   }
