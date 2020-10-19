@@ -1,9 +1,11 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { MESSAGES } from '../../messages';
-import { FormGroup, Validators, FormControl, ValidationErrors } from '@angular/forms';
-import { startWith, map } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { map, startWith } from 'rxjs/operators';
 import { passwordValidators, repeatPasswordValidators } from './validators';
+
+import { AppLoginApiService } from './app-login-api.service';
+import { BehaviorSubject } from 'rxjs';
+import { MESSAGES } from '../../messages';
 
 @Component({
   selector: 'app-signup-form',
@@ -95,6 +97,8 @@ import { passwordValidators, repeatPasswordValidators } from './validators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppSignUpFormComponent {
+  constructor(private appLoginApiService: AppLoginApiService) {}
+
   msg = {
     enter: MESSAGES['signup.register'],
     email: MESSAGES['basic.email'],
@@ -163,6 +167,11 @@ export class AppSignUpFormComponent {
     if (this.loginForm.invalid) {
       return;
     }
+
+    this.appLoginApiService.register({
+      username: this.usernameFormControl.value,
+      password: this.passwordFormControl.value,
+    });
   }
 
   private isRepeatPasswordCorrect(): ValidationErrors {

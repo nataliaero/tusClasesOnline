@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { MESSAGES } from '../../messages';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AppLoginApiService } from './app-login-api.service';
 
 export interface SignupDialogData {
   title: string;
